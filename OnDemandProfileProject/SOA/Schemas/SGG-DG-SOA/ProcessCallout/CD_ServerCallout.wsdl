@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/CD_Server.xsd"/>
+      <xsd:element name="InitiateConnectDisconnectEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateConnectDisconnect"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CDRequestCompletedEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateConnectDisconnect"/>
+            <xsd:element ref="tns:InitiateConnectDisconnectResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="CDRequestReceived">
+    <wsdl:part name="payload"
+          element="tns:InitiateConnectDisconnectEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="CDRequestReceivedResponse">
+    <wsdl:part name="payload"
+          element="tns:InitiateConnectDisconnectEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="CDRequestCompleted">
+    <wsdl:part name="payload"
+          element="tns:CDRequestCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="CDRequestCompletedResponse">
+    <wsdl:part name="payload"
+          element="tns:CDRequestCompletedEnvelope"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="CD_ServerCallout">
+    <wsdl:operation name="CDRequestReceived">
+      <wsdl:input message="tns:CDRequestReceived"/>
+      <wsdl:output message="tns:CDRequestReceivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDRequestCompleted">
+      <wsdl:input message="tns:CDRequestCompleted"/>
+      <wsdl:output message="tns:CDRequestCompletedResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="CD_ServerCalloutPL">
+      <plnk:role name="CD_ServerCalloutProvider">
+          <plnk:portType name="tns:CD_ServerCallout"/>
+      </plnk:role>
+  </plnk:partnerLinkType>
+  
+  <wsdl:binding name="CD_ServerCallout" type="tns:CD_ServerCallout">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="CDRequestReceived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/CDRequestReceived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CDRequestCompleted">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/CDRequestCompleted"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

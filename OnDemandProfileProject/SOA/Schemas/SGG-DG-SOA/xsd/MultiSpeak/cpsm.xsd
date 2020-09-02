@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="cpsm_V4.1_Release" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cpsm="cpsm_V4.1_Release" xmlns:gml="gml_V4.1_Release" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="gml_V4.1_Release" schemaLocation="gml.xsd"/>
+	<xsd:complexType name="IdentifiedObject" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="mRID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Names" type="cpsm:ArrayOfName" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfName">
+		<xsd:sequence>
+			<xsd:element name="Name" type="cpsm:Name" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Name">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="NameType" type="cpsm:NameType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NameType">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="NameTypeAuthority" type="cpsm:NameTypeAuthority" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NameTypeAuthority">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConformLoadSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:SeasonDayTypeSchedule"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SeasonDayTypeSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:RegularIntervalSchedule">
+				<xsd:sequence>
+					<xsd:element name="dayType" type="cpsm:DayType" minOccurs="0"/>
+					<xsd:element name="seasonType" type="cpsm:Season" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RegularIntervalSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:BasicIntervalSchedule">
+				<xsd:sequence>
+					<xsd:element name="timeStep" type="cpsm:Seconds" minOccurs="0"/>
+					<xsd:element name="endTime" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="timePoints" type="cpsm:TimePoints" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BasicIntervalSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="startTime" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="value1Unit" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="value2Unit" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="mspCIMObject" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="extensions" type="cpsm:extensions" minOccurs="0"/>
+			<xsd:element name="comments" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extensionsList" type="cpsm:extensionsList" minOccurs="0"/>
+			<xsd:element name="IdentifiedObject" type="cpsm:IdentifiedObject" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="objectID" type="xsd:string"/>
+		<xsd:attribute name="verb" type="cpsm:action" default="Change"/>
+		<xsd:attribute name="errorString" type="xsd:string"/>
+		<xsd:attribute name="replaceID" type="xsd:string"/>
+		<xsd:attribute name="utility" type="xsd:string"/>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:complexType name="extensions">
+		<xsd:sequence>
+			<xsd:any minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="extensionsList">
+		<xsd:sequence>
+			<xsd:element name="extensionsItem" type="cpsm:extensionsItem" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="extensionsItem">
+		<xsd:sequence>
+			<xsd:element name="extName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extValue" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extType" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="anySimpleType"/>
+						<xsd:enumeration value="anyType"/>
+						<xsd:enumeration value="anyURI"/>
+						<xsd:enumeration value="base64Binary"/>
+						<xsd:enumeration value="boolean"/>
+						<xsd:enumeration value="byte"/>
+						<xsd:enumeration value="date"/>
+						<xsd:enumeration value="dateTime"/>
+						<xsd:enumeration value="decimal"/>
+						<xsd:enumeration value="double"/>
+						<xsd:enumeration value="duration"/>
+						<xsd:enumeration value="ENTITIES"/>
+						<xsd:enumeration value="ENTITY"/>
+						<xsd:enumeration value="float"/>
+						<xsd:enumeration value="gDay"/>
+						<xsd:enumeration value="gMonth"/>
+						<xsd:enumeration value="gMonthDay"/>
+						<xsd:enumeration value="gYear"/>
+						<xsd:enumeration value="gYearMonth"/>
+						<xsd:enumeration value="hexBinary"/>
+						<xsd:enumeration value="ID"/>
+						<xsd:enumeration value="IDREF"/>
+						<xsd:enumeration value="IDREFS"/>
+						<xsd:enumeration value="int"/>
+						<xsd:enumeration value="integer"/>
+						<xsd:enumeration value="language"/>
+						<xsd:enumeration value="long"/>
+						<xsd:enumeration value="Name"/>
+						<xsd:enumeration value="NCName"/>
+						<xsd:enumeration value="negativeInteger"/>
+						<xsd:enumeration value="NMTOKEN"/>
+						<xsd:enumeration value="NMTOKENS"/>
+						<xsd:enumeration value="nonNegativeInteger"/>
+						<xsd:enumeration value="nonPositiveInteger"/>
+						<xsd:enumeration value="normalizedString"/>
+						<xsd:enumeration value="NOTATION"/>
+						<xsd:enumeration value="positiveInteger"/>
+						<xsd:enumeration value="QName"/>
+						<xsd:enumeration value="short"/>
+						<xsd:enumeration value="string"/>
+						<xsd:enumeration value="time"/>
+						<xsd:enumeration value="token"/>
+						<xsd:enumeration value="unsignedByte"/>
+						<xsd:enumeration value="unsignedInt"/>
+						<xsd:enumeration value="unsignedLong"/>
+						<xsd:enumeration value="unsignedShort"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="action">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="New"/>
+			<xsd:enumeration value="Change"/>
+			<xsd:enumeration value="Delete"/>
+			<xsd:enumeration value="Replace"/>
+			<xsd:enumeration value="Link"/>
+			<xsd:enumeration value="Unlink"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="GeographicalRegion" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SubGeographicalRegion" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="geographicalRegionID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EquivalentNetwork" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EquipmentContainer" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="contentsList" type="cpsm:ContentsList" minOccurs="0"/>
+					<xsd:element name="connectivityNodes" type="cpsm:ConnectivityNodes" minOccurs="0"/>
+					<xsd:element name="connectivitySections" type="cpsm:ConnectivitySections" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ContentsList">
+		<xsd:sequence>
+			<xsd:element name="contentsItem" type="cpsm:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="objectRef">
+		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="noun" type="xsd:QName"/>
+		<xsd:attribute name="objectID" type="xsd:string"/>
+		<xsd:attribute name="utility" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ConnectivityNodes">
+		<xsd:sequence>
+			<xsd:element name="NodeFields" type="cpsm:NodeFields" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NodeFields">
+		<xsd:sequence>
+			<xsd:element name="connectivityNodeID" type="cpsm:nodeIdentifier" minOccurs="0"/>
+			<xsd:element name="substationID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="measurements" type="cpsm:measurements" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="nodeIdentifier">
+		<xsd:attribute name="name" type="xsd:string"/>
+		<xsd:attribute name="objectID" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="measurements">
+		<xsd:sequence>
+			<xsd:element name="measurementID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ConnectivitySections">
+		<xsd:sequence>
+			<xsd:element name="sectionID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="parentSectionID" type="cpsm:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Line" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:EquipmentContainer">
+				<xsd:sequence>
+					<xsd:element name="regionID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Bay" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:EquipmentContainer">
+				<xsd:sequence>
+					<xsd:element name="voltageLevelID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="breakerConfiguration" type="cpsm:BreakerConfiguration" minOccurs="0"/>
+					<xsd:element name="busbarConfiguration" type="cpsm:BusbarConfiguration" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="BreakerConfiguration">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="singleBreaker"/>
+			<xsd:enumeration value="breakerAndAHalf"/>
+			<xsd:enumeration value="doubleBreaker"/>
+			<xsd:enumeration value="noBreaker"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BusbarConfiguration">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="singleBus"/>
+			<xsd:enumeration value="doubleBus"/>
+			<xsd:enumeration value="mainWithTransfer"/>
+			<xsd:enumeration value="ringBus"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="VoltageLevel" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:EquipmentContainer">
+				<xsd:sequence>
+					<xsd:element name="baseVoltageID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="highVoltageLimit" type="cpsm:voltage" minOccurs="0"/>
+					<xsd:element name="lowVoltageLimit" type="cpsm:voltage" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="voltage">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:voltageUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="voltageUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="V"/>
+			<xsd:enumeration value="kV"/>
+			<xsd:enumeration value="MV"/>
+			<xsd:enumeration value="mV"/>
+			<xsd:enumeration value="microV"/>
+			<xsd:enumeration value="Per Unit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ConductingEquipment" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="GMLLocation" type="gml:PointType" minOccurs="0"/>
+					<xsd:element name="GMLLine" type="gml:LineStringType" minOccurs="0"/>
+					<xsd:element name="connectivitySections" type="cpsm:ConnectivitySections" minOccurs="0"/>
+					<xsd:element name="connectivityNodes" type="cpsm:ConnectivityNodes" minOccurs="0"/>
+					<xsd:element name="phaseCode" type="cpsm:phaseCode" minOccurs="0"/>
+					<xsd:element name="normallyInService" type="xsd:boolean" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="phaseCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="A"/>
+			<xsd:enumeration value="B"/>
+			<xsd:enumeration value="C"/>
+			<xsd:enumeration value="N"/>
+			<xsd:enumeration value="AB"/>
+			<xsd:enumeration value="AC"/>
+			<xsd:enumeration value="BC"/>
+			<xsd:enumeration value="ABC"/>
+			<xsd:enumeration value="AN"/>
+			<xsd:enumeration value="BN"/>
+			<xsd:enumeration value="CN"/>
+			<xsd:enumeration value="ABN"/>
+			<xsd:enumeration value="ACN"/>
+			<xsd:enumeration value="BCN"/>
+			<xsd:enumeration value="ABCN"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="TransformerWinding" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment">
+				<xsd:sequence>
+					<xsd:element name="tapChangers" type="cpsm:TapChangers" minOccurs="0"/>
+					<xsd:element name="baseVoltageID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="windingNativeAttributes" type="cpsm:WindingNativeAttributes" minOccurs="0"/>
+					<xsd:element name="terminalList" type="cpsm:TerminalList" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="TapChangers">
+		<xsd:sequence>
+			<xsd:element name="TapChanger" type="cpsm:TapChanger" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="TapChanger" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment">
+				<xsd:sequence>
+					<xsd:element name="regulatingControl" type="cpsm:RegulatingControl" minOccurs="0"/>
+					<xsd:element name="voltageBandwidth" type="cpsm:voltage" minOccurs="0"/>
+					<xsd:element name="numberOfSteps" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="ptRatio" type="xsd:double" minOccurs="0"/>
+					<xsd:element name="ctRating" type="cpsm:current" minOccurs="0"/>
+					<xsd:element name="ampacity" type="cpsm:current" minOccurs="0"/>
+					<xsd:element name="initialDelay" type="cpsm:Seconds" minOccurs="0"/>
+					<xsd:element name="subsequentDelay" type="cpsm:Seconds" minOccurs="0"/>
+					<xsd:element name="nativeAttributes" type="cpsm:TapChangerNativeAttributes" minOccurs="0"/>
+					<xsd:element name="terminalID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RegulatingControl" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="terminalID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="regulationSchedule" type="cpsm:RegulationSchedule" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RegulationSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:RegularIntervalSchedule">
+				<xsd:sequence>
+					<xsd:element name="lineDropCompensation" type="xsd:boolean" minOccurs="0"/>
+					<xsd:element name="lineDropR" type="cpsm:resistance" minOccurs="0"/>
+					<xsd:element name="lineDropX" type="cpsm:reactance" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="resistance">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:zUnit"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="zUnit">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Ohms"/>
+			<xsd:enumeration value="Percent"/>
+			<xsd:enumeration value="Per Unit"/>
+			<xsd:enumeration value="Total"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="reactance">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:zUnit"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="current">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:currentUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="currentUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="A"/>
+			<xsd:enumeration value="mA"/>
+			<xsd:enumeration value="kA"/>
+			<xsd:enumeration value="MA"/>
+			<xsd:enumeration value="Per Unit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="Seconds">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="unit" type="cpsm:UnitSymbol"/>
+				<xsd:attribute name="multiplier" type="cpsm:UnitMultiplier"/>
+				<xsd:anyAttribute/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="UnitSymbol">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="VA"/>
+			<xsd:enumeration value="W"/>
+			<xsd:enumeration value="VAr"/>
+			<xsd:enumeration value="VAh"/>
+			<xsd:enumeration value="Wh"/>
+			<xsd:enumeration value="VArh"/>
+			<xsd:enumeration value="V"/>
+			<xsd:enumeration value="ohm"/>
+			<xsd:enumeration value="A"/>
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="H"/>
+			<xsd:enumeration value="C"/>
+			<xsd:enumeration value="s"/>
+			<xsd:enumeration value="min"/>
+			<xsd:enumeration value="h"/>
+			<xsd:enumeration value="deg"/>
+			<xsd:enumeration value="rad"/>
+			<xsd:enumeration value="J"/>
+			<xsd:enumeration value="N"/>
+			<xsd:enumeration value="S"/>
+			<xsd:enumeration value="none"/>
+			<xsd:enumeration value="Hz"/>
+			<xsd:enumeration value="kg"/>
+			<xsd:enumeration value="Pa"/>
+			<xsd:enumeration value="m"/>
+			<xsd:enumeration value="m2"/>
+			<xsd:enumeration value="m3"/>
+			<xsd:enumeration value="V/VAr"/>
+			<xsd:enumeration value="W/Hz"/>
+			<xsd:enumeration value="J/s"/>
+			<xsd:enumeration value="s-1"/>
+			<xsd:enumeration value="kg/J"/>
+			<xsd:enumeration value="W/s"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UnitMultiplier">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="p"/>
+			<xsd:enumeration value="n"/>
+			<xsd:enumeration value="micro"/>
+			<xsd:enumeration value="m"/>
+			<xsd:enumeration value="c"/>
+			<xsd:enumeration value="d"/>
+			<xsd:enumeration value="k"/>
+			<xsd:enumeration value="M"/>
+			<xsd:enumeration value="G"/>
+			<xsd:enumeration value="T"/>
+			<xsd:enumeration value="none"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="TapChangerNativeAttributes">
+		<xsd:sequence>
+			<xsd:element name="highStep" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="lowStep" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="neutralU" type="cpsm:voltage" minOccurs="0"/>
+			<xsd:element name="neutralStep" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="normalStep" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="stepPhaseShiftIncrement" type="cpsm:angle" minOccurs="0"/>
+			<xsd:element name="stepVoltageIncrement" type="cpsm:PerCent" minOccurs="0"/>
+			<xsd:element name="type" type="cpsm:TapChangerKind" minOccurs="0"/>
+			<xsd:element name="tculControlMode" type="cpsm:TransformerControlMode" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="angle">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:angleUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="angleUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Degrees"/>
+			<xsd:enumeration value="Minutes"/>
+			<xsd:enumeration value="Seconds"/>
+			<xsd:enumeration value="Radians"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="PerCent">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="TapChangerKind">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="fixed"/>
+			<xsd:enumeration value="voltageControl"/>
+			<xsd:enumeration value="phaseControl"/>
+			<xsd:enumeration value="voltageAndPhaseControl"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TransformerControlMode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="off"/>
+			<xsd:enumeration value="local"/>
+			<xsd:enumeration value="volt"/>
+			<xsd:enumeration value="active"/>
+			<xsd:enumeration value="reactive"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="WindingNativeAttributes">
+		<xsd:sequence>
+			<xsd:element name="ratedU" type="cpsm:voltage" minOccurs="0"/>
+			<xsd:element name="ratedS" type="cpsm:apparentPower" minOccurs="0"/>
+			<xsd:element name="windingType" type="cpsm:WindingType" minOccurs="0"/>
+			<xsd:element name="b" type="cpsm:susceptance" minOccurs="0"/>
+			<xsd:element name="r" type="cpsm:resistance" minOccurs="0"/>
+			<xsd:element name="x" type="cpsm:reactance" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="apparentPower">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:apparentPowerUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="apparentPowerUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="VA"/>
+			<xsd:enumeration value="kVA"/>
+			<xsd:enumeration value="MVA"/>
+			<xsd:enumeration value="Per Unit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="WindingType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Primary"/>
+			<xsd:enumeration value="Secondary"/>
+			<xsd:enumeration value="Tertiary"/>
+			<xsd:enumeration value="Quaternary"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="susceptance">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:sUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="sUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="microS"/>
+			<xsd:enumeration value="mS"/>
+			<xsd:enumeration value="S"/>
+			<xsd:enumeration value="kS"/>
+			<xsd:enumeration value="MS"/>
+			<xsd:enumeration value="Siemens"/>
+			<xsd:enumeration value="mho"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="TerminalList">
+		<xsd:sequence>
+			<xsd:element name="terminalID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Connector" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BusbarSection" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:Connector">
+				<xsd:sequence>
+					<xsd:element name="busbarType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="eqipmentContainerID" type="cpsm:objectRef" minOccurs="0"/>
+					<xsd:element name="bayID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EquivalentEquipment" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EquivalentShunt" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:EquivalentEquipment">
+				<xsd:sequence>
+					<xsd:element name="g" type="cpsm:conductance" minOccurs="0"/>
+					<xsd:element name="b" type="cpsm:susceptance" minOccurs="0"/>
+					<xsd:element name="equivalentNetworkID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="conductance">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:sUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="EquivalentBranch" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:EquivalentEquipment">
+				<xsd:sequence>
+					<xsd:element name="r" type="cpsm:resistance" minOccurs="0"/>
+					<xsd:element name="x" type="cpsm:reactance" minOccurs="0"/>
+					<xsd:element name="equivalentNetworkID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Terminal" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment">
+				<xsd:sequence>
+					<xsd:element name="measurements" type="cpsm:measurements" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GeneratingUnit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment">
+				<xsd:sequence>
+					<xsd:element name="equipmentContainerID" type="cpsm:objectRef" minOccurs="0"/>
+					<xsd:element name="GrossToNetActivePowerCurve" type="cpsm:GrossToNetActivePowerCurve" minOccurs="0"/>
+					<xsd:element name="ReactiveCapabilityCurve" type="cpsm:ReactiveCapabilityCurve" minOccurs="0"/>
+					<xsd:element name="efficiency" type="xsd:float" minOccurs="0"/>
+					<xsd:element name="initialP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="longPF" type="xsd:float" minOccurs="0"/>
+					<xsd:element name="maxOperatingP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="minOperatingP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="normalPF" type="xsd:float" minOccurs="0"/>
+					<xsd:element name="genControlSource" type="cpsm:GeneratorControlSource" minOccurs="0"/>
+					<xsd:element name="ratedGrossMaxP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="ratedGrossMinP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="ratedNetMaxP" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="shortPF" type="xsd:float" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GrossToNetActivePowerCurve" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:Curve"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Curve" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="curveStyle" type="cpsm:CurveStyle" minOccurs="0"/>
+					<xsd:element name="xUnit" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="y1Unit" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="y2Unit" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="dataPoints" type="cpsm:DataPoints" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="CurveStyle">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="constantYValue"/>
+			<xsd:enumeration value="straightLineYValues"/>
+			<xsd:enumeration value="rampYValues"/>
+			<xsd:enumeration value="formula"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="DataPoints">
+		<xsd:sequence>
+			<xsd:element name="curveData" type="cpsm:CurveData" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CurveData">
+		<xsd:sequence>
+			<xsd:element name="xvalue" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="y1value" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="y2value" type="xsd:float" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:complexType name="ReactiveCapabilityCurve" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:Curve"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="activePower">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:realPowerUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="realPowerUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="mW"/>
+			<xsd:enumeration value="W"/>
+			<xsd:enumeration value="kW"/>
+			<xsd:enumeration value="MW"/>
+			<xsd:enumeration value="GW"/>
+			<xsd:enumeration value="Per Unit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="GeneratorControlSource">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Unavailable"/>
+			<xsd:enumeration value="offAGC"/>
+			<xsd:enumeration value="onAGC"/>
+			<xsd:enumeration value="PlantControl"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="ThermalGeneratingUnit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:GeneratingUnit"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="HydroGeneratingUnit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:GeneratingUnit"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RegulatingCondEq" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:ConductingEquipment">
+				<xsd:sequence>
+					<xsd:element name="equipmentContainerID" type="cpsm:objectRef" minOccurs="0"/>
+					<xsd:element name="regulatingControlID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StaticVarCompensator" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:RegulatingCondEq">
+				<xsd:sequence>
+					<xsd:element name="capacitiveRating" type="cpsm:reactivePower" minOccurs="0"/>
+					<xsd:element name="inductiveRating" type="cpsm:reactivePower" minOccurs="0"/>
+					<xsd:element name="sVCControlMode" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="ReactivePower"/>
+								<xsd:enumeration value="Voltage"/>
+								<xsd:enumeration value="Off"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="slope" minOccurs="0">
+						<xsd:complexType>
+							<xsd:simpleContent>
+								<xsd:extension base="xsd:float">
+									<xsd:attribute name="units">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:enumeration value="kV/MVAr"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:extension>
+							</xsd:simpleContent>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="voltageSetPoint" type="cpsm:voltage" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="reactivePower">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:float">
+				<xsd:attribute name="units" type="cpsm:reactivePowerUnits"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="reactivePowerUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="mVAr"/>
+			<xsd:enumeration value="VAr"/>
+			<xsd:enumeration value="kVAr"/>
+			<xsd:enumeration value="MVAr"/>
+			<xsd:enumeration value="GVAr"/>
+			<xsd:enumeration value="Per Unit"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="PowerSystemResource" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="LoadArea" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:PowerSystemResource"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BaseVoltage" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="nominalVoltage" type="cpsm:voltage" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Unit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConnectivityNode" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="voltageLevelID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="subControlAreaID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="nominalVoltage" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="substationID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="measurementList" type="cpsm:measurements" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Accumulator" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="maxValue" type="xsd:positiveInteger" minOccurs="0"/>
+					<xsd:element name="accumulatorValues" type="cpsm:AccumulatorValues" minOccurs="0"/>
+					<xsd:element name="units" type="cpsm:uom" minOccurs="0"/>
+					<xsd:element name="unitID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="quality" type="cpsm:qualityDescription" minOccurs="0"/>
+					<xsd:element name="timeSpan" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="startTime" type="xsd:dateTime"/>
+								<xsd:element name="stopTime" type="xsd:dateTime"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="phase" type="cpsm:phaseCode" minOccurs="0"/>
+					<xsd:element name="harmonic" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="quadrant" type="cpsm:accountability" minOccurs="0"/>
+					<xsd:element name="measurementTypeID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="terminalID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="powerSystemResourceID" type="cpsm:objectRef" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AccumulatorValues">
+		<xsd:sequence>
+			<xsd:element name="AccumulatorValue" type="cpsm:AccumulatorValue" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AccumulatorValue" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:MeasurementValue">
+				<xsd:sequence>
+					<xsd:element name="value" type="xsd:positiveInteger" minOccurs="0"/>
+					<xsd:element name="measurementValueSourceID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MeasurementValue" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="timeStamp" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="sensorAccuracy" type="cpsm:PerCent" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DiscreteValue" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:MeasurementValue">
+				<xsd:sequence>
+					<xsd:element name="value" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="measurementValueSourceID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AnalogValue" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:MeasurementValue">
+				<xsd:sequence>
+					<xsd:element name="value" type="xsd:positiveInteger" minOccurs="0"/>
+					<xsd:element name="measurementValueSourceID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StringMeasurementValue" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:MeasurementValue">
+				<xsd:sequence>
+					<xsd:element name="value" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="uom">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Wh"/>
+			<xsd:enumeration value="W"/>
+			<xsd:enumeration value="kWh"/>
+			<xsd:enumeration value="kW"/>
+			<xsd:enumeration value="MWh"/>
+			<xsd:enumeration value="MW"/>
+			<xsd:enumeration value="GWh"/>
+			<xsd:enumeration value="GW"/>
+			<xsd:enumeration value="mWh"/>
+			<xsd:enumeration value="mW"/>
+			<xsd:enumeration value="microWh"/>
+			<xsd:enumeration value="microW"/>
+			<xsd:enumeration value="VARh"/>
+			<xsd:enumeration value="VAR"/>
+			<xsd:enumeration value="kVARh"/>
+			<xsd:enumeration value="kVAR"/>
+			<xsd:enumeration value="MVARh"/>
+			<xsd:enumeration value="MVAR"/>
+			<xsd:enumeration value="GVARh"/>
+			<xsd:enumeration value="GVAR"/>
+			<xsd:enumeration value="mVARh"/>
+			<xsd:enumeration value="mVAR"/>
+			<xsd:enumeration value="microVARh"/>
+			<xsd:enumeration value="microVAR"/>
+			<xsd:enumeration value="VAh"/>
+			<xsd:enumeration value="VA"/>
+			<xsd:enumeration value="kVAh"/>
+			<xsd:enumeration value="kVA"/>
+			<xsd:enumeration value="MVAh"/>
+			<xsd:enumeration value="MVA"/>
+			<xsd:enumeration value="GVAh"/>
+			<xsd:enumeration value="GVA"/>
+			<xsd:enumeration value="mVAh"/>
+			<xsd:enumeration value="mVA"/>
+			<xsd:enumeration value="microVAh"/>
+			<xsd:enumeration value="microVA"/>
+			<xsd:enumeration value="Qh"/>
+			<xsd:enumeration value="Q"/>
+			<xsd:enumeration value="kQh"/>
+			<xsd:enumeration value="kQ"/>
+			<xsd:enumeration value="MQh"/>
+			<xsd:enumeration value="MQ"/>
+			<xsd:enumeration value="GQh"/>
+			<xsd:enumeration value="GQ"/>
+			<xsd:enumeration value="mQh"/>
+			<xsd:enumeration value="mQ"/>
+			<xsd:enumeration value="microQh"/>
+			<xsd:enumeration value="microQ"/>
+			<xsd:enumeration value="V RMS"/>
+			<xsd:enumeration value="kV RMS"/>
+			<xsd:enumeration value="MV RMS"/>
+			<xsd:enumeration value="mV RMS"/>
+			<xsd:enumeration value="microV RMS"/>
+			<xsd:enumeration value="V"/>
+			<xsd:enumeration value="kV"/>
+			<xsd:enumeration value="MV"/>
+			<xsd:enumeration value="mV"/>
+			<xsd:enumeration value="microV"/>
+			<xsd:enumeration value="Vsquared RMS"/>
+			<xsd:enumeration value="kVsquared RMS"/>
+			<xsd:enumeration value="MVsquared RMS"/>
+			<xsd:enumeration value="mVsquared RMS"/>
+			<xsd:enumeration value="microVsquared RMS"/>
+			<xsd:enumeration value="Amps RMS"/>
+			<xsd:enumeration value="kAmps RMS"/>
+			<xsd:enumeration value="Mamps RMS"/>
+			<xsd:enumeration value="mAmps RMS"/>
+			<xsd:enumeration value="microAmps RMS"/>
+			<xsd:enumeration value="Amps"/>
+			<xsd:enumeration value="kAmps"/>
+			<xsd:enumeration value="Mamps"/>
+			<xsd:enumeration value="mAmps"/>
+			<xsd:enumeration value="microAmps"/>
+			<xsd:enumeration value="Amps squared RMS"/>
+			<xsd:enumeration value="kAmps squared RMS"/>
+			<xsd:enumeration value="Mamps squared RMS"/>
+			<xsd:enumeration value="mAmps squared RMS"/>
+			<xsd:enumeration value="microAmps squared RMS"/>
+			<xsd:enumeration value="T.H.D. Voltage"/>
+			<xsd:enumeration value="T.H.D. Current"/>
+			<xsd:enumeration value="Voltage phase angle"/>
+			<xsd:enumeration value="Current phase angle"/>
+			<xsd:enumeration value="Power factor"/>
+			<xsd:enumeration value="Time"/>
+			<xsd:enumeration value="Date"/>
+			<xsd:enumeration value="Date time"/>
+			<xsd:enumeration value="Interval timer"/>
+			<xsd:enumeration value="Frequency"/>
+			<xsd:enumeration value="Counter"/>
+			<xsd:enumeration value="Sense input"/>
+			<xsd:enumeration value="Nbr of pulse"/>
+			<xsd:enumeration value="Nbr of sag"/>
+			<xsd:enumeration value="Nbr of swells"/>
+			<xsd:enumeration value="Nbr of power outage"/>
+			<xsd:enumeration value="Nbr of excursion low"/>
+			<xsd:enumeration value="Nbr of excursion high"/>
+			<xsd:enumeration value="Normal voltage period"/>
+			<xsd:enumeration value="Nbr of voltage unbalance"/>
+			<xsd:enumeration value="Nbr of V T.H.D. excess"/>
+			<xsd:enumeration value="Nbr of amps T.H.D. excess"/>
+			<xsd:enumeration value="Nbr of demand resets"/>
+			<xsd:enumeration value="Nbr of times programmed"/>
+			<xsd:enumeration value="Minutes on battery"/>
+			<xsd:enumeration value="Nbr of inversion"/>
+			<xsd:enumeration value="Nbr of removal"/>
+			<xsd:enumeration value="Nbr of reprogramming"/>
+			<xsd:enumeration value="Nbr of power loss"/>
+			<xsd:enumeration value="Nbr of reverse rotation"/>
+			<xsd:enumeration value="Nbr of physical tamper"/>
+			<xsd:enumeration value="Nbr of encoder tamper"/>
+			<xsd:enumeration value="Nbr of watchdog"/>
+			<xsd:enumeration value="cubic meters uncorrected"/>
+			<xsd:enumeration value="cubic meters per Hr uncorrected"/>
+			<xsd:enumeration value="cubic meters corrected"/>
+			<xsd:enumeration value="cubic meters per Hr corrected"/>
+			<xsd:enumeration value="cubic feet uncorrected"/>
+			<xsd:enumeration value="cubic feet per Hr uncorrected"/>
+			<xsd:enumeration value="cubic feet corrected"/>
+			<xsd:enumeration value="cubic feet per Hr corrected"/>
+			<xsd:enumeration value="deg C"/>
+			<xsd:enumeration value="deg F"/>
+			<xsd:enumeration value="deg K"/>
+			<xsd:enumeration value="Joules"/>
+			<xsd:enumeration value="Joules per Hr"/>
+			<xsd:enumeration value="kJoules"/>
+			<xsd:enumeration value="kJoules per Hr"/>
+			<xsd:enumeration value="MJoules"/>
+			<xsd:enumeration value="MJoules per Hr"/>
+			<xsd:enumeration value="mJoules"/>
+			<xsd:enumeration value="mJoules per Hr"/>
+			<xsd:enumeration value="microJoules"/>
+			<xsd:enumeration value="microJoules per Hr"/>
+			<xsd:enumeration value="Therm"/>
+			<xsd:enumeration value="Therm per Hr"/>
+			<xsd:enumeration value="Static pascal"/>
+			<xsd:enumeration value="Differential pascal"/>
+			<xsd:enumeration value="Static pound per square inch"/>
+			<xsd:enumeration value="Differential pound per square inch"/>
+			<xsd:enumeration value="Gram square cm"/>
+			<xsd:enumeration value="Meter HG column"/>
+			<xsd:enumeration value="Inches HG column"/>
+			<xsd:enumeration value="Inches H2O column"/>
+			<xsd:enumeration value="Bar"/>
+			<xsd:enumeration value="percent relative humidity"/>
+			<xsd:enumeration value="PPM odorant"/>
+			<xsd:enumeration value="cubic meter"/>
+			<xsd:enumeration value="cubic meter per Hr"/>
+			<xsd:enumeration value="cubic feet"/>
+			<xsd:enumeration value="cubic feet per Hr"/>
+			<xsd:enumeration value="ccf"/>
+			<xsd:enumeration value="ccf per Hr"/>
+			<xsd:enumeration value="US gl"/>
+			<xsd:enumeration value="US gl per Hr"/>
+			<xsd:enumeration value="IMP gl"/>
+			<xsd:enumeration value="IMP gl per Hr"/>
+			<xsd:enumeration value="Acre ft"/>
+			<xsd:enumeration value="PPM lead"/>
+			<xsd:enumeration value="turbidity"/>
+			<xsd:enumeration value="PPM chlorine"/>
+			<xsd:enumeration value="PH factor"/>
+			<xsd:enumeration value="Corrosion"/>
+			<xsd:enumeration value="Ionization"/>
+			<xsd:enumeration value="PPM SO2"/>
+			<xsd:enumeration value="liters"/>
+			<xsd:enumeration value="pounds per square foot"/>
+			<xsd:enumeration value="inches of water"/>
+			<xsd:enumeration value="ft of water"/>
+			<xsd:enumeration value="atmospheres"/>
+			<xsd:enumeration value="Dollar"/>
+			<xsd:enumeration value="inches"/>
+			<xsd:enumeration value="ft"/>
+			<xsd:enumeration value="m"/>
+			<xsd:enumeration value="dm"/>
+			<xsd:enumeration value="km"/>
+			<xsd:enumeration value="cm"/>
+			<xsd:enumeration value="mm"/>
+			<xsd:enumeration value="micro m"/>
+			<xsd:enumeration value="mph"/>
+			<xsd:enumeration value="feet per second"/>
+			<xsd:enumeration value="km per hour"/>
+			<xsd:enumeration value="km per second"/>
+			<xsd:enumeration value="m per second"/>
+			<xsd:enumeration value="percent"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="qualityDescription">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Measured"/>
+			<xsd:enumeration value="Default"/>
+			<xsd:enumeration value="Estimated"/>
+			<xsd:enumeration value="Calculated"/>
+			<xsd:enumeration value="Initial"/>
+			<xsd:enumeration value="Last"/>
+			<xsd:enumeration value="Failed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="accountability">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Q1"/>
+			<xsd:enumeration value="Q2"/>
+			<xsd:enumeration value="Q3"/>
+			<xsd:enumeration value="Q4"/>
+			<xsd:enumeration value="Q1-2"/>
+			<xsd:enumeration value="Q1-3"/>
+			<xsd:enumeration value="Q1-4"/>
+			<xsd:enumeration value="Q2-3"/>
+			<xsd:enumeration value="Q2-4"/>
+			<xsd:enumeration value="Q3-4"/>
+			<xsd:enumeration value="Q1-2-3"/>
+			<xsd:enumeration value="Q1-2-4"/>
+			<xsd:enumeration value="Q1-3-4"/>
+			<xsd:enumeration value="Q2-3-4"/>
+			<xsd:enumeration value="Q1-2-3-4"/>
+			<xsd:enumeration value="Q1-2-netFlow"/>
+			<xsd:enumeration value="Q1-3-netFlow"/>
+			<xsd:enumeration value="Q1-4-netFlow"/>
+			<xsd:enumeration value="Q2-3-netFlow"/>
+			<xsd:enumeration value="Q2-4-netFlow"/>
+			<xsd:enumeration value="Q3-4-netFlow"/>
+			<xsd:enumeration value="Q1-2-3-netFlow"/>
+			<xsd:enumeration value="Q1-2-4-netFlow"/>
+			<xsd:enumeration value="Q1-3-4-netFlow"/>
+			<xsd:enumeration value="Q2-3-4-netFlow"/>
+			<xsd:enumeration value="Q1-2-3-4-netFlow"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="StringMeasurement" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="stringMeasurementValue" type="cpsm:StringMeasurementValue" minOccurs="0"/>
+					<xsd:element name="measurementTypeID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="measurementValueSourceID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MeasurementType" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="MeasurementValueSource" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SubLoadArea" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="loadAreaID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ConformLoadGroup" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="subLoadAreaID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="conformLoadSchedule" type="cpsm:ConformLoadSchedule" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NonConformLoadGroup" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="subLoadAreaID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="nonConformLoadSchedule" type="cpsm:NonConformLoadSchedule" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NonConformLoadSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:SeasonDayTypeSchedule"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ControlArea" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="netInterchange" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="tieFlow" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="positiveFlowIn" type="xsd:boolean" minOccurs="0"/>
+								<xsd:element name="terminalID" type="xsd:string" minOccurs="0"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="type" minOccurs="0">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="AGC"/>
+								<xsd:enumeration value="Forecast"/>
+								<xsd:enumeration value="Interchange"/>
+								<xsd:enumeration value="Other"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="EnergyAreaID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ControlAreaGeneratingUnit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="controlAreaID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="generatingUnitID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ActivePowerLimit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="value" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="type" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="operationalLimitSetID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ApparentPowerLimit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="value" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="type" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="operationalLimitSetID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CurrentLimit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="value" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="type" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="operationalLimitSetID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="VoltageLimit" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="value" type="cpsm:activePower" minOccurs="0"/>
+					<xsd:element name="type" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="operationalLimitSetID" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="OperationalLimitSet" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="equipmentID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="limits" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="limitID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DayType" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Discrete" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:mspCIMObject">
+				<xsd:sequence>
+					<xsd:element name="maxValue" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="minValue" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="normalValue" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="discreteValue" type="cpsm:DiscreteValue" minOccurs="0"/>
+					<xsd:element name="units" type="cpsm:uom" minOccurs="0"/>
+					<xsd:element name="unitID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="quality" type="cpsm:qualityDescription" minOccurs="0"/>
+					<xsd:element name="phase" type="cpsm:phaseCode" minOccurs="0"/>
+					<xsd:element name="unitPrefix" type="cpsm:unitPrefix" minOccurs="0"/>
+					<xsd:element name="harmonic" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="quadrant" type="cpsm:accountability" minOccurs="0"/>
+					<xsd:element name="measurementTypeID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="terminalID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="powerSystemResourceID" type="cpsm:objectRef" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="unitPrefix">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Maximum"/>
+			<xsd:enumeration value="Minimum"/>
+			<xsd:enumeration value="Average"/>
+			<xsd:enumeration value="Instantaneous"/>
+			<xsd:enumeration value="Cumulative"/>
+			<xsd:enumeration value="Quantity"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="IrregularIntervalSchedule" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:BasicIntervalSchedule">
+				<xsd:sequence>
+					<xsd:element name="TimePoints" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="IrregularTimePoint" type="cpsm:IrregularTimePoint" minOccurs="0" maxOccurs="unbounded"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="IrregularTimePoint">
+		<xsd:sequence>
+			<xsd:element name="time" type="cpsm:Seconds" minOccurs="0"/>
+			<xsd:element name="value1" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="value2" type="xsd:float" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:complexType name="TimePoints">
+		<xsd:sequence>
+			<xsd:element name="timePoint" type="cpsm:RegularTimePoint" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RegularTimePoint">
+		<xsd:sequence>
+			<xsd:element name="sequenceNumber" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="value1" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="value2" type="xsd:float" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:complexType name="LoadCurve" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="cpsm:RegularIntervalSchedule">
+				<xsd:sequence>
+					<xsd:element name="subLoadAreaID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="season" type="cpsm:Season" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Season">
+		<xsd:sequence>
+			<xsd:element name="name" type="cpsm:SeasonName" minOccurs="0"/>
+			<xsd:element name="endDate" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="startDate" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:simpleType name="SeasonName">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="winter"/>
+			<xsd:enumeration value="spring"/>
+			<xsd:enumeration value="summer"/>
+			<xsd:enumeration value="fall"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SynchronousMachineType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="generator"/>
+			<xsd:enumeration value="condenser"/>
+			<xsd:enumeration value="generator_or_condenser"/>
+			<xsd:enumeration value="motor"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SynchronousMachineOperatingMode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="generator"/>
+			<xsd:enumeration value="condenser"/>
+			<xsd:enumeration value="motor"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified"
+                targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/ouaf/CB_Server.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+</wsdl:definitions>

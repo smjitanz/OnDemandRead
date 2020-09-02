@@ -1,0 +1,16 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="CYANOnDemanReadRespInterval"
+     targetNamespace="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:xai="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="OUAFResponseSOAPReference">
+        <plnk:role name="CYANOnDemanReadRespIntervalPortType" portType="xai:CYANOnDemanReadRespIntervalPortType"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
+         location="CYANOnDemanReadRespInterval_1.wsdl"/>
+</wsdl:definitions>

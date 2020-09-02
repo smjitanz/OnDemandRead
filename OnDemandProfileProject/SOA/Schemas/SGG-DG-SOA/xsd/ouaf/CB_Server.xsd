@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ouaf="http://xmlns.oracle.com/ouaf" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://xmlns.oracle.com/ouaf" schemaLocation="ouaf.xsd"/>
+	<xsd:complexType name="CDStateChange" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="meterID" type="tns:meterID" minOccurs="0"/>
+					<xsd:element name="stateChange" type="tns:loadActionCode" minOccurs="0"/>
+					<xsd:element name="meterEvent" type="tns:meterEvent" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="loadActionCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Connect"/>
+			<xsd:enumeration value="Disconnect"/>
+			<xsd:enumeration value="InitiatePowerLimitation"/>
+			<xsd:enumeration value="Opened"/>
+			<xsd:enumeration value="Closed"/>
+			<xsd:enumeration value="Open"/>
+			<xsd:enumeration value="Close"/>
+			<xsd:enumeration value="Armed"/>
+			<xsd:enumeration value="Enabled"/>
+			<xsd:enumeration value="Disabled"/>
+			<xsd:enumeration value="Arm"/>
+			<xsd:enumeration value="Enable"/>
+			<xsd:enumeration value="Disable"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="meterEvent">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="domain" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="domainPart" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="type" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="index" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="valueAttribute" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Structure changed for OUAF compatibility: this element corresponds to the value attribute and has changed names to accomodate the value element above.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="codeString" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="DG-ReadingChangedNotification">
+		<xsd:annotation>
+			<xsd:documentation>Once the XAI WSDL is available, delete this element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="ouaf:abstractOUAFResponse">
+					<xsd:sequence>
+						<xsd:element name="communicationId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="communicationType" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="bo" type="xsd:string"/>
+						<xsd:element name="boStatus" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusReason" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="externalSystem" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+						<xsd:element name="initiatingOutCommunication" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="amiDeviceIdentifierNumber" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="deviceId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="retryDetails" type="ouaf:retryDetails" minOccurs="0"/>
+						<xsd:element name="responseDetail" type="ouaf:responseDetail" minOccurs="0"/>
+						<xsd:any/>
+						<xsd:element name="responseDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MultiSpeak" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element ref="tns:multiSpeakMsgHeader"/>
+												<xsd:element ref="tns:readingChangedNotification"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="readingChangedNotification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="changedMeterReads" type="tns:ArrayOfMeterReadings" minOccurs="0"/>
+				<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DG-ConDisconStChgNotification">
+		<xsd:annotation>
+			<xsd:documentation>Once the XAI WSDL is available, delete this element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="ouaf:abstractOUAFResponse">
+					<xsd:sequence>
+						<xsd:element name="communicationId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="communicationType" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="bo" type="xsd:string"/>
+						<xsd:element name="boStatus" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusReason" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="externalSystem" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+						<xsd:element name="initiatingOutCommunication" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="amiDeviceIdentifierNumber" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="deviceId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="retryDetails" type="ouaf:retryDetails" minOccurs="0"/>
+						<xsd:element name="responseDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MultiSpeak" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element ref="tns:multiSpeakMsgHeader"/>
+												<xsd:element ref="tns:CDStatesChangedNotification"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="CDStatesChangedNotification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="stateChanges" type="tns:ArrayOfCDStateChange" minOccurs="0"/>
+				<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ArrayOfCDStateChange">
+		<xsd:sequence>
+			<xsd:element name="CDStateChange" type="tns:CDStateChange" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CDStatesChangedNotificationResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CDStatesChangedNotificationResult" type="tns:ArrayOfErrorObject" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

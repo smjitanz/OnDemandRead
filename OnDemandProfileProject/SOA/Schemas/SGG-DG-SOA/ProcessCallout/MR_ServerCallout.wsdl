@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/MR_Server.xsd"/>
+      <xsd:element name="InitiateMeterReadingsByMeterIDEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateMeterReadingsByMeterID"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InitiateMeterReadingsByMeterIDCompletedEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateMeterReadingsByMeterID"/>
+            <xsd:element ref="tns:InitiateMeterReadingsByMeterIDResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MeterAddNotificationEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:MeterAddNotification"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MeterAddNotificationCompletedEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:MeterAddNotification"/>
+            <xsd:element ref="tns:MeterAddNotificationResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MeterRemoveNotificationEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:MeterRemoveNotification"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="MeterRemoveNotificationCompletedEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:MeterRemoveNotification"/>
+            <xsd:element ref="tns:MeterRemoveNotificationResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="OnDemandReadRequestReceived">
+    <wsdl:part name="payload"
+          element="tns:InitiateMeterReadingsByMeterIDEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="OnDemandReadRequestReceivedResponse">
+    <wsdl:part name="payload"
+          element="tns:InitiateMeterReadingsByMeterIDEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="OnDemandReadRequestCompleted">
+    <wsdl:part name="payload"
+          element="tns:InitiateMeterReadingsByMeterIDCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="OnDemandReadRequestCompletedResponse">
+    <wsdl:part name="payload"
+          element="tns:InitiateMeterReadingsByMeterIDCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddRequestReceived">
+    <wsdl:part name="payload" element="tns:MeterAddNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddRequestReceivedResponse">
+    <wsdl:part name="payload" element="tns:MeterAddNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddRequestCompleted">
+    <wsdl:part name="payload"
+               element="tns:MeterAddNotificationCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddRequestCompletedResponse">
+    <wsdl:part name="payload"
+               element="tns:MeterAddNotificationCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveRequestReceived">
+    <wsdl:part name="payload" element="tns:MeterRemoveNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveRequestReceivedResponse">
+    <wsdl:part name="payload" element="tns:MeterRemoveNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveRequestCompleted">
+    <wsdl:part name="payload"
+               element="tns:MeterRemoveNotificationCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveRequestCompletedResponse">
+    <wsdl:part name="payload"
+               element="tns:MeterRemoveNotificationCompletedEnvelope"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="MR_ServerCallout">
+    <wsdl:operation name="OnDemandReadRequestReceived">
+      <wsdl:input message="tns:OnDemandReadRequestReceived"/>
+      <wsdl:output message="tns:OnDemandReadRequestReceivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="OnDemandReadRequestCompleted">
+      <wsdl:input message="tns:OnDemandReadRequestCompleted"/>
+      <wsdl:output message="tns:OnDemandReadRequestCompletedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CommissioningRequestReceived">
+      <wsdl:input message="tns:MeterAddRequestReceived"/>
+      <wsdl:output message="tns:MeterAddRequestReceivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CommissioningCompleted">
+      <wsdl:input message="tns:MeterAddRequestCompleted"/>
+      <wsdl:output message="tns:MeterAddRequestCompletedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="DecommissioningRequestReceived">
+      <wsdl:input message="tns:MeterRemoveRequestReceived"/>
+      <wsdl:output message="tns:MeterRemoveRequestReceivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="DecommissioningCompleted">
+      <wsdl:input message="tns:MeterRemoveRequestCompleted"/>
+      <wsdl:output message="tns:MeterRemoveRequestCompletedResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="MR_ServerCalloutPL">
+    <plnk:role name="MR_ServerCalloutProvider">
+        <plnk:portType name="tns:MR_ServerCallout"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+  
+  <wsdl:binding name="MR_ServerCallout" type="tns:MR_ServerCallout">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="DecommissioningRequestReceived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/DecommissioningRequestReceived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnDemandReadRequestReceived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/OnDemandReadRequestReceived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissioningRequestReceived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/CommissioningRequestReceived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnDemandReadRequestCompleted">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/OnDemandReadRequestCompleted"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecommissioningCompleted">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/DecommissioningCompleted"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommissioningCompleted">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/CommissioningCompleted"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

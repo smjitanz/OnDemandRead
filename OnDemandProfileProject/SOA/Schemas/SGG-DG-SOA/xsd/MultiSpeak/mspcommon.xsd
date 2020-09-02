@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:element name="MultiSpeakMsgHeader" type="tns:MultiSpeakMsgHeader"/>
+	<xsd:complexType name="MultiSpeakMsgHeader">
+		<xsd:attribute name="MajorVersion" type="xsd:integer"/>
+		<xsd:attribute name="MinorVersion" type="xsd:integer"/>
+		<xsd:attribute name="Build" type="xsd:integer"/>
+		<xsd:attribute name="Branch" type="xsd:integer"/>
+		<xsd:attribute name="BuildString" type="tns:BuildDescriptor" use="required"/>
+		<xsd:attribute name="UserID" type="xsd:string"/>
+		<xsd:attribute name="Pwd" type="xsd:string"/>
+		<xsd:attribute name="AppName" type="xsd:string"/>
+		<xsd:attribute name="AppVersion" type="xsd:string"/>
+		<xsd:attribute name="Company" type="xsd:string"/>
+		<xsd:attribute name="DefaultCurrencyCode" type="tns:DefaultCurrencyCode"/>
+		<xsd:attribute name="CSUnits" type="tns:MessageHeaderCSUnits" default="feet"/>
+		<xsd:attribute name="CoordinateSystemName" type="xsd:string"/>
+		<xsd:attribute name="CoordinateSystemAuthority" type="xsd:string"/>
+		<xsd:attribute name="CoordinateSystemAuthorityCode" type="xsd:string"/>
+		<xsd:attribute name="Datum" type="xsd:string"/>
+		<xsd:attribute name="SessionID" type="xsd:string"/>
+		<xsd:attribute name="PreviousSessionID" type="xsd:string"/>
+		<xsd:attribute name="ObjectsRemaining" type="xsd:integer"/>
+		<xsd:attribute name="LastSent" type="xsd:string"/>
+		<xsd:attribute name="RegistrationID" type="xsd:string"/>
+		<xsd:attribute name="MessageID" type="xsd:string"/>
+		<xsd:attribute name="TimeStamp" type="xsd:dateTime"/>
+		<xsd:attribute name="Context" type="tns:MessageContext"/>
+		<xsd:attribute name="AuditID" type="xsd:string"/>
+		<xsd:attribute name="AuditPassword" type="xsd:string"/>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:simpleType name="BuildDescriptor">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PR"/>
+			<xsd:enumeration value="RC"/>
+			<xsd:enumeration value="Branch"/>
+			<xsd:enumeration value="Release"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MessageHeaderCSUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="feet"/>
+			<xsd:enumeration value="meters"/>
+			<xsd:enumeration value="USSurveyFeet"/>
+			<xsd:enumeration value="other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MessageContext">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Production"/>
+			<xsd:enumeration value="Testing"/>
+			<xsd:enumeration value="Development"/>
+			<xsd:enumeration value="Study"/>
+			<xsd:enumeration value="Training"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DefaultCurrencyCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="USD"/>
+			<xsd:enumeration value="EUR"/>
+			<xsd:enumeration value="AED"/>
+			<xsd:enumeration value="AFN"/>
+			<xsd:enumeration value="ALL"/>
+			<xsd:enumeration value="AMD"/>
+			<xsd:enumeration value="ANG"/>
+			<xsd:enumeration value="AOA"/>
+			<xsd:enumeration value="ARS"/>
+			<xsd:enumeration value="AUD"/>
+			<xsd:enumeration value="AWG"/>
+			<xsd:enumeration value="AZN"/>
+			<xsd:enumeration value="BAM"/>
+			<xsd:enumeration value="BBD"/>
+			<xsd:enumeration value="BDT"/>
+			<xsd:enumeration value="BGN"/>
+			<xsd:enumeration value="BHD"/>
+			<xsd:enumeration value="BIF"/>
+			<xsd:enumeration value="BMD"/>
+			<xsd:enumeration value="BND"/>
+			<xsd:enumeration value="BOB"/>
+			<xsd:enumeration value="BOV"/>
+			<xsd:enumeration value="BRL"/>
+			<xsd:enumeration value="BSD"/>
+			<xsd:enumeration value="BTN"/>
+			<xsd:enumeration value="BWP"/>
+			<xsd:enumeration value="BYR"/>
+			<xsd:enumeration value="BZD"/>
+			<xsd:enumeration value="CAD"/>
+			<xsd:enumeration value="CDF"/>
+			<xsd:enumeration value="CHE"/>
+			<xsd:enumeration value="CHF"/>
+			<xsd:enumeration value="CHW"/>
+			<xsd:enumeration value="CLF"/>
+			<xsd:enumeration value="CLP"/>
+			<xsd:enumeration value="CNY"/>
+			<xsd:enumeration value="COP"/>
+			<xsd:enumeration value="COU"/>
+			<xsd:enumeration value="CRC"/>
+			<xsd:enumeration value="CUP"/>
+			<xsd:enumeration value="CVE"/>
+			<xsd:enumeration value="CZK"/>
+			<xsd:enumeration value="DJF"/>
+			<xsd:enumeration value="DKK"/>
+			<xsd:enumeration value="DOP"/>
+			<xsd:enumeration value="DZD"/>
+			<xsd:enumeration value="EEK"/>
+			<xsd:enumeration value="EGP"/>
+			<xsd:enumeration value="ERN"/>
+			<xsd:enumeration value="ETB"/>
+			<xsd:enumeration value="FJD"/>
+			<xsd:enumeration value="FKP"/>
+			<xsd:enumeration value="GBP"/>
+			<xsd:enumeration value="GEL"/>
+			<xsd:enumeration value="GHS"/>
+			<xsd:enumeration value="GIP"/>
+			<xsd:enumeration value="GMD"/>
+			<xsd:enumeration value="GNF"/>
+			<xsd:enumeration value="GTQ"/>
+			<xsd:enumeration value="GYD"/>
+			<xsd:enumeration value="HKD"/>
+			<xsd:enumeration value="HNL"/>
+			<xsd:enumeration value="HRK"/>
+			<xsd:enumeration value="HTG"/>
+			<xsd:enumeration value="HUF"/>
+			<xsd:enumeration value="IDR"/>
+			<xsd:enumeration value="ILS"/>
+			<xsd:enumeration value="INR"/>
+			<xsd:enumeration value="IQD"/>
+			<xsd:enumeration value="IRR"/>
+			<xsd:enumeration value="ISK"/>
+			<xsd:enumeration value="JMD"/>
+			<xsd:enumeration value="JOD"/>
+			<xsd:enumeration value="JPY"/>
+			<xsd:enumeration value="KES"/>
+			<xsd:enumeration value="KGS"/>
+			<xsd:enumeration value="KHR"/>
+			<xsd:enumeration value="KMF"/>
+			<xsd:enumeration value="KPW"/>
+			<xsd:enumeration value="KRW"/>
+			<xsd:enumeration value="KWD"/>
+			<xsd:enumeration value="KYD"/>
+			<xsd:enumeration value="KZT"/>
+			<xsd:enumeration value="LAK"/>
+			<xsd:enumeration value="LBP"/>
+			<xsd:enumeration value="LKR"/>
+			<xsd:enumeration value="LRD"/>
+			<xsd:enumeration value="LSL"/>
+			<xsd:enumeration value="LTL"/>
+			<xsd:enumeration value="LVL"/>
+			<xsd:enumeration value="LYD"/>
+			<xsd:enumeration value="MAD"/>
+			<xsd:enumeration value="MDL"/>
+			<xsd:enumeration value="MGA"/>
+			<xsd:enumeration value="MKD"/>
+			<xsd:enumeration value="MMK"/>
+			<xsd:enumeration value="MNT"/>
+			<xsd:enumeration value="MOP"/>
+			<xsd:enumeration value="MRO"/>
+			<xsd:enumeration value="MUR"/>
+			<xsd:enumeration value="MVR"/>
+			<xsd:enumeration value="MWK"/>
+			<xsd:enumeration value="MXN"/>
+			<xsd:enumeration value="MXV"/>
+			<xsd:enumeration value="MYR"/>
+			<xsd:enumeration value="MZN"/>
+			<xsd:enumeration value="NAD"/>
+			<xsd:enumeration value="NGN"/>
+			<xsd:enumeration value="NIO"/>
+			<xsd:enumeration value="NOK"/>
+			<xsd:enumeration value="NPR"/>
+			<xsd:enumeration value="NZD"/>
+			<xsd:enumeration value="OMR"/>
+			<xsd:enumeration value="PAB"/>
+			<xsd:enumeration value="PEN"/>
+			<xsd:enumeration value="PGK"/>
+			<xsd:enumeration value="PHP"/>
+			<xsd:enumeration value="PKR"/>
+			<xsd:enumeration value="PLN"/>
+			<xsd:enumeration value="PYG"/>
+			<xsd:enumeration value="QAR"/>
+			<xsd:enumeration value="RON"/>
+			<xsd:enumeration value="RSD"/>
+			<xsd:enumeration value="RUB"/>
+			<xsd:enumeration value="RWF"/>
+			<xsd:enumeration value="SAR"/>
+			<xsd:enumeration value="SBD"/>
+			<xsd:enumeration value="SCR"/>
+			<xsd:enumeration value="SDG"/>
+			<xsd:enumeration value="SEK"/>
+			<xsd:enumeration value="SGD"/>
+			<xsd:enumeration value="SHP"/>
+			<xsd:enumeration value="SKK"/>
+			<xsd:enumeration value="SLL"/>
+			<xsd:enumeration value="SOS"/>
+			<xsd:enumeration value="SRD"/>
+			<xsd:enumeration value="STD"/>
+			<xsd:enumeration value="SYP"/>
+			<xsd:enumeration value="SZL"/>
+			<xsd:enumeration value="THB"/>
+			<xsd:enumeration value="TJS"/>
+			<xsd:enumeration value="TMM"/>
+			<xsd:enumeration value="TND"/>
+			<xsd:enumeration value="TOP"/>
+			<xsd:enumeration value="TRY"/>
+			<xsd:enumeration value="TTD"/>
+			<xsd:enumeration value="TWD"/>
+			<xsd:enumeration value="TZS"/>
+			<xsd:enumeration value="UAH"/>
+			<xsd:enumeration value="UGX"/>
+			<xsd:enumeration value="USN"/>
+			<xsd:enumeration value="USS"/>
+			<xsd:enumeration value="UYU"/>
+			<xsd:enumeration value="UZS"/>
+			<xsd:enumeration value="VEF"/>
+			<xsd:enumeration value="VND"/>
+			<xsd:enumeration value="VUV"/>
+			<xsd:enumeration value="WST"/>
+			<xsd:enumeration value="XAF"/>
+			<xsd:enumeration value="XAG"/>
+			<xsd:enumeration value="XAU"/>
+			<xsd:enumeration value="XBA"/>
+			<xsd:enumeration value="XBB"/>
+			<xsd:enumeration value="XBC"/>
+			<xsd:enumeration value="XBD"/>
+			<xsd:enumeration value="XCD"/>
+			<xsd:enumeration value="XDR"/>
+			<xsd:enumeration value="XFU"/>
+			<xsd:enumeration value="XOF"/>
+			<xsd:enumeration value="XPD"/>
+			<xsd:enumeration value="XPF"/>
+			<xsd:enumeration value="XPT"/>
+			<xsd:enumeration value="XTS"/>
+			<xsd:enumeration value="XXX"/>
+			<xsd:enumeration value="YER"/>
+			<xsd:enumeration value="ZAR"/>
+			<xsd:enumeration value="ZMK"/>
+			<xsd:enumeration value="ZWD"/>
+			<xsd:enumeration value="ADF"/>
+			<xsd:enumeration value="ADP"/>
+			<xsd:enumeration value="ATS"/>
+			<xsd:enumeration value="BEF"/>
+			<xsd:enumeration value="CYP"/>
+			<xsd:enumeration value="DEM"/>
+			<xsd:enumeration value="ESP"/>
+			<xsd:enumeration value="FIM"/>
+			<xsd:enumeration value="FRF"/>
+			<xsd:enumeration value="GRD"/>
+			<xsd:enumeration value="IEP"/>
+			<xsd:enumeration value="ITL"/>
+			<xsd:enumeration value="LUF"/>
+			<xsd:enumeration value="MCF"/>
+			<xsd:enumeration value="MTL"/>
+			<xsd:enumeration value="NLG"/>
+			<xsd:enumeration value="PTE"/>
+			<xsd:enumeration value="SIT"/>
+			<xsd:enumeration value="SML"/>
+			<xsd:enumeration value="VAL"/>
+			<xsd:enumeration value="XEU"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="serviceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Electric"/>
+			<xsd:enumeration value="Gas"/>
+			<xsd:enumeration value="Water"/>
+			<xsd:enumeration value="Propane"/>
+			<xsd:enumeration value="Refuse"/>
+			<xsd:enumeration value="Sewer"/>
+			<xsd:enumeration value="Telecom"/>
+			<xsd:enumeration value="TV"/>
+			<xsd:enumeration value="Cable"/>
+			<xsd:enumeration value="Heating"/>
+			<xsd:enumeration value="Steam"/>
+			<xsd:enumeration value="Transportation"/>
+			<xsd:enumeration value="All"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="meterID">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="meterNo" type="xsd:string"/>
+				<xsd:attribute name="serviceType" type="tns:serviceType"/>
+				<xsd:attribute name="objectID" type="xsd:string"/>
+				<xsd:attribute name="utility" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterIDNillable">
+		<xsd:sequence>
+			<xsd:element name="meterID" type="tns:meterID" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterID">
+		<xsd:sequence>
+			<xsd:element name="meterID" type="tns:meterID" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="objectRef">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string"/>
+				<xsd:attribute name="noun" type="xsd:QName"/>
+				<xsd:attribute name="objectID" type="xsd:string"/>
+				<xsd:attribute name="utility" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef">
+		<xsd:sequence>
+			<xsd:element name="locationReference" type="tns:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef1">
+		<xsd:sequence>
+			<xsd:element name="cabinetContentsItem" type="tns:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef2">
+		<xsd:sequence>
+			<xsd:element name="contentsItem" type="tns:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef3">
+		<xsd:sequence>
+			<xsd:element name="applicationPoint" type="tns:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef4">
+		<xsd:sequence>
+			<xsd:element name="jobID" type="tns:objectRef" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfObjectRef5">
+		<xsd:sequence>
+			<xsd:element name="objectRef" type="tns:objectRef" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfConfigurationGroupIDs">
+		<xsd:sequence>
+			<xsd:element name="configurationGroupID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfPremiseIDs">
+		<xsd:sequence>
+			<xsd:element name="premiseID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfVehicleIDs">
+		<xsd:sequence>
+			<xsd:element name="vehicleID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfEquipmentIDs">
+		<xsd:sequence>
+			<xsd:element name="equipmentID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfWorkerIDs">
+		<xsd:sequence>
+			<xsd:element name="workerID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfFixedChargeCodes">
+		<xsd:sequence>
+			<xsd:element name="fixedChargeCode" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfInformationItems">
+		<xsd:sequence>
+			<xsd:element name="informationItem" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfTransactionTypes">
+		<xsd:sequence>
+			<xsd:element name="transactionType" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfVals">
+		<xsd:sequence>
+			<xsd:element name="val" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfString">
+		<xsd:sequence>
+			<xsd:element name="string" type="xsd:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfCrewIDs">
+		<xsd:sequence>
+			<xsd:element name="crewID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfSkillIDs">
+		<xsd:sequence>
+			<xsd:element name="skillID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfCapabilityIDs">
+		<xsd:sequence>
+			<xsd:element name="capabilityID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfLoadManagementDeviceIDs">
+		<xsd:sequence>
+			<xsd:element name="loadManagementDeviceID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfInHomeDisplayIDs">
+		<xsd:sequence>
+			<xsd:element name="inHomeDisplayID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterGroupIDs">
+		<xsd:sequence>
+			<xsd:element name="meterGroupID" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterStatuses">
+		<xsd:sequence>
+			<xsd:element name="meterStatus" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="GetPublishMethodsResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="GetPublishMethodsResult" type="tns:ArrayOfString" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ArrayOfMethodNames">
+		<xsd:sequence>
+			<xsd:element name="methodName" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfReadingTypes">
+		<xsd:sequence>
+			<xsd:element name="readingType" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfSealNumbers">
+		<xsd:sequence>
+			<xsd:element name="sealNumber" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="GetDomainNamesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="GetDomainNamesResult" type="tns:ArrayOfString" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetMethodsResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="GetMethodsResult" type="tns:ArrayOfString" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

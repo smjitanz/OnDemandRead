@@ -1,0 +1,1695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:s3="http://www.w3.org/1999/xlink"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s1="cpsm_V4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:s2="gml_V4.1_Release"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+  
+  <wsdl:import location="CD_Messages.wsdl" namespace="http://www.multispeak.org/Version_4.1_Release"/>
+  
+  <wsdl:portType name="CD_ServerSoap">
+    <wsdl:operation name="PingURL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        Pings
+                                                                        URL of
+                                                                        CD to
+                                                                        see if
+                                                                        it is
+                                                                        alive.
+                                                                        Returns
+                                                                        errorObject(s)
+                                                                        as
+                                                                        necessary
+                                                                        to
+                                                                        communicate
+                                                                        application
+                                                                        status.</wsdl:documentation>
+      <wsdl:input message="tns:PingURLSoapIn"/>
+      <wsdl:output message="tns:PingURLSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethods">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        list of
+                                                                        methods
+                                                                        supported
+                                                                        by CD.</wsdl:documentation>
+      <wsdl:input message="tns:GetMethodsSoapIn"/>
+      <wsdl:output message="tns:GetMethodsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The
+                                                                        client
+                                                                        requests
+                                                                        from the
+                                                                        server a
+                                                                        list of
+                                                                        names of
+                                                                        domains
+                                                                        supported
+                                                                        by the
+                                                                        server.
+                                                                        This
+                                                                        method
+                                                                        is used,
+                                                                        along
+                                                                        with the
+                                                                        GetDomainMembers
+                                                                        method
+                                                                        to
+                                                                        enable
+                                                                        systems
+                                                                        to
+                                                                        exchange
+                                                                        information
+                                                                        about
+                                                                        application-specific
+                                                                        or
+                                                                        installation-specific
+                                                                        lists of
+                                                                        information,
+                                                                        such as
+                                                                        the
+                                                                        lists of
+                                                                        counties
+                                                                        for this
+                                                                        installation
+                                                                        or the
+                                                                        list of
+                                                                        serviceStatusCodes
+                                                                        used by
+                                                                        the
+                                                                        server.
+                                                                        It is
+                                                                        recommended
+                                                                        that
+                                                                        domain
+                                                                        names be
+                                                                        returned
+                                                                        in the
+                                                                        form of
+                                                                        the name
+                                                                        of a
+                                                                        named
+                                                                        object
+                                                                        (noun)
+                                                                        in the
+                                                                        MultiSpeak
+                                                                        schema
+                                                                        dotted
+                                                                        with the
+                                                                        field
+                                                                        name of
+                                                                        interest.
+                                                                        For
+                                                                        instance,
+                                                                        if the
+                                                                        system
+                                                                        of
+                                                                        record
+                                                                        is
+                                                                        returning
+                                                                        workflow
+                                                                        status
+                                                                        codes
+                                                                        that
+                                                                        would be
+                                                                        used on
+                                                                        work
+                                                                        orders,
+                                                                        it is
+                                                                        suggested
+                                                                        that the
+                                                                        domain
+                                                                        name be
+                                                                        called
+                                                                        “workOrder.workflowStatus”,
+                                                                        using
+                                                                        the same
+                                                                        spelling
+                                                                        and
+                                                                        capitalization
+                                                                        used in
+                                                                        the
+                                                                        MultiSpeak
+                                                                        schema.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainNamesSoapIn"/>
+      <wsdl:output message="tns:GetDomainNamesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainMembers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The
+                                                                        client
+                                                                        requests
+                                                                        from the
+                                                                        server
+                                                                        the
+                                                                        members
+                                                                        of a
+                                                                        specific
+                                                                        domain
+                                                                        of
+                                                                        information,
+                                                                        identified
+                                                                        by the
+                                                                        domainName
+                                                                        parameter,
+                                                                        which
+                                                                        are
+                                                                        supported
+                                                                        by the
+                                                                        server.
+                                                                        This
+                                                                        method
+                                                                        is used,
+                                                                        along
+                                                                        with the
+                                                                        GetDomainNames
+                                                                        method
+                                                                        to
+                                                                        enable
+                                                                        systems
+                                                                        to
+                                                                        exchange
+                                                                        information
+                                                                        about
+                                                                        application-specific
+                                                                        or
+                                                                        installation-specific
+                                                                        lists of
+                                                                        information,
+                                                                        such as
+                                                                        the
+                                                                        lists of
+                                                                        counties
+                                                                        for this
+                                                                        installation
+                                                                        or the
+                                                                        list of
+                                                                        serviceStatusCodes
+                                                                        used by
+                                                                        the
+                                                                        server.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainMembersSoapIn"/>
+      <wsdl:output message="tns:GetDomainMembersSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="RequestRegistrationID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        service
+                                                                        requests
+                                                                        of the
+                                                                        publisher
+                                                                        a unique
+                                                                        registration
+                                                                        ID that
+                                                                        would
+                                                                        subsequently
+                                                                        be used
+                                                                        to refer
+                                                                        unambiguously
+                                                                        to that
+                                                                        specific
+                                                                        subscription.
+                                                                        The
+                                                                        return
+                                                                        parameter
+                                                                        is the
+                                                                        registrationID,
+                                                                        which is
+                                                                        a
+                                                                        string-type
+                                                                        value.
+                                                                        It is
+                                                                        recommended
+                                                                        that the
+                                                                        server
+                                                                        not
+                                                                        implement
+                                                                        registration
+                                                                        in such
+                                                                        a manner
+                                                                        that one
+                                                                        client
+                                                                        can
+                                                                        guess
+                                                                        the
+                                                                        registrationID
+                                                                        of
+                                                                        another.
+                                                                        For
+                                                                        instance
+                                                                        the use
+                                                                        of
+                                                                        sequential
+                                                                        numbers
+                                                                        for
+                                                                        registrationIDs
+                                                                        is
+                                                                        discouraged.</wsdl:documentation>
+      <wsdl:input message="tns:RequestRegistrationIDSoapIn"/>
+      <wsdl:output message="tns:RequestRegistrationIDSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterForService">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        establishs
+                                                                        a
+                                                                        subscription
+                                                                        using a
+                                                                        previously
+                                                                        requested
+                                                                        registrationID.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        registrationInfo
+                                                                        is a
+                                                                        complex
+                                                                        type
+                                                                        that
+                                                                        includes
+                                                                        the
+                                                                        following
+                                                                        information:
+                                                                        registrationID
+                                                                        - the
+                                                                        previously
+                                                                        requested
+                                                                        registrationID
+                                                                        obtained
+                                                                        from the
+                                                                        publisher
+                                                                        by
+                                                                        calling
+                                                                        RequestRegistrationID,
+                                                                        responseURL
+                                                                        – the
+                                                                        URL to
+                                                                        which
+                                                                        information
+                                                                        should
+                                                                        subsequently
+                                                                        be
+                                                                        published
+                                                                        on this
+                                                                        subscription,
+                                                                        msFunction
+                                                                        – the
+                                                                        abbreviated
+                                                                        string
+                                                                        name of
+                                                                        the
+                                                                        MultiSpeak
+                                                                        method
+                                                                        making
+                                                                        the
+                                                                        subscription
+                                                                        request
+                                                                        (for
+                                                                        instance,
+                                                                        if an
+                                                                        application
+                                                                        that
+                                                                        exposes
+                                                                        the
+                                                                        Meter
+                                                                        Reading
+                                                                        function
+                                                                        has made
+                                                                        the
+                                                                        request,
+                                                                        then the
+                                                                        msFunction
+                                                                        variable
+                                                                        should
+                                                                        include
+                                                                        “MR”),
+                                                                        methodsList
+                                                                        – An
+                                                                        array of
+                                                                        strings
+                                                                        that
+                                                                        contain
+                                                                        the
+                                                                        string
+                                                                        names of
+                                                                        the
+                                                                        MultiSpeak
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        subscriber
+                                                                        would
+                                                                        like to
+                                                                        subscribe.
+                                                                        Subsequent
+                                                                        calls to
+                                                                        RegisterForService
+                                                                        on an
+                                                                        existing
+                                                                        subscription
+                                                                        replace
+                                                                        prior
+                                                                        subscription
+                                                                        details
+                                                                        in their
+                                                                        entirety
+                                                                        - they
+                                                                        do NOT
+                                                                        add to
+                                                                        an
+                                                                        existing
+                                                                        subscription.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterForServiceSoapIn"/>
+      <wsdl:output message="tns:RegisterForServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterForService">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        deletes
+                                                                        a
+                                                                        previously
+                                                                        established
+                                                                        subscription
+                                                                        (registration
+                                                                        for
+                                                                        service)
+                                                                        that
+                                                                        carries
+                                                                        the
+                                                                        registration
+                                                                        identifer
+                                                                        listed
+                                                                        in the
+                                                                        input
+                                                                        parameter
+                                                                        registrationID.</wsdl:documentation>
+      <wsdl:input message="tns:UnregisterForServiceSoapIn"/>
+      <wsdl:output message="tns:UnregisterForServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationInfoByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        requests
+                                                                        the
+                                                                        return
+                                                                        of
+                                                                        existing
+                                                                        registration
+                                                                        information
+                                                                        (that is
+                                                                        to say
+                                                                        the
+                                                                        details
+                                                                        of what
+                                                                        is
+                                                                        subscribed
+                                                                        on this
+                                                                        subscription)
+                                                                        for a
+                                                                        specific
+                                                                        registrationID.
+                                                                        The
+                                                                        server
+                                                                        should
+                                                                        return a
+                                                                        SOAPFault
+                                                                        if the
+                                                                        registrationID
+                                                                        is not
+                                                                        valid.</wsdl:documentation>
+      <wsdl:input message="tns:GetRegistrationInfoByIDSoapIn"/>
+      <wsdl:output message="tns:GetRegistrationInfoByIDSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishMethods">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        this
+                                                                        server
+                                                                        can
+                                                                        publish
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:GetPublishMethodsSoapIn"/>
+      <wsdl:output message="tns:GetPublishMethodsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="DomainMembersChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        permits
+                                                                        a client
+                                                                        to have
+                                                                        changed
+                                                                        information
+                                                                        on
+                                                                        domain
+                                                                        members
+                                                                        published
+                                                                        to it
+                                                                        using a
+                                                                        previously
+                                                                        arranged
+                                                                        subscription,
+                                                                        set up
+                                                                        using
+                                                                        the
+                                                                        RegisterForServiceMethod.
+                                                                        The
+                                                                        client
+                                                                        should
+                                                                        first
+                                                                        obtain a
+                                                                        registrationID
+                                                                        and then
+                                                                        register
+                                                                        for
+                                                                        service,
+                                                                        including
+                                                                        the
+                                                                        DomainMembersChangedNotification
+                                                                        as one
+                                                                        of the
+                                                                        methods
+                                                                        in the
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        client
+                                                                        has
+                                                                        subscribed.
+                                                                        The
+                                                                        server
+                                                                        shall
+                                                                        include
+                                                                        the
+                                                                        registrationID
+                                                                        for the
+                                                                        subscription
+                                                                        in the
+                                                                        message
+                                                                        header
+                                                                        so that
+                                                                        the
+                                                                        client
+                                                                        can
+                                                                        determine
+                                                                        the
+                                                                        source
+                                                                        of the
+                                                                        domainMember
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:DomainMembersChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:DomainMembersChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="DomainNamesChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        permits
+                                                                        a client
+                                                                        to have
+                                                                        changed
+                                                                        information
+                                                                        on
+                                                                        domain
+                                                                        names
+                                                                        published
+                                                                        to it
+                                                                        using a
+                                                                        previously
+                                                                        arranged
+                                                                        subscription,
+                                                                        set up
+                                                                        using
+                                                                        the
+                                                                        RegisterForServiceMethod.
+                                                                        The
+                                                                        client
+                                                                        should
+                                                                        first
+                                                                        obtain a
+                                                                        registrationID
+                                                                        and then
+                                                                        register
+                                                                        for
+                                                                        service,
+                                                                        including
+                                                                        the
+                                                                        DomainNamesChangedNotification
+                                                                        as one
+                                                                        of the
+                                                                        methods
+                                                                        in the
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        client
+                                                                        has
+                                                                        subscribed.
+                                                                        The
+                                                                        server
+                                                                        shall
+                                                                        include
+                                                                        the
+                                                                        registrationID
+                                                                        for the
+                                                                        subscription
+                                                                        in the
+                                                                        message
+                                                                        header
+                                                                        so that
+                                                                        the
+                                                                        client
+                                                                        can
+                                                                        determine
+                                                                        the
+                                                                        source
+                                                                        of the
+                                                                        domainName
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:DomainNamesChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:DomainNamesChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCDSupportedMeters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        all
+                                                                        meters
+                                                                        that
+                                                                        have
+                                                                        Connect/Disconnect
+                                                                        Capability.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        lastReceived
+                                                                        is
+                                                                        included
+                                                                        so that
+                                                                        large
+                                                                        sets of
+                                                                        data can
+                                                                        be
+                                                                        returned
+                                                                        in
+                                                                        manageable
+                                                                        blocks.
+                                                                        lastReceived
+                                                                        should
+                                                                        carry an
+                                                                        empty
+                                                                        string
+                                                                        the
+                                                                        first
+                                                                        time in
+                                                                        a
+                                                                        session
+                                                                        that
+                                                                        this
+                                                                        method
+                                                                        is
+                                                                        invoked.
+                                                                        When
+                                                                        multiple
+                                                                        calls to
+                                                                        this
+                                                                        method
+                                                                        are
+                                                                        required
+                                                                        to
+                                                                        obtain
+                                                                        all of
+                                                                        the
+                                                                        data,
+                                                                        the
+                                                                        lastReceived
+                                                                        should
+                                                                        carry in
+                                                                        subsequent
+                                                                        calls
+                                                                        the
+                                                                        objectID
+                                                                        of the
+                                                                        data
+                                                                        instance
+                                                                        noted by
+                                                                        the
+                                                                        server
+                                                                        as being
+                                                                        the
+                                                                        lastSent.</wsdl:documentation>
+      <wsdl:input message="tns:GetCDSupportedMetersSoapIn"/>
+      <wsdl:output message="tns:GetCDSupportedMetersSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetModifiedCDMeters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        all
+                                                                        meters
+                                                                        that
+                                                                        have
+                                                                        Connect/Disconnect
+                                                                        Capability
+                                                                        and that
+                                                                        have
+                                                                        been
+                                                                        modified
+                                                                        since
+                                                                        the last
+                                                                        identified
+                                                                        session.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        previousSessionID
+                                                                        should
+                                                                        carry
+                                                                        the
+                                                                        session
+                                                                        identifier
+                                                                        for the
+                                                                        last
+                                                                        session
+                                                                        of data
+                                                                        that the
+                                                                        client
+                                                                        has
+                                                                        successfully
+                                                                        received.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        lastReceived
+                                                                        is
+                                                                        included
+                                                                        so that
+                                                                        large
+                                                                        sets of
+                                                                        data can
+                                                                        be
+                                                                        returned
+                                                                        in
+                                                                        manageable
+                                                                        blocks.
+                                                                        lastReceived
+                                                                        should
+                                                                        carry an
+                                                                        empty
+                                                                        string
+                                                                        the
+                                                                        first
+                                                                        time in
+                                                                        a
+                                                                        session
+                                                                        that
+                                                                        this
+                                                                        method
+                                                                        is
+                                                                        invoked.
+                                                                        When
+                                                                        multiple
+                                                                        calls to
+                                                                        this
+                                                                        method
+                                                                        are
+                                                                        required
+                                                                        to
+                                                                        obtain
+                                                                        all of
+                                                                        the
+                                                                        data,
+                                                                        the
+                                                                        lastReceived
+                                                                        should
+                                                                        carry in
+                                                                        subsequent
+                                                                        calls
+                                                                        the
+                                                                        objectID
+                                                                        of the
+                                                                        data
+                                                                        instance
+                                                                        noted by
+                                                                        the
+                                                                        server
+                                                                        as being
+                                                                        the
+                                                                        lastSent.</wsdl:documentation>
+      <wsdl:input message="tns:GetModifiedCDMetersSoapIn"/>
+      <wsdl:output message="tns:GetModifiedCDMetersSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCDMeterState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        current
+                                                                        state of
+                                                                        a
+                                                                        connect/disconnect
+                                                                        device
+                                                                        for a
+                                                                        given
+                                                                        meterID.
+                                                                        The
+                                                                        default
+                                                                        condition
+                                                                        is
+                                                                        Closed.</wsdl:documentation>
+      <wsdl:input message="tns:GetCDMeterStateSoapIn"/>
+      <wsdl:output message="tns:GetCDMeterStateSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateConnectDisconnect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        a
+                                                                        connect
+                                                                        or
+                                                                        disconnect
+                                                                        action
+                                                                        by
+                                                                        issuing
+                                                                        one or
+                                                                        more
+                                                                        connectDisconnectEvent
+                                                                        objects
+                                                                        to the
+                                                                        CD. CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The
+                                                                        connect/disconnect
+                                                                        function
+                                                                        returns
+                                                                        infromation
+                                                                        about
+                                                                        this
+                                                                        action
+                                                                        using
+                                                                        the
+                                                                        CDStateChangedNotification
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateConnectDisconnectSoapIn"/>
+      <wsdl:output message="tns:InitiateConnectDisconnectSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateCDStateRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        a switch
+                                                                        status
+                                                                        check
+                                                                        directly
+                                                                        from one
+                                                                        or more
+                                                                        Connect/Disconnect
+                                                                        devices.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The CD
+                                                                        switch
+                                                                        state
+                                                                        check
+                                                                        function
+                                                                        returns
+                                                                        information
+                                                                        asynchronously
+                                                                        about
+                                                                        this
+                                                                        switch
+                                                                        state
+                                                                        using
+                                                                        either
+                                                                        the
+                                                                        CDStateNotification
+                                                                        (for
+                                                                        only one
+                                                                        device)
+                                                                        or the
+                                                                        CDStatesNotification
+                                                                        (for one
+                                                                        or more
+                                                                        devices)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateCDStateRequestSoapIn"/>
+      <wsdl:output message="tns:InitiateCDStateRequestSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateArmCDDevice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        arming
+                                                                        of one
+                                                                        or more
+                                                                        Connect/Disconnect
+                                                                        devices.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The CD
+                                                                        function
+                                                                        returns
+                                                                        information
+                                                                        asynchronously
+                                                                        about
+                                                                        this
+                                                                        switch
+                                                                        action
+                                                                        using
+                                                                        either
+                                                                        the
+                                                                        CDStateChangedNotification
+                                                                        (for
+                                                                        only one
+                                                                        device)
+                                                                        or the
+                                                                        CDStatesChangedNotification
+                                                                        (for one
+                                                                        or more
+                                                                        devices)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateArmCDDeviceSoapIn"/>
+      <wsdl:output message="tns:InitiateArmCDDeviceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateEnableCDDevice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        enabling
+                                                                        of one
+                                                                        or more
+                                                                        Connect/Disconnect
+                                                                        devices.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The CD
+                                                                        function
+                                                                        returns
+                                                                        information
+                                                                        asynchronously
+                                                                        about
+                                                                        this
+                                                                        switch
+                                                                        action
+                                                                        using
+                                                                        either
+                                                                        the
+                                                                        CDStateChangedNotification
+                                                                        (for
+                                                                        only one
+                                                                        device)
+                                                                        or the
+                                                                        CDStatesChangedNotification
+                                                                        (for one
+                                                                        or more
+                                                                        devices)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateEnableCDDeviceSoapIn"/>
+      <wsdl:output message="tns:InitiateEnableCDDeviceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateDisableCDDevice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        disabling
+                                                                        of one
+                                                                        or more
+                                                                        Connect/Disconnect
+                                                                        devices.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The CD
+                                                                        function
+                                                                        returns
+                                                                        information
+                                                                        asynchronously
+                                                                        about
+                                                                        this
+                                                                        switch
+                                                                        action
+                                                                        using
+                                                                        either
+                                                                        the
+                                                                        CDStateChangedNotification
+                                                                        (for
+                                                                        only one
+                                                                        device)
+                                                                        or the
+                                                                        CDStatesChangedNotification
+                                                                        (for one
+                                                                        or more
+                                                                        devices)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateDisableCDDeviceSoapIn"/>
+      <wsdl:output message="tns:InitiateDisableCDDeviceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        Notifies
+                                                                        CD of a
+                                                                        change
+                                                                        in the
+                                                                        Customer
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        the
+                                                                        changed
+                                                                        customer
+                                                                        object(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CustomerChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:CustomerChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="AccountChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        Notifies
+                                                                        CD of a
+                                                                        change
+                                                                        in
+                                                                        customer
+                                                                        account(s)
+                                                                        by
+                                                                        sending
+                                                                        the
+                                                                        changed
+                                                                        account
+                                                                        object(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:AccountChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:AccountChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceLocationChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        Notifies
+                                                                        CD of a
+                                                                        change
+                                                                        in the
+                                                                        Service
+                                                                        Location
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        the
+                                                                        changed
+                                                                        serviceLocation
+                                                                        object(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:ServiceLocationChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:ServiceLocationChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="MeterChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        Notifies
+                                                                        CD of a
+                                                                        change
+                                                                        in the
+                                                                        Meter
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        the
+                                                                        changed
+                                                                        meter
+                                                                        object(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:MeterChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:MeterChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDDeviceAddNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        CD to
+                                                                        add the
+                                                                        associated
+                                                                        connect/disconnect
+                                                                        device(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDDeviceAddNotificationSoapIn"/>
+      <wsdl:output message="tns:CDDeviceAddNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDDeviceChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        CD of a
+                                                                        change
+                                                                        in
+                                                                        connect/disconnect
+                                                                        device(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDDeviceChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:CDDeviceChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDDeviceExchangeNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        CD that
+                                                                        connect/disconnect
+                                                                        device(s)
+                                                                        have
+                                                                        been
+                                                                        deployed
+                                                                        or
+                                                                        exchanged.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        in an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDDeviceExchangeNotificationSoapIn"/>
+      <wsdl:output message="tns:CDDeviceExchangeNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDDeviceRemoveNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        CD to
+                                                                        remove
+                                                                        the
+                                                                        associated
+                                                                        connect/disconnect
+                                                                        device(s).
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDDeviceRemoveNotificationSoapIn"/>
+      <wsdl:output message="tns:CDDeviceRemoveNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDDeviceRetireNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        CD that
+                                                                        the
+                                                                        associated
+                                                                        connect/disconnect
+                                                                        devices(s)have
+                                                                        been
+                                                                        retired
+                                                                        from the
+                                                                        system.
+                                                                        CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDDeviceRetireNotificationSoapIn"/>
+      <wsdl:output message="tns:CDDeviceRetireNotificationSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+</wsdl:definitions>

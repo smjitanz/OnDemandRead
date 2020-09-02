@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+  <wsdl:types>
+     <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.multispeak.org/Version_4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/OD_Server.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="cpsm_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/cpsm.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="gml_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/gml.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.w3.org/1999/xlink">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/xlink.xsd"/>
+    </s:schema>
+  </wsdl:types>
+
+   <wsdl:import location="oramds:/apps/SGG-DG-SOA/MultiSpeak/OD_Messages.wsdl" namespace="http://www.multispeak.org/Version_4.1_Release"/>
+    
+  <wsdl:portType name="OD_ServerProxy">
+    <wsdl:operation name="InitiateOutageDetectionEventRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        update
+                                                                        the
+                                                                        status
+                                                                        of an
+                                                                        outageDetectionDevice.
+                                                                        OD
+                                                                        responds
+                                                                        by
+                                                                        publishing
+                                                                        a
+                                                                        revised
+                                                                        outageDetectionEvent
+                                                                        (using
+                                                                        the
+                                                                        ODEventNotification
+                                                                        method
+                                                                        on
+                                                                        OA-OD)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        parameter.
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        is
+                                                                        included
+                                                                        to link
+                                                                        a
+                                                                        returned
+                                                                        ODEventNotification
+                                                                        with
+                                                                        this
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateOutageDetectionEventRequestSoapIn"/>
+      <wsdl:output message="tns:InitiateOutageDetectionEventRequestSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="OD_ServerProxyService">
+      <plnk:role name="OD_ServerProxyProvider">
+          <plnk:portType name="tns:OD_ServerProxy"/>
+      </plnk:role>
+  </plnk:partnerLinkType>
+    
+  <wsdl:binding name="OD_ServerProxy" type="tns:OD_ServerProxy">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="InitiateOutageDetectionEventRequest">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateOutageDetectionEventRequest"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/OD_Server.xsd"/>
+      <xsd:element name="InitiateOutageDetectionEventRequestEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateOutageDetectionEventRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="InitiateOutageDetectionEventRequestCompletedEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:InitiateOutageDetectionEventRequest"/>
+            <xsd:element ref="tns:InitiateOutageDetectionEventRequestResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+  <wsdl:message name="InitiateODEventRequestReceived">
+    <wsdl:part name="payload"
+          element="tns:InitiateOutageDetectionEventRequestEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateODEventRequestReceivedResponse">
+    <wsdl:part name="payload"
+          element="tns:InitiateOutageDetectionEventRequestEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateODEventRequestCompleted">
+    <wsdl:part name="payload"
+          element="tns:InitiateOutageDetectionEventRequestCompletedEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateODEventRequestCompletedResponse">
+    <wsdl:part name="payload"
+          element="tns:InitiateOutageDetectionEventRequestCompletedEnvelope"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="OD_ServerCallout">
+    <wsdl:operation name="InitiateOutageDetectionEventRequestReceived">
+      <wsdl:input message="tns:InitiateODEventRequestReceived"/>
+      <wsdl:output message="tns:InitiateODEventRequestReceivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateOutageDetectionEventRequestCompleted">
+      <wsdl:input message="tns:InitiateODEventRequestCompleted"/>
+      <wsdl:output message="tns:InitiateODEventRequestCompletedResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="OD_ServerCalloutPL">
+      <plnk:role name="OD_ServerCalloutProvider">
+          <plnk:portType name="tns:OD_ServerCallout"/>
+      </plnk:role>
+  </plnk:partnerLinkType>
+  
+  <wsdl:binding name="OD_ServerCallout" type="tns:OD_ServerCallout">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="InitiateOutageDetectionEventRequestReceived">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateOutageDetectionEventRequestReceived"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateOutageDetectionEventRequestCompleted">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateOutageDetectionEventRequestCompleted"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

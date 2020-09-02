@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/OA_Server.xsd"/>
+      <xsd:element name="ODEventNotificationEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:ODEventNotification"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+ <wsdl:message name="ODEventNotificationReceived">
+    <wsdl:part name="payload"
+          element="tns:ODEventNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="ODEventNotificationReceivedResponse">
+    <wsdl:part name="payload"
+          element="tns:ODEventNotificationEnvelope"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="OA_ServerCallout">
+    <wsdl:operation name="ODEventNotificationReceived">
+      <wsdl:input message="tns:ODEventNotificationReceived"/>
+      <wsdl:output message="tns:ODEventNotificationReceivedResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="OA_ServerCalloutPL">
+      <plnk:role name="OA_ServerCalloutProvider">
+          <plnk:portType name="tns:OA_ServerCallout"/>
+      </plnk:role>
+  </plnk:partnerLinkType>
+  
+  <wsdl:binding name="OA_ServerCallout" type="tns:OA_ServerCallout">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="ODEventNotificationReceived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/ODEventNotificationReceived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

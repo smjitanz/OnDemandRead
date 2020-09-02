@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_request" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="OnDemandProfileRestReference">RestReference</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_request" schemaLocation="../Schemas/OnDemandProfileRequest.xsd"/>
+        </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_response" schemaLocation="../Schemas/OnDemandProfileResponse.xsd"/>
+        </xsd:schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_FaultBinding404" schemaLocation="../Schemas/FaultBinding404.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/ws/onDemandProfile">
+         <method name="POST" soa:wsdlOperation="onDemandProfile">
+            <request>
+               <representation mediaType="application/json" element="cns:OnDemandProfile" xmlns:cns="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_request"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:Root-Element" xmlns:cns="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_response"/>
+            </response>
+            <response status="404" soa:wsdlFaultName="FaultBinding404">
+               <representation mediaType="application/json" element="cns:FaultBinding" xmlns:cns="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_FaultBinding404"/>
+            </response>
+            <response status="503" soa:wsdlFaultName="FaultBinding503">
+               <representation mediaType="application/json" element="cns:FaultBinding" xmlns:cns="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_FaultBinding404"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified"
+                targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/ouaf/MR_Server.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MeterRemoveNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:meterRemoveNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:meterRemoveNotificationResponseEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:multiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:meterAddNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:meterAddNotificationResponseEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:multiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateMeterReadingsByMeterIDSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:initiateMeterReadingsByMeterIDEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateMeterReadingsByMeterIDSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:initiateMeterReadingsByMeterIDResponseEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateMeterReadingsByMeterIDMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:multiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:portType name="MR_ServerSoap">
+    <wsdl:operation name="MeterRemoveNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        MR to
+                                                                        remove
+                                                                        the
+                                                                        associated
+                                                                        meter(s).
+                                                                        MR
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:MeterRemoveNotificationSoapIn"/>
+      <wsdl:output message="tns:MeterRemoveNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="MeterAddNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        MR to
+                                                                        Add the
+                                                                        associated
+                                                                        meter(s).MR
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:MeterAddNotificationSoapIn"/>
+      <wsdl:output message="tns:MeterAddNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateMeterReadingsByMeterID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        requests
+                                                                        a new
+                                                                        meter
+                                                                        reading
+                                                                        from MR,
+                                                                        on
+                                                                        meters
+                                                                        selected
+                                                                        by
+                                                                        meterID.
+                                                                        MR
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        meter
+                                                                        reading
+                                                                        is
+                                                                        returned
+                                                                        to the
+                                                                        CB in
+                                                                        the form
+                                                                        of a
+                                                                        meterReading,
+                                                                        anintervalData
+                                                                        block,
+                                                                        or a
+                                                                        formattedBlock,
+                                                                        sent to
+                                                                        the URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL.
+                                                                        The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        links
+                                                                        this
+                                                                        Initiate
+                                                                        request
+                                                                        with the
+                                                                        published
+                                                                        data
+                                                                        method
+                                                                        call.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateMeterReadingsByMeterIDSoapIn"/>
+      <wsdl:output message="tns:InitiateMeterReadingsByMeterIDSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MR_ServerSoap" type="tns:MR_ServerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="MeterRemoveNotification">
+      <soap:operation soapAction="http://xmlns.oracle.com/ouaf/multispeak_4.1/MeterRemoveNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MeterAddNotification">
+      <soap:operation soapAction="http://xmlns.oracle.com/ouaf/multispeak_4.1/MeterAddNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateMeterReadingsByMeterID">
+      <soap:operation soapAction="http://xmlns.oracle.com/ouaf/multispeak_4.1/InitiateMeterReadingsByMeterID"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MR_Server">
+    <wsdl:port name="MR_ServerSoap" binding="tns:MR_ServerSoap">
+      <soap12:address location="http://localhost:49471/MR_Server.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

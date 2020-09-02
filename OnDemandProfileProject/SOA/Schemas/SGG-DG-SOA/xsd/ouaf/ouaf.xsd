@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf" xmlns:mspk="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:ouaf="http://xmlns.oracle.com/ouaf" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:import namespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" schemaLocation="mspcommon.xsd"/>
+	<xsd:element name="fault" type="ouaf:soapFaultDA"/>
+	<xsd:complexType name="soapFaultDA">
+		<xsd:sequence>
+			<xsd:element name="faultCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="faultString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="faultActor" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="detail" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="code" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="value" type="xsd:string" minOccurs="0"/>
+									<xsd:element name="subcode" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="value" type="xsd:string" maxOccurs="unbounded"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="reason" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="text" type="xsd:string"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="node" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="role" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="detail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="sqlMessage">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="class" type="xsd:string"/>
+												<xsd:element name="lineNumber" type="xsd:integer"/>
+												<xsd:element name="message" type="xsd:string"/>
+												<xsd:element name="number" type="xsd:integer"/>
+												<xsd:element name="source" type="xsd:string"/>
+												<xsd:element name="state" type="xsd:string"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OUAFRequestEnvelope">
+		<xsd:sequence>
+			<xsd:element ref="mspk:multiSpeakMsgHeader"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="retryDetails">
+		<xsd:sequence>
+			<xsd:element name="retryDateTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="numberOfRetries" type="xsd:decimal" default="0" minOccurs="0"/>
+			<xsd:element name="currentErrorState" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="responseDetail">
+		<xsd:sequence>
+			<xsd:element ref="ouaf:instanceId"/>
+			<xsd:element name="MultiSpeak">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="mspk:multiSpeakMsgHeader"/>
+						<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="Result" type="mspk:ArrayOfErrorObject" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element ref="ouaf:fault" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="abstractOUAFResponse" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="communicationId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="communicationType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="bo" type="xsd:string"/>
+			<xsd:element name="boStatus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="statusReason" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="externalSystem" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="statusDateTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="initiatingOutCommunication" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="amiDeviceIdentifierNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="deviceId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="retryDetails" type="ouaf:retryDetails" minOccurs="0"/>
+			<xsd:element name="responseDetail" type="ouaf:responseDetail" minOccurs="0"/>
+			<xsd:any/>
+		</xsd:sequence>
+		<xsd:attribute name="dateTimeTagFormat" type="xsd:string" use="required" fixed="xsd"/>
+		<xsd:attribute name="transactionType">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="RWOV"/>
+					<xsd:enumeration value="FADD"/>
+					<xsd:enumeration value="FUPD"/>
+					<xsd:enumeration value="DEL"/>
+					<xsd:enumeration value="UPD"/>
+					<xsd:enumeration value="ADD"/>
+					<xsd:enumeration value="READ"/>
+					<xsd:enumeration value="REPL"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="instanceId" type="xsd:string"/>
+	<xsd:element name="externalSenderID" type="xsd:string"/>
+</xsd:schema>

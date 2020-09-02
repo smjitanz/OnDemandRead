@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:s3="http://www.w3.org/1999/xlink"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s1="cpsm_V4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:s2="gml_V4.1_Release"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.multispeak.org/Version_4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/OA_Server.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="cpsm_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/cpsm.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="gml_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/gml.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.w3.org/1999/xlink">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/xlink.xsd"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllCircuitElementsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetModifiedCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedCircuitElementsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetModifiedCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineMeterConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownlineMeterConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineMeterConnectivitySoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetDownlineMeterConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineMeterConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineMeterConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetUplineMeterConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineMeterConnectivitySoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetUplineMeterConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineMeterConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetSiblingMeterConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetSiblingMeterConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetSiblingMeterConnectivitySoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetSiblingMeterConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSiblingMeterConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownlineConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetDownlineConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetUplineConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetUplineConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetChildConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetChildConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetParentConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetParentConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedConnectivitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetModifiedConnectivity"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedConnectivitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetModifiedConnectivityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetModifiedConnectivityMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="PingURLSoapIn">
+    <wsdl:part name="parameters" element="tns:PingURL"/>
+  </wsdl:message>
+  <wsdl:message name="PingURLSoapOut">
+    <wsdl:part name="parameters" element="tns:PingURLResponse"/>
+  </wsdl:message>
+  <wsdl:message name="PingURLMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetMethodsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMethods"/>
+  </wsdl:message>
+  <wsdl:message name="GetMethodsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMethodsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetMethodsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainNames"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainNamesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainNamesMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainMembersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDomainMembers"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainMembersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDomainMembersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDomainMembersMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="RequestRegistrationIDSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestRegistrationID"/>
+  </wsdl:message>
+  <wsdl:message name="RequestRegistrationIDSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestRegistrationIDResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RequestRegistrationIDMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="RegisterForServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:RegisterForService"/>
+  </wsdl:message>
+  <wsdl:message name="RegisterForServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterForServiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RegisterForServiceMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="UnregisterForServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:UnregisterForService"/>
+  </wsdl:message>
+  <wsdl:message name="UnregisterForServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:UnregisterForServiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UnregisterForServiceMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationInfoByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegistrationInfoByID"/>
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationInfoByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegistrationInfoByIDResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationInfoByIDMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetPublishMethodsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPublishMethods"/>
+  </wsdl:message>
+  <wsdl:message name="GetPublishMethodsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPublishMethodsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPublishMethodsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="DomainMembersChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:DomainMembersChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="DomainMembersChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:DomainMembersChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DomainMembersChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="DomainNamesChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:DomainNamesChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="DomainNamesChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:DomainNamesChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DomainNamesChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementNearLatLongSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCircuitElementNearLatLong"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementNearLatLongSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetCircuitElementNearLatLongResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementNearLatLongMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageEventStatus"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutageEventStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveOutagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveOutages"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveOutagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveOutagesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveOutagesMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusByOutageLocationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageEventStatusByOutageLocation"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusByOutageLocationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageEventStatusByOutageLocationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventStatusByOutageLocationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageMessagePromptListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageMessagePromptList"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageMessagePromptListSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageMessagePromptListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageMessagePromptListMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageStatusByLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageStatusByLocation"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageStatusByLocationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageStatusByLocationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageStatusByLocationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutagedODDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutagedODDevices"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutagedODDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutagedODDevicesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutagedODDevicesMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllCrewsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllCrews"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllCrewsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllCrewsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllCrewsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveOutageEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllActiveOutageEvents"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveOutageEventsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetAllActiveOutageEventsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveOutageEventsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageEvent"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutageEventResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageEventMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomersAffectedByOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomersAffectedByOutage"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomersAffectedByOutageSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetCustomersAffectedByOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomersAffectedByOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveCallsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllActiveCalls"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveCallsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllActiveCallsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAllActiveCallsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetAssessmentLocationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssessmentLocations"/>
+  </wsdl:message>
+  <wsdl:message name="GetAssessmentLocationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssessmentLocationsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAssessmentLocationsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveAssessmentLocationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveAssessmentLocations"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveAssessmentLocationsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetActiveAssessmentLocationsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetActiveAssessmentLocationsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCallsReceivedOnOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCallsReceivedOnOutage"/>
+  </wsdl:message>
+  <wsdl:message name="GetCallsReceivedOnOutageSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetCallsReceivedOnOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCallsReceivedOnOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerOutageHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerOutageHistory"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerOutageHistorySoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetCustomerOutageHistoryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerOutageHistoryMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomerCallHistory"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomerCallHistoryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallHistoryMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageDurationEventsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageDurationEvents"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageDurationEventsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutageDurationEventsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageDurationEventsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageHistoryOnServiceLocationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageHistoryOnServiceLocation"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageHistoryOnServiceLocationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageHistoryOnServiceLocationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageHistoryOnServiceLocationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallsOnServiceLocationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:GetCustomerCallsOnServiceLocation"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallsOnServiceLocationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetCustomerCallsOnServiceLocationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCustomerCallsOnServiceLocationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageByCircuitElementSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageByCircuitElement"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageByCircuitElementSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetOutageByCircuitElementResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageByCircuitElementMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCircuitElementStatus"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCircuitElementStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCircuitElementStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetFeaturesNearLatLongSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFeaturesNearLatLong"/>
+  </wsdl:message>
+  <wsdl:message name="GetFeaturesNearLatLongSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFeaturesNearLatLongResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetFeaturesNearLatLongMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageReasonCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutageReasonCodes"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageReasonCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutageReasonCodesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetOutageReasonCodesMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:OutageReasonChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:OutageReasonChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonContainerChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:OutageReasonContainerChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonContainerChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:OutageReasonContainerChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="OutageReasonContainerChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="HistoryLogChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:HistoryLogChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="HistoryLogChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:HistoryLogChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="HistoryLogChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="ODEventNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:ODEventNotification"/>
+  </wsdl:message>
+  <wsdl:message name="ODEventNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:ODEventNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ODEventNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="ODDeviceChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:ODDeviceChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="ODDeviceChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:ODDeviceChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ODDeviceChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="AssessmentLocationChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:AssessmentLocationChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="AssessmentLocationChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:AssessmentLocationChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AssessmentLocationChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="PMChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:PMChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="PMChangedNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:PMChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="PMChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="CHEventNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:CHEventNotification"/>
+  </wsdl:message>
+  <wsdl:message name="CHEventNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:CHEventNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CHEventNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="CloseCallsSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseCalls"/>
+  </wsdl:message>
+  <wsdl:message name="CloseCallsSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseCallsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CloseCallsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:SCADAAnalogChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:SCADAStatusChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAStatusChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:SCADAPointChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAPointChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForAnalogSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAPointChangedNotificationForAnalog"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForAnalogSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAPointChangedNotificationForAnalogResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForAnalogMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForStatusSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAPointChangedNotificationForStatus"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForStatusSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAPointChangedNotificationForStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAPointChangedNotificationForStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationByPointIDSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationByPointID"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationByPointIDSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationByPointIDResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationByPointIDMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForPowerSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationForPower"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForPowerSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationForPowerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForPowerMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForVoltageSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationForVoltage"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForVoltageSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAAnalogChangedNotificationForVoltageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAAnalogChangedNotificationForVoltageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationByPointIDSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SCADAStatusChangedNotificationByPointID"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationByPointIDSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SCADAStatusChangedNotificationByPointIDResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SCADAStatusChangedNotificationByPointIDMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="ConnectDisconnectChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:ConnectDisconnectChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="ConnectDisconnectChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:ConnectDisconnectChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ConnectDisconnectChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="CDStateNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:CDStateNotification"/>
+  </wsdl:message>
+  <wsdl:message name="CDStateNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:CDStateNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CDStateNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="CDStatesNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:CDStatesNotification"/>
+  </wsdl:message>
+  <wsdl:message name="CDStatesNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:CDStatesNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CDStatesNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:RestoreOutage"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreOutageSoapOut">
+    <wsdl:part name="parameters" element="tns:RestoreOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="AssignCrewsToOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:AssignCrewsToOutage"/>
+  </wsdl:message>
+  <wsdl:message name="AssignCrewsToOutageSoapOut">
+    <wsdl:part name="parameters" element="tns:AssignCrewsToOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AssignCrewsToOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignCrewsFromOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:UnassignCrewsFromOutage"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignCrewsFromOutageSoapOut">
+    <wsdl:part name="parameters" element="tns:UnassignCrewsFromOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignCrewsFromOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignOutagesFromCrewSoapIn">
+    <wsdl:part name="parameters" element="tns:UnassignOutagesFromCrew"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignOutagesFromCrewSoapOut">
+    <wsdl:part name="parameters" element="tns:UnassignOutagesFromCrewResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UnassignOutagesFromCrewMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="AddRemarkToOutageSoapIn">
+    <wsdl:part name="parameters" element="tns:AddRemarkToOutage"/>
+  </wsdl:message>
+  <wsdl:message name="AddRemarkToOutageSoapOut">
+    <wsdl:part name="parameters" element="tns:AddRemarkToOutageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddRemarkToOutageMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SetOutageElementStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:SetOutageElementStatus"/>
+  </wsdl:message>
+  <wsdl:message name="SetOutageElementStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:SetOutageElementStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SetOutageElementStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="CustomerChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:CustomerChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="CustomerChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:CustomerChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CustomerChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="AccountChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:AccountChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="AccountChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:AccountChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AccountChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="ServiceLocationChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:ServiceLocationChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="ServiceLocationChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:ServiceLocationChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ServiceLocationChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:MeterChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="MeterChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:MeterChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MeterChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:MeterRemoveNotification"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:MeterRemoveNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRemoveNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRetireNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:MeterRetireNotification"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRetireNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:MeterRetireNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MeterRetireNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:MeterAddNotification"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:MeterAddNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MeterAddNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="MeterExchangeNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:MeterExchangeNotification"/>
+  </wsdl:message>
+  <wsdl:message name="MeterExchangeNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:MeterExchangeNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="MeterExchangeNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateOutageStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateOutageStatus"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateOutageStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateOutageStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateOutageStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateCutSoapIn">
+    <wsdl:part name="parameters" element="tns:InitiateCut"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateCutSoapOut">
+    <wsdl:part name="parameters" element="tns:InitiateCutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="InitiateCutMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreCutSoapIn">
+    <wsdl:part name="parameters" element="tns:RestoreCut"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreCutSoapOut">
+    <wsdl:part name="parameters" element="tns:RestoreCutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RestoreCutMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="ResolvedCallerSoapIn">
+    <wsdl:part name="parameters" element="tns:ResolvedCaller"/>
+  </wsdl:message>
+  <wsdl:message name="ResolvedCallerSoapOut">
+    <wsdl:part name="parameters" element="tns:ResolvedCallerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ResolvedCallerMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateMessageStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateMessageStatus"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateMessageStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateMessageStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateMessageStatusMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="SwitchingOrderChangedNotificationSoapIn">
+    <wsdl:part name="parameters"
+               element="tns:SwitchingOrderChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="SwitchingOrderChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:SwitchingOrderChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SwitchingOrderChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="BlinkAlarmNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:BlinkAlarmNotification"/>
+  </wsdl:message>
+  <wsdl:message name="BlinkAlarmNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:BlinkAlarmNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="BlinkAlarmNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="VoltageAlarmNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:VoltageAlarmNotification"/>
+  </wsdl:message>
+  <wsdl:message name="VoltageAlarmNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:VoltageAlarmNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="VoltageAlarmNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetSubstationNamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubstationNames"/>
+  </wsdl:message>
+  <wsdl:message name="GetSubstationNamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubstationNamesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSubstationNamesMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDownlineCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineCircuitElementsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetDownlineCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDownlineCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUplineCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineCircuitElementsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetUplineCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetUplineCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChildCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildCircuitElementsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChildCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetChildCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentCircuitElementsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParentCircuitElements"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentCircuitElementsSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:GetParentCircuitElementsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetParentCircuitElementsMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+</wsdl:definitions>

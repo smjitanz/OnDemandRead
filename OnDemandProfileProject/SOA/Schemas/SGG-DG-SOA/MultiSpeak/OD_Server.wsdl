@@ -1,0 +1,2377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:s3="http://www.w3.org/1999/xlink"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s1="cpsm_V4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:s2="gml_V4.1_Release"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+  
+  <wsdl:import location="OD_Messages.wsdl" namespace="http://www.multispeak.org/Version_4.1_Release"/>
+  
+  <wsdl:portType name="OD_ServerSoap">
+    <wsdl:operation name="PingURL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        pings
+                                                                        URL of
+                                                                        OD to
+                                                                        see if
+                                                                        it is
+                                                                        alive.
+                                                                        Returns
+                                                                        errorObject(s)
+                                                                        as
+                                                                        necessary
+                                                                        to
+                                                                        communicate
+                                                                        application
+                                                                        status.</wsdl:documentation>
+      <wsdl:input message="tns:PingURLSoapIn"/>
+      <wsdl:output message="tns:PingURLSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethods">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        list of
+                                                                        methods
+                                                                        supported
+                                                                        by OD.</wsdl:documentation>
+      <wsdl:input message="tns:GetMethodsSoapIn"/>
+      <wsdl:output message="tns:GetMethodsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainNames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The
+                                                                        client
+                                                                        requests
+                                                                        from the
+                                                                        server a
+                                                                        list of
+                                                                        names of
+                                                                        domains
+                                                                        supported
+                                                                        by the
+                                                                        server.
+                                                                        This
+                                                                        method
+                                                                        is used,
+                                                                        along
+                                                                        with the
+                                                                        GetDomainMembers
+                                                                        method
+                                                                        to
+                                                                        enable
+                                                                        systems
+                                                                        to
+                                                                        exchange
+                                                                        information
+                                                                        about
+                                                                        application-specific
+                                                                        or
+                                                                        installation-specific
+                                                                        lists of
+                                                                        information,
+                                                                        such as
+                                                                        the
+                                                                        lists of
+                                                                        counties
+                                                                        for this
+                                                                        installation
+                                                                        or the
+                                                                        list of
+                                                                        serviceStatusCodes
+                                                                        used by
+                                                                        the
+                                                                        server.
+                                                                        It is
+                                                                        recommended
+                                                                        that
+                                                                        domain
+                                                                        names be
+                                                                        returned
+                                                                        in the
+                                                                        form of
+                                                                        the name
+                                                                        of a
+                                                                        named
+                                                                        object
+                                                                        (noun)
+                                                                        in the
+                                                                        MultiSpeak
+                                                                        schema
+                                                                        dotted
+                                                                        with the
+                                                                        field
+                                                                        name of
+                                                                        interest.
+                                                                        For
+                                                                        instance,
+                                                                        if the
+                                                                        system
+                                                                        of
+                                                                        record
+                                                                        is
+                                                                        returning
+                                                                        workflow
+                                                                        status
+                                                                        codes
+                                                                        that
+                                                                        would be
+                                                                        used on
+                                                                        work
+                                                                        orders,
+                                                                        it is
+                                                                        suggested
+                                                                        that the
+                                                                        domain
+                                                                        name be
+                                                                        called
+                                                                        “workOrder.workflowStatus”,
+                                                                        using
+                                                                        the same
+                                                                        spelling
+                                                                        and
+                                                                        capitalization
+                                                                        used in
+                                                                        the
+                                                                        MultiSpeak
+                                                                        schema.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainNamesSoapIn"/>
+      <wsdl:output message="tns:GetDomainNamesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainMembers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The
+                                                                        client
+                                                                        requests
+                                                                        from the
+                                                                        server
+                                                                        the
+                                                                        members
+                                                                        of a
+                                                                        specific
+                                                                        domain
+                                                                        of
+                                                                        information,
+                                                                        identified
+                                                                        by the
+                                                                        domainName
+                                                                        parameter,
+                                                                        which
+                                                                        are
+                                                                        supported
+                                                                        by the
+                                                                        server.
+                                                                        This
+                                                                        method
+                                                                        is used,
+                                                                        along
+                                                                        with the
+                                                                        GetDomainNames
+                                                                        method
+                                                                        to
+                                                                        enable
+                                                                        systems
+                                                                        to
+                                                                        exchange
+                                                                        information
+                                                                        about
+                                                                        application-specific
+                                                                        or
+                                                                        installation-specific
+                                                                        lists of
+                                                                        information,
+                                                                        such as
+                                                                        the
+                                                                        lists of
+                                                                        counties
+                                                                        for this
+                                                                        installation
+                                                                        or the
+                                                                        list of
+                                                                        serviceStatusCodes
+                                                                        used by
+                                                                        the
+                                                                        server.</wsdl:documentation>
+      <wsdl:input message="tns:GetDomainMembersSoapIn"/>
+      <wsdl:output message="tns:GetDomainMembersSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="RequestRegistrationID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        service
+                                                                        requests
+                                                                        of the
+                                                                        publisher
+                                                                        a unique
+                                                                        registration
+                                                                        ID that
+                                                                        would
+                                                                        subsequently
+                                                                        be used
+                                                                        to refer
+                                                                        unambiguously
+                                                                        to that
+                                                                        specific
+                                                                        subscription.
+                                                                        The
+                                                                        return
+                                                                        parameter
+                                                                        is the
+                                                                        registrationID,
+                                                                        which is
+                                                                        a
+                                                                        string-type
+                                                                        value.
+                                                                        It is
+                                                                        recommended
+                                                                        that the
+                                                                        server
+                                                                        not
+                                                                        implement
+                                                                        registration
+                                                                        in such
+                                                                        a manner
+                                                                        that one
+                                                                        client
+                                                                        can
+                                                                        guess
+                                                                        the
+                                                                        registrationID
+                                                                        of
+                                                                        another.
+                                                                        For
+                                                                        instance
+                                                                        the use
+                                                                        of
+                                                                        sequential
+                                                                        numbers
+                                                                        for
+                                                                        registrationIDs
+                                                                        is
+                                                                        discouraged.</wsdl:documentation>
+      <wsdl:input message="tns:RequestRegistrationIDSoapIn"/>
+      <wsdl:output message="tns:RequestRegistrationIDSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterForService">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        establishs
+                                                                        a
+                                                                        subscription
+                                                                        using a
+                                                                        previously
+                                                                        requested
+                                                                        registrationID.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        registrationInfo
+                                                                        is a
+                                                                        complex
+                                                                        type
+                                                                        that
+                                                                        includes
+                                                                        the
+                                                                        following
+                                                                        information:
+                                                                        registrationID
+                                                                        - the
+                                                                        previously
+                                                                        requested
+                                                                        registrationID
+                                                                        obtained
+                                                                        from the
+                                                                        publisher
+                                                                        by
+                                                                        calling
+                                                                        RequestRegistrationID,
+                                                                        responseURL
+                                                                        – the
+                                                                        URL to
+                                                                        which
+                                                                        information
+                                                                        should
+                                                                        subsequently
+                                                                        be
+                                                                        published
+                                                                        on this
+                                                                        subscription,
+                                                                        msFunction
+                                                                        – the
+                                                                        abbreviated
+                                                                        string
+                                                                        name of
+                                                                        the
+                                                                        MultiSpeak
+                                                                        method
+                                                                        making
+                                                                        the
+                                                                        subscription
+                                                                        request
+                                                                        (for
+                                                                        instance,
+                                                                        if an
+                                                                        application
+                                                                        that
+                                                                        exposes
+                                                                        the
+                                                                        Meter
+                                                                        Reading
+                                                                        function
+                                                                        has made
+                                                                        the
+                                                                        request,
+                                                                        then the
+                                                                        msFunction
+                                                                        variable
+                                                                        should
+                                                                        include
+                                                                        “MR”),
+                                                                        methodsList
+                                                                        – An
+                                                                        array of
+                                                                        strings
+                                                                        that
+                                                                        contain
+                                                                        the
+                                                                        string
+                                                                        names of
+                                                                        the
+                                                                        MultiSpeak
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        subscriber
+                                                                        would
+                                                                        like to
+                                                                        subscribe.
+                                                                        Subsequent
+                                                                        calls to
+                                                                        RegisterForService
+                                                                        on an
+                                                                        existing
+                                                                        subscription
+                                                                        replace
+                                                                        prior
+                                                                        subscription
+                                                                        details
+                                                                        in their
+                                                                        entirety
+                                                                        - they
+                                                                        do NOT
+                                                                        add to
+                                                                        an
+                                                                        existing
+                                                                        subscription.</wsdl:documentation>
+      <wsdl:input message="tns:RegisterForServiceSoapIn"/>
+      <wsdl:output message="tns:RegisterForServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterForService">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        deletes
+                                                                        a
+                                                                        previously
+                                                                        established
+                                                                        subscription
+                                                                        (registration
+                                                                        for
+                                                                        service)
+                                                                        that
+                                                                        carries
+                                                                        the
+                                                                        registration
+                                                                        identifer
+                                                                        listed
+                                                                        in the
+                                                                        input
+                                                                        parameter
+                                                                        registrationID.</wsdl:documentation>
+      <wsdl:input message="tns:UnregisterForServiceSoapIn"/>
+      <wsdl:output message="tns:UnregisterForServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationInfoByID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        requests
+                                                                        the
+                                                                        return
+                                                                        of
+                                                                        existing
+                                                                        registration
+                                                                        information
+                                                                        (that is
+                                                                        to say
+                                                                        the
+                                                                        details
+                                                                        of what
+                                                                        is
+                                                                        subscribed
+                                                                        on this
+                                                                        subscription)
+                                                                        for a
+                                                                        specific
+                                                                        registrationID.
+                                                                        The
+                                                                        server
+                                                                        should
+                                                                        return a
+                                                                        SOAPFault
+                                                                        if the
+                                                                        registrationID
+                                                                        is not
+                                                                        valid.</wsdl:documentation>
+      <wsdl:input message="tns:GetRegistrationInfoByIDSoapIn"/>
+      <wsdl:output message="tns:GetRegistrationInfoByIDSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishMethods">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        this
+                                                                        server
+                                                                        can
+                                                                        publish
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:GetPublishMethodsSoapIn"/>
+      <wsdl:output message="tns:GetPublishMethodsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="DomainMembersChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        permits
+                                                                        a client
+                                                                        to have
+                                                                        changed
+                                                                        information
+                                                                        on
+                                                                        domain
+                                                                        members
+                                                                        published
+                                                                        to it
+                                                                        using a
+                                                                        previously
+                                                                        arranged
+                                                                        subscription,
+                                                                        set up
+                                                                        using
+                                                                        the
+                                                                        RegisterForServiceMethod.
+                                                                        The
+                                                                        client
+                                                                        should
+                                                                        first
+                                                                        obtain a
+                                                                        registrationID
+                                                                        and then
+                                                                        register
+                                                                        for
+                                                                        service,
+                                                                        including
+                                                                        the
+                                                                        DomainMembersChangedNotification
+                                                                        as one
+                                                                        of the
+                                                                        methods
+                                                                        in the
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        client
+                                                                        has
+                                                                        subscribed.
+                                                                        The
+                                                                        server
+                                                                        shall
+                                                                        include
+                                                                        the
+                                                                        registrationID
+                                                                        for the
+                                                                        subscription
+                                                                        in the
+                                                                        message
+                                                                        header
+                                                                        so that
+                                                                        the
+                                                                        client
+                                                                        can
+                                                                        determine
+                                                                        the
+                                                                        source
+                                                                        of the
+                                                                        domainMember
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:DomainMembersChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:DomainMembersChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="DomainNamesChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">This
+                                                                        method
+                                                                        permits
+                                                                        a client
+                                                                        to have
+                                                                        changed
+                                                                        information
+                                                                        on
+                                                                        domain
+                                                                        names
+                                                                        published
+                                                                        to it
+                                                                        using a
+                                                                        previously
+                                                                        arranged
+                                                                        subscription,
+                                                                        set up
+                                                                        using
+                                                                        the
+                                                                        RegisterForServiceMethod.
+                                                                        The
+                                                                        client
+                                                                        should
+                                                                        first
+                                                                        obtain a
+                                                                        registrationID
+                                                                        and then
+                                                                        register
+                                                                        for
+                                                                        service,
+                                                                        including
+                                                                        the
+                                                                        DomainNamesChangedNotification
+                                                                        as one
+                                                                        of the
+                                                                        methods
+                                                                        in the
+                                                                        list of
+                                                                        methods
+                                                                        to which
+                                                                        the
+                                                                        client
+                                                                        has
+                                                                        subscribed.
+                                                                        The
+                                                                        server
+                                                                        shall
+                                                                        include
+                                                                        the
+                                                                        registrationID
+                                                                        for the
+                                                                        subscription
+                                                                        in the
+                                                                        message
+                                                                        header
+                                                                        so that
+                                                                        the
+                                                                        client
+                                                                        can
+                                                                        determine
+                                                                        the
+                                                                        source
+                                                                        of the
+                                                                        domainName
+                                                                        information.</wsdl:documentation>
+      <wsdl:input message="tns:DomainNamesChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:DomainNamesChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOutageDetectionDevices">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        all
+                                                                        outage
+                                                                        detection
+                                                                        devices.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        lastReceived
+                                                                        is
+                                                                        included
+                                                                        so that
+                                                                        large
+                                                                        sets of
+                                                                        data can
+                                                                        be
+                                                                        returned
+                                                                        in
+                                                                        manageable
+                                                                        blocks.
+                                                                        lastReceived
+                                                                        should
+                                                                        carry an
+                                                                        empty
+                                                                        string
+                                                                        the
+                                                                        first
+                                                                        time in
+                                                                        a
+                                                                        session
+                                                                        that
+                                                                        this
+                                                                        method
+                                                                        is
+                                                                        invoked.
+                                                                        When
+                                                                        multiple
+                                                                        calls to
+                                                                        this
+                                                                        method
+                                                                        are
+                                                                        required
+                                                                        to
+                                                                        obtain
+                                                                        all of
+                                                                        the
+                                                                        data,
+                                                                        the
+                                                                        lastReceived
+                                                                        should
+                                                                        carry
+                                                                        the
+                                                                        objectID
+                                                                        of the
+                                                                        last
+                                                                        data
+                                                                        instance
+                                                                        received
+                                                                        in
+                                                                        subsequent
+                                                                        calls.
+                                                                        If the
+                                                                        sessionID
+                                                                        parameter
+                                                                        is set
+                                                                        in the
+                                                                        message
+                                                                        header,
+                                                                        then the
+                                                                        server
+                                                                        shall
+                                                                        respond
+                                                                        as if it
+                                                                        were
+                                                                        being
+                                                                        asked
+                                                                        for a
+                                                                        GetModifiedXXX
+                                                                        since
+                                                                        that
+                                                                        sessionID;
+                                                                        if the
+                                                                        sessionID
+                                                                        is not
+                                                                        included
+                                                                        in the
+                                                                        method
+                                                                        call,
+                                                                        then all
+                                                                        instances
+                                                                        of the
+                                                                        object
+                                                                        shall be
+                                                                        returned
+                                                                        in
+                                                                        response
+                                                                        to the
+                                                                        call.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllOutageDetectionDevicesSoapIn"/>
+      <wsdl:output message="tns:GetAllOutageDetectionDevicesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByMeterID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        outage
+                                                                        detection
+                                                                        devices
+                                                                        associated
+                                                                        with the
+                                                                        given
+                                                                        meter.</wsdl:documentation>
+      <wsdl:input message="tns:GetOutageDetectionDevicesByMeterIDSoapIn"/>
+      <wsdl:output message="tns:GetOutageDetectionDevicesByMeterIDSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        all
+                                                                        outage
+                                                                        detection
+                                                                        devices
+                                                                        with a
+                                                                        given
+                                                                        OutageDetectionDeviceStatus.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        lastReceived
+                                                                        is
+                                                                        included
+                                                                        so that
+                                                                        large
+                                                                        sets of
+                                                                        data can
+                                                                        be
+                                                                        returned
+                                                                        in
+                                                                        manageable
+                                                                        blocks.
+                                                                        lastReceived
+                                                                        should
+                                                                        carry an
+                                                                        empty
+                                                                        string
+                                                                        the
+                                                                        first
+                                                                        time in
+                                                                        a
+                                                                        session
+                                                                        that
+                                                                        this
+                                                                        method
+                                                                        is
+                                                                        invoked.
+                                                                        When
+                                                                        multiple
+                                                                        calls to
+                                                                        this
+                                                                        method
+                                                                        are
+                                                                        required
+                                                                        to
+                                                                        obtain
+                                                                        all of
+                                                                        the
+                                                                        data,
+                                                                        the
+                                                                        lastReceived
+                                                                        should
+                                                                        carry
+                                                                        the
+                                                                        objectID
+                                                                        of the
+                                                                        last
+                                                                        data
+                                                                        instance
+                                                                        received
+                                                                        in
+                                                                        subsequent
+                                                                        calls.</wsdl:documentation>
+      <wsdl:input message="tns:GetOutageDetectionDevicesByStatusSoapIn"/>
+      <wsdl:output message="tns:GetOutageDetectionDevicesByStatusSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByType">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        all
+                                                                        outage
+                                                                        detection
+                                                                        devices
+                                                                        of a
+                                                                        given
+                                                                        OutageDetectionDeviceType.
+                                                                        The
+                                                                        calling
+                                                                        parameter
+                                                                        lastReceived
+                                                                        is
+                                                                        included
+                                                                        so that
+                                                                        large
+                                                                        sets of
+                                                                        data can
+                                                                        be
+                                                                        returned
+                                                                        in
+                                                                        manageable
+                                                                        blocks.
+                                                                        lastReceived
+                                                                        should
+                                                                        carry an
+                                                                        empty
+                                                                        string
+                                                                        the
+                                                                        first
+                                                                        time in
+                                                                        a
+                                                                        session
+                                                                        that
+                                                                        this
+                                                                        method
+                                                                        is
+                                                                        invoked.
+                                                                        When
+                                                                        multiple
+                                                                        calls to
+                                                                        this
+                                                                        method
+                                                                        are
+                                                                        required
+                                                                        to
+                                                                        obtain
+                                                                        all of
+                                                                        the
+                                                                        data,
+                                                                        the
+                                                                        lastReceived
+                                                                        should
+                                                                        carry
+                                                                        the
+                                                                        objectID
+                                                                        of the
+                                                                        last
+                                                                        data
+                                                                        instance
+                                                                        received
+                                                                        in
+                                                                        subsequent
+                                                                        calls.</wsdl:documentation>
+      <wsdl:input message="tns:GetOutageDetectionDevicesByTypeSoapIn"/>
+      <wsdl:output message="tns:GetOutageDetectionDevicesByTypeSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutagedODDevices">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns
+                                                                        the
+                                                                        outageDetectionDevices
+                                                                        that are
+                                                                        currently
+                                                                        experiencing
+                                                                        outage
+                                                                        conditions.</wsdl:documentation>
+      <wsdl:input message="tns:GetOutagedODDevicesSoapIn"/>
+      <wsdl:output message="tns:GetOutagedODDevicesSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateOutageDetectionEventRequest">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        update
+                                                                        the
+                                                                        status
+                                                                        of an
+                                                                        outageDetectionDevice.
+                                                                        OD
+                                                                        responds
+                                                                        by
+                                                                        publishing
+                                                                        a
+                                                                        revised
+                                                                        outageDetectionEvent
+                                                                        (using
+                                                                        the
+                                                                        ODEventNotification
+                                                                        method
+                                                                        on
+                                                                        OA-OD)
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        parameter.
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        is
+                                                                        included
+                                                                        to link
+                                                                        a
+                                                                        returned
+                                                                        ODEventNotification
+                                                                        with
+                                                                        this
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateOutageDetectionEventRequestSoapIn"/>
+      <wsdl:output message="tns:InitiateOutageDetectionEventRequestSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByObject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        return
+                                                                        only
+                                                                        outage
+                                                                        detection
+                                                                        events
+                                                                        that are
+                                                                        known to
+                                                                        be of
+                                                                        type
+                                                                        Outage
+                                                                        or
+                                                                        Inferred
+                                                                        on
+                                                                        service
+                                                                        locations
+                                                                        downline
+                                                                        from a
+                                                                        circuit
+                                                                        element
+                                                                        supplied
+                                                                        using
+                                                                        the
+                                                                        calling
+                                                                        parameters
+                                                                        objectName
+                                                                        and
+                                                                        nounType
+                                                                        and
+                                                                        containing
+                                                                        the
+                                                                        phasing
+                                                                        supplied
+                                                                        in the
+                                                                        calling
+                                                                        parameter
+                                                                        phaseCode.
+                                                                        OD
+                                                                        responds
+                                                                        by
+                                                                        publishing
+                                                                        a
+                                                                        revised
+                                                                        outageDetectionEvent
+                                                                        (using
+                                                                        the
+                                                                        ODEventNotification
+                                                                        method
+                                                                        on
+                                                                        OA-OD)to
+                                                                        the URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        parameter.
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        is
+                                                                        included
+                                                                        to link
+                                                                        a
+                                                                        returned
+                                                                        ODEventNotification
+                                                                        with
+                                                                        this
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateODEventRequestByObjectSoapIn"/>
+      <wsdl:output message="tns:InitiateODEventRequestByObjectSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByServiceLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        return
+                                                                        outage
+                                                                        detection
+                                                                        events
+                                                                        that are
+                                                                        known to
+                                                                        be of
+                                                                        type
+                                                                        Outage
+                                                                        or
+                                                                        Inferred
+                                                                        on an
+                                                                        array of
+                                                                        service
+                                                                        locations.
+                                                                        Server
+                                                                        responds
+                                                                        by
+                                                                        publishing
+                                                                        a
+                                                                        revised
+                                                                        outageDetectionEvent
+                                                                        (using
+                                                                        the
+                                                                        ODEventNotification
+                                                                        method
+                                                                        on
+                                                                        OA_Server)to
+                                                                        the URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        parameter.
+                                                                        Server
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        is
+                                                                        included
+                                                                        to link
+                                                                        a
+                                                                        returned
+                                                                        ODEventNotification
+                                                                        with
+                                                                        this
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateODEventRequestByServiceLocationSoapIn"/>
+      <wsdl:output message="tns:InitiateODEventRequestByServiceLocationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODMonitoringRequestByObject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        return
+                                                                        only
+                                                                        outage
+                                                                        detection
+                                                                        events
+                                                                        that are
+                                                                        known to
+                                                                        be of
+                                                                        type
+                                                                        Outage
+                                                                        or
+                                                                        Inferred
+                                                                        on
+                                                                        service
+                                                                        locations
+                                                                        downline
+                                                                        from a
+                                                                        circuit
+                                                                        element
+                                                                        supplied
+                                                                        using
+                                                                        the
+                                                                        calling
+                                                                        parameters
+                                                                        objectName
+                                                                        and
+                                                                        nounType.
+                                                                        OD
+                                                                        creates
+                                                                        a
+                                                                        monitoring
+                                                                        event
+                                                                        for the
+                                                                        specified
+                                                                        circuit
+                                                                        element.
+                                                                        Monitoring
+                                                                        shall be
+                                                                        performed
+                                                                        at the
+                                                                        time
+                                                                        interval
+                                                                        given in
+                                                                        the
+                                                                        periodicity
+                                                                        parameter
+                                                                        (expressed
+                                                                        in
+                                                                        minutes).
+                                                                        OD
+                                                                        responds
+                                                                        by
+                                                                        publishing
+                                                                        a
+                                                                        revised
+                                                                        outageDetectionEvent
+                                                                        (using
+                                                                        the
+                                                                        ODEventNotification
+                                                                        method
+                                                                        on
+                                                                        OA-OD)to
+                                                                        the URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        parameter.
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        is
+                                                                        included
+                                                                        to link
+                                                                        a
+                                                                        returned
+                                                                        ODEventNotification
+                                                                        with
+                                                                        this
+                                                                        request.
+                                                                        The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateODMonitoringRequestByObjectSoapIn"/>
+      <wsdl:output message="tns:InitiateODMonitoringRequestByObjectSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayODMonitoringRequests">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        return a
+                                                                        list of
+                                                                        circuit
+                                                                        elements
+                                                                        (in the
+                                                                        form of
+                                                                        objectRefs)
+                                                                        that are
+                                                                        currently
+                                                                        being
+                                                                        monitored.
+                                                                        OD
+                                                                        returns
+                                                                        an array
+                                                                        of
+                                                                        objectRefs.</wsdl:documentation>
+      <wsdl:input message="tns:DisplayODMonitoringRequestsSoapIn"/>
+      <wsdl:output message="tns:DisplayODMonitoringRequestsSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CancelODMonitoringRequestByObject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Requester
+                                                                        requests
+                                                                        server
+                                                                        to
+                                                                        cancel
+                                                                        outage
+                                                                        detection
+                                                                        monitoring
+                                                                        on the
+                                                                        list of
+                                                                        supplied
+                                                                        circuit
+                                                                        elements
+                                                                        (called
+                                                                        out by
+                                                                        objectRef).
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CancelODMonitoringRequestByObjectSoapIn"/>
+      <wsdl:output message="tns:CancelODMonitoringRequestByObjectSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="OutageEventChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        subscriber
+                                                                        of a
+                                                                        change
+                                                                        in
+                                                                        OutageEvent
+                                                                        by
+                                                                        sending
+                                                                        an array
+                                                                        of
+                                                                        changed
+                                                                        OutageEvent
+                                                                        objects.
+                                                                        GV
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:OutageEventChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:OutageEventChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        notifies
+                                                                        server
+                                                                        of a
+                                                                        change
+                                                                        in the
+                                                                        Customer
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        one or
+                                                                        more
+                                                                        changed
+                                                                        customer
+                                                                        object(s).
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CustomerChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:CustomerChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceLocationChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        notifies
+                                                                        server
+                                                                        of a
+                                                                        change
+                                                                        in the
+                                                                        Service
+                                                                        Location
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        one or
+                                                                        more
+                                                                        changed
+                                                                        serviceLocation
+                                                                        object(s).
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:ServiceLocationChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:ServiceLocationChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="MeterChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Client
+                                                                        notifies
+                                                                        server
+                                                                        of a
+                                                                        change
+                                                                        in the
+                                                                        Meter
+                                                                        object
+                                                                        by
+                                                                        sending
+                                                                        one or
+                                                                        more
+                                                                        changed
+                                                                        meter
+                                                                        object(s).
+                                                                        OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        using an
+                                                                        array of
+                                                                        errorObjects.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:MeterChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:MeterChangedNotificationSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyODDataForOutageDetectionDevice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allow
+                                                                        requester
+                                                                        to
+                                                                        modify
+                                                                        server
+                                                                        data for
+                                                                        a
+                                                                        specific
+                                                                        outage
+                                                                        detection
+                                                                        device
+                                                                        object.
+                                                                        If this
+                                                                        transaction
+                                                                        failes,OD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        the
+                                                                        failure
+                                                                        using a
+                                                                        SAOPFault.</wsdl:documentation>
+      <wsdl:input message="tns:ModifyODDataForOutageDetectionDeviceSoapIn"/>
+      <wsdl:output message="tns:ModifyODDataForOutageDetectionDeviceSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OD_ServerSoap" type="tns:OD_ServerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="PingURL">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/PingURL"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:PingURLMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:PingURLMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethods">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetMethods"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetMethodsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetMethodsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainNames">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetDomainNames"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetDomainNamesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetDomainNamesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainMembers">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetDomainMembers"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetDomainMembersMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetDomainMembersMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestRegistrationID">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/RequestRegistrationID"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:RequestRegistrationIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:RequestRegistrationIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterForService">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/RegisterForService"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:RegisterForServiceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:RegisterForServiceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterForService">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/UnregisterForService"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:UnregisterForServiceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:UnregisterForServiceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationInfoByID">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetRegistrationInfoByID"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetRegistrationInfoByIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetRegistrationInfoByIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishMethods">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetPublishMethods"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetPublishMethodsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetPublishMethodsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainMembersChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DomainMembersChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DomainMembersChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DomainMembersChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainNamesChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DomainNamesChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DomainNamesChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DomainNamesChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOutageDetectionDevices">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetAllOutageDetectionDevices"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetAllOutageDetectionDevicesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetAllOutageDetectionDevicesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByMeterID">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByMeterID"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByMeterIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByMeterIDMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByStatus">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByStatus"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByStatusMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByStatusMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByType">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByType"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByTypeMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutageDetectionDevicesByTypeMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutagedODDevices">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutagedODDevices"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutagedODDevicesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:GetOutagedODDevicesMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateOutageDetectionEventRequest">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateOutageDetectionEventRequest"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByObject">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODEventRequestByObject"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODEventRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODEventRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByServiceLocation">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODEventRequestByServiceLocation"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODEventRequestByServiceLocationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODEventRequestByServiceLocationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODMonitoringRequestByObject">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODMonitoringRequestByObject"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayODMonitoringRequests">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DisplayODMonitoringRequests"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DisplayODMonitoringRequestsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:DisplayODMonitoringRequestsMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelODMonitoringRequestByObject">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/CancelODMonitoringRequestByObject"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CancelODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CancelODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OutageEventChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/OutageEventChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:OutageEventChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:OutageEventChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/CustomerChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CustomerChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CustomerChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceLocationChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/ServiceLocationChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:ServiceLocationChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:ServiceLocationChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MeterChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/MeterChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:MeterChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:MeterChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyODDataForOutageDetectionDevice">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/ModifyODDataForOutageDetectionDevice"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:ModifyODDataForOutageDetectionDeviceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:ModifyODDataForOutageDetectionDeviceMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OD_ServerSoap12" type="tns:OD_ServerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"
+                    style="document"/>
+    <wsdl:operation name="PingURL">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/PingURL"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:PingURLMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:PingURLMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMethods">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetMethods"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetMethodsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetMethodsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainNames">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetDomainNames"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetDomainNamesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetDomainNamesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainMembers">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetDomainMembers"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetDomainMembersMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetDomainMembersMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestRegistrationID">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/RequestRegistrationID"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:RequestRegistrationIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:RequestRegistrationIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterForService">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/RegisterForService"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:RegisterForServiceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:RegisterForServiceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnregisterForService">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/UnregisterForService"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:UnregisterForServiceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:UnregisterForServiceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationInfoByID">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetRegistrationInfoByID"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetRegistrationInfoByIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetRegistrationInfoByIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublishMethods">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetPublishMethods"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetPublishMethodsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetPublishMethodsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainMembersChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DomainMembersChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DomainMembersChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DomainMembersChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainNamesChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DomainNamesChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DomainNamesChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DomainNamesChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOutageDetectionDevices">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetAllOutageDetectionDevices"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetAllOutageDetectionDevicesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetAllOutageDetectionDevicesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByMeterID">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByMeterID"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByMeterIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByMeterIDMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByStatus">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByStatus"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByStatusMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByStatusMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutageDetectionDevicesByType">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutageDetectionDevicesByType"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByTypeMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutageDetectionDevicesByTypeMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutagedODDevices">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/GetOutagedODDevices"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutagedODDevicesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:GetOutagedODDevicesMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateOutageDetectionEventRequest">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateOutageDetectionEventRequest"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateOutageDetectionEventRequestMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByObject">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODEventRequestByObject"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODEventRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODEventRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODEventRequestByServiceLocation">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODEventRequestByServiceLocation"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODEventRequestByServiceLocationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODEventRequestByServiceLocationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitiateODMonitoringRequestByObject">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateODMonitoringRequestByObject"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:InitiateODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisplayODMonitoringRequests">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/DisplayODMonitoringRequests"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DisplayODMonitoringRequestsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:DisplayODMonitoringRequestsMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelODMonitoringRequestByObject">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/CancelODMonitoringRequestByObject"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:CancelODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:CancelODMonitoringRequestByObjectMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OutageEventChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/OutageEventChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:OutageEventChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:OutageEventChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/CustomerChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:CustomerChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:CustomerChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ServiceLocationChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/ServiceLocationChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:ServiceLocationChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:ServiceLocationChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MeterChangedNotification">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/MeterChangedNotification"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:MeterChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:MeterChangedNotificationMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyODDataForOutageDetectionDevice">
+      <soap12:operation soapAction="http://www.multispeak.org/Version_4.1_Release/ModifyODDataForOutageDetectionDevice"
+                        style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:ModifyODDataForOutageDetectionDeviceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:ModifyODDataForOutageDetectionDeviceMultiSpeakMsgHeader"
+                       part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

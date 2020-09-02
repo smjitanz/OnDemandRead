@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:ouaf="http://xmlns.oracle.com/ouaf" xmlns:mspk="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://xmlns.oracle.com/ouaf" schemaLocation="ouaf.xsd"/>
+	<xsd:element name="initiateOutageDetectionEventRequestEnvelope">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ouaf:OUAFRequestEnvelope">
+					<xsd:sequence>
+						<xsd:element ref="tns:initiateOutageDetectionEventRequest"/>
+						<xsd:element name="externalSenderID" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiateOutageDetectionEventRequest">
+		<xsd:annotation>
+			<xsd:documentation>Case changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="meterIDs" type="tns:ArrayOfMeterID" minOccurs="0"/>
+				<xsd:element name="requestDate" type="xsd:dateTime" minOccurs="0"/>
+				<xsd:element name="responseURL" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+				<xsd:element ref="tns:expTime" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiateOutageDetectionEventRequestResponseEnvelope">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:element ref="ouaf:fault"/>
+					<xsd:sequence>
+						<xsd:element ref="ouaf:instanceId"/>
+						<xsd:element ref="ouaf:externalSenderID"/>
+						<xsd:element ref="mspk:multiSpeakMsgHeader"/>
+						<xsd:element ref="tns:initiateOutageDetectionEventRequestResult"/>
+					</xsd:sequence>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiateOutageDetectionEventRequestResult" type="tns:ArrayOfErrorObject">
+		<xsd:annotation>
+			<xsd:documentation>Case changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

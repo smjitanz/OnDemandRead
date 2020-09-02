@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAConfigPlan xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns="http://schemas.oracle.com/soa/configplan">
+   <composite name="OnDemandProfileComposite">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="profileondemandbpelprocess_client_ep">
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess#wsdl.endpoint(profileondemandbpelprocess_client_ep/ProfileOnDemandBPELProcess_pt)</replace>
+            </attribute>
+         </binding>
+      </service>
+      <property name="productVersion">
+         <replace>12.2.1.3.0.170820</replace>
+      </property>
+      <property name="compositeID">
+         <replace>c004031b-29cf-4ed3-b591-632e2de2c236</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="ProfileOnDemandBPELProcess">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.preference.onDemandProfileUrl">
+            <replace>https://mea-itanz-itg.dev.cyanconnode.com/ws/onDemandProfile/</replace>
+         </property>
+      </component>
+      <reference name="OnDemandProfileRestReference">
+         <binding type="rest"/>
+      </reference>
+      <reference name="OUAFResponseSOAPReference">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval#wsdl.endpoint(CYANOnDemanReadRespIntervalService/CYANOnDemanReadRespIntervalPort)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>WSDLs/CYANOnDemanReadRespInterval_1.wsdl</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="Schemas/DemandProfileBPELProcess.xsd|Schemas/FaultBinding404.xsd|Schemas/OnDemandProfileBPELProcess.xsd|Schemas/OnDemandProfileRequest.xsd|Schemas/OnDemandProfileResponse.xsd|Schemas/ProfileOnDemandBPELProcess.xsd|Schemas/SGG-DG-SOA/AuxiliaryRoutines.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/CB_Messages.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/CB_Server.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/CD_Messages.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/CD_PortTypes.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/CD_Server.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/MR_Messages.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/MR_PortTypes.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/MR_Server.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OA_Messages.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OA_Server.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OA_Server_Collisions.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OD_Messages.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OD_PortTypes.wsdl|Schemas/SGG-DG-SOA/MultiSpeak/OD_Server.wsdl|Schemas/SGG-DG-SOA/ouaf/CB_Server.wsdl|Schemas/SGG-DG-SOA/ouaf/CD_Server.wsdl|Schemas/SGG-DG-SOA/ouaf/MR_Server.wsdl|Schemas/SGG-DG-SOA/ouaf/OA_Server.wsdl|Schemas/SGG-DG-SOA/ouaf/OD_Server.wsdl|Schemas/SGG-DG-SOA/ProcessCallout/CB_ServerCallout.wsdl|Schemas/SGG-DG-SOA/ProcessCallout/CD_ServerCallout.wsdl|Schemas/SGG-DG-SOA/ProcessCallout/MR_ServerCallout.wsdl|Schemas/SGG-DG-SOA/ProcessCallout/OA_ServerCallout.wsdl|Schemas/SGG-DG-SOA/ProcessCallout/OD_ServerCallout.wsdl|Schemas/SGG-DG-SOA/Proxy/CD_ServerProxy.wsdl|Schemas/SGG-DG-SOA/Proxy/MR_ServerProxy.wsdl|Schemas/SGG-DG-SOA/Proxy/OD_ServerProxy.wsdl|Schemas/SGG-DG-SOA/xsd/MultiSpeak/CB_Server.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/CD_Server.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/cpsm.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/gml.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/MR_Server.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/mspcommon.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/OA_Server.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/OD_Server.xsd|Schemas/SGG-DG-SOA/xsd/MultiSpeak/xlink.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/CB_Server.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/CD_Server.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/MR_Server.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/mspcommon.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/OA_Server.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/OD_Server.xsd|Schemas/SGG-DG-SOA/xsd/ouaf/ouaf.xsd|WSDLs/CYANOnDemanReadRespInterval_1.wsdl|WSDLs/CYANOnDemanReadRespInterval_1Wrapper.wsdl|WSDLs/OnDemandProfileRestReference.wsdl|WSDLs/ProfileOnDemandBPELProcess.wsdl|WSDLs/RuntimeFault.wsdl|wsm-assembly.xml">
+      <searchReplace>
+         <search/>
+         <replace/>
+      </searchReplace>
+   </wsdlAndSchema>
+</SOAConfigPlan>

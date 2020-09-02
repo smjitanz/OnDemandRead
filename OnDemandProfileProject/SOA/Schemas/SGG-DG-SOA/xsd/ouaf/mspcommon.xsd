@@ -1,0 +1,1707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:gml="gml_V4.1_Release" xmlns:cpsm="cpsm_V4.1_Release" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:simpleType name="serviceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Electric"/>
+			<xsd:enumeration value="Gas"/>
+			<xsd:enumeration value="Water"/>
+			<xsd:enumeration value="Propane"/>
+			<xsd:enumeration value="Refuse"/>
+			<xsd:enumeration value="Sewer"/>
+			<xsd:enumeration value="Telecom"/>
+			<xsd:enumeration value="TV"/>
+			<xsd:enumeration value="Cable"/>
+			<xsd:enumeration value="Heating"/>
+			<xsd:enumeration value="Steam"/>
+			<xsd:enumeration value="Transportation"/>
+			<xsd:enumeration value="All"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="action">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="New"/>
+			<xsd:enumeration value="Change"/>
+			<xsd:enumeration value="Delete"/>
+			<xsd:enumeration value="Replace"/>
+			<xsd:enumeration value="Link"/>
+			<xsd:enumeration value="Unlink"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="uom">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Acre ft"/>
+			<xsd:enumeration value="Amps"/>
+			<xsd:enumeration value="Amps RMS"/>
+			<xsd:enumeration value="Amps squared RMS"/>
+			<xsd:enumeration value="atmospheres"/>
+			<xsd:enumeration value="Bar"/>
+			<xsd:enumeration value="ccf"/>
+			<xsd:enumeration value="ccf per Hr"/>
+			<xsd:enumeration value="cm"/>
+			<xsd:enumeration value="Corrosion"/>
+			<xsd:enumeration value="Counter"/>
+			<xsd:enumeration value="cubic feet"/>
+			<xsd:enumeration value="cubic feet corrected"/>
+			<xsd:enumeration value="cubic feet per Hr"/>
+			<xsd:enumeration value="cubic feet per Hr corrected"/>
+			<xsd:enumeration value="cubic feet per Hr uncorrected"/>
+			<xsd:enumeration value="cubic feet uncorrected"/>
+			<xsd:enumeration value="cubic meter"/>
+			<xsd:enumeration value="cubic meter per Hr"/>
+			<xsd:enumeration value="cubic meters corrected"/>
+			<xsd:enumeration value="cubic meters per Hr corrected"/>
+			<xsd:enumeration value="cubic meters per Hr uncorrected"/>
+			<xsd:enumeration value="cubic meters uncorrected"/>
+			<xsd:enumeration value="Current phase angle"/>
+			<xsd:enumeration value="Date"/>
+			<xsd:enumeration value="Date time"/>
+			<xsd:enumeration value="deg C"/>
+			<xsd:enumeration value="deg F"/>
+			<xsd:enumeration value="deg K"/>
+			<xsd:enumeration value="Differential pascal"/>
+			<xsd:enumeration value="Differential pound per square inch"/>
+			<xsd:enumeration value="dm"/>
+			<xsd:enumeration value="Dollar"/>
+			<xsd:enumeration value="feet per second"/>
+			<xsd:enumeration value="Frequency"/>
+			<xsd:enumeration value="ft"/>
+			<xsd:enumeration value="ft of water"/>
+			<xsd:enumeration value="GQ"/>
+			<xsd:enumeration value="GQh"/>
+			<xsd:enumeration value="Gram square cm"/>
+			<xsd:enumeration value="GVA"/>
+			<xsd:enumeration value="GVAh"/>
+			<xsd:enumeration value="GVAR"/>
+			<xsd:enumeration value="GVARh"/>
+			<xsd:enumeration value="GW"/>
+			<xsd:enumeration value="GWh"/>
+			<xsd:enumeration value="IMP gl"/>
+			<xsd:enumeration value="IMP gl per Hr"/>
+			<xsd:enumeration value="inches"/>
+			<xsd:enumeration value="Inches H2O column"/>
+			<xsd:enumeration value="Inches HG column"/>
+			<xsd:enumeration value="inches of water"/>
+			<xsd:enumeration value="Interval timer"/>
+			<xsd:enumeration value="Ionization"/>
+			<xsd:enumeration value="Joules"/>
+			<xsd:enumeration value="Joules per Hr"/>
+			<xsd:enumeration value="kAmps"/>
+			<xsd:enumeration value="kAmps RMS"/>
+			<xsd:enumeration value="kAmps squared RMS"/>
+			<xsd:enumeration value="kJoules"/>
+			<xsd:enumeration value="kJoules per Hr"/>
+			<xsd:enumeration value="km"/>
+			<xsd:enumeration value="km per hour"/>
+			<xsd:enumeration value="km per second"/>
+			<xsd:enumeration value="kQ"/>
+			<xsd:enumeration value="kQh"/>
+			<xsd:enumeration value="kV"/>
+			<xsd:enumeration value="kV RMS"/>
+			<xsd:enumeration value="kVA"/>
+			<xsd:enumeration value="kVAh"/>
+			<xsd:enumeration value="kVAR"/>
+			<xsd:enumeration value="kVARh"/>
+			<xsd:enumeration value="kVsquared RMS"/>
+			<xsd:enumeration value="kW"/>
+			<xsd:enumeration value="kWh"/>
+			<xsd:enumeration value="liters"/>
+			<xsd:enumeration value="m"/>
+			<xsd:enumeration value="m per second"/>
+			<xsd:enumeration value="mAmps"/>
+			<xsd:enumeration value="Mamps"/>
+			<xsd:enumeration value="mAmps RMS"/>
+			<xsd:enumeration value="Mamps RMS"/>
+			<xsd:enumeration value="Mamps squared RMS"/>
+			<xsd:enumeration value="mAmps squared RMS"/>
+			<xsd:enumeration value="Meter HG column"/>
+			<xsd:enumeration value="micro m"/>
+			<xsd:enumeration value="microAmps"/>
+			<xsd:enumeration value="microAmps RMS"/>
+			<xsd:enumeration value="microAmps squared RMS"/>
+			<xsd:enumeration value="microJoules"/>
+			<xsd:enumeration value="microJoules per Hr"/>
+			<xsd:enumeration value="microQ"/>
+			<xsd:enumeration value="microQh"/>
+			<xsd:enumeration value="microV"/>
+			<xsd:enumeration value="microV RMS"/>
+			<xsd:enumeration value="microVA"/>
+			<xsd:enumeration value="microVAh"/>
+			<xsd:enumeration value="microVAR"/>
+			<xsd:enumeration value="microVARh"/>
+			<xsd:enumeration value="microVsquared RMS"/>
+			<xsd:enumeration value="microW"/>
+			<xsd:enumeration value="microWh"/>
+			<xsd:enumeration value="Minutes on battery"/>
+			<xsd:enumeration value="mJoules"/>
+			<xsd:enumeration value="MJoules"/>
+			<xsd:enumeration value="MJoules per Hr"/>
+			<xsd:enumeration value="mJoules per Hr"/>
+			<xsd:enumeration value="mm"/>
+			<xsd:enumeration value="mph"/>
+			<xsd:enumeration value="MQ"/>
+			<xsd:enumeration value="mQ"/>
+			<xsd:enumeration value="MQh"/>
+			<xsd:enumeration value="mQh"/>
+			<xsd:enumeration value="MV"/>
+			<xsd:enumeration value="mV"/>
+			<xsd:enumeration value="MV RMS"/>
+			<xsd:enumeration value="mV RMS"/>
+			<xsd:enumeration value="mVA"/>
+			<xsd:enumeration value="MVA"/>
+			<xsd:enumeration value="MVAh"/>
+			<xsd:enumeration value="mVAh"/>
+			<xsd:enumeration value="MVAR"/>
+			<xsd:enumeration value="mVAR"/>
+			<xsd:enumeration value="mVARh"/>
+			<xsd:enumeration value="MVARh"/>
+			<xsd:enumeration value="mVsquared RMS"/>
+			<xsd:enumeration value="MVsquared RMS"/>
+			<xsd:enumeration value="MW"/>
+			<xsd:enumeration value="mW"/>
+			<xsd:enumeration value="mWh"/>
+			<xsd:enumeration value="MWh"/>
+			<xsd:enumeration value="Nbr of amps T.H.D. excess"/>
+			<xsd:enumeration value="Nbr of demand resets"/>
+			<xsd:enumeration value="Nbr of encoder tamper"/>
+			<xsd:enumeration value="Nbr of excursion high"/>
+			<xsd:enumeration value="Nbr of excursion low"/>
+			<xsd:enumeration value="Nbr of inversion"/>
+			<xsd:enumeration value="Nbr of physical tamper"/>
+			<xsd:enumeration value="Nbr of power loss"/>
+			<xsd:enumeration value="Nbr of power outage"/>
+			<xsd:enumeration value="Nbr of pulse"/>
+			<xsd:enumeration value="Nbr of removal"/>
+			<xsd:enumeration value="Nbr of reprogramming"/>
+			<xsd:enumeration value="Nbr of reverse rotation"/>
+			<xsd:enumeration value="Nbr of sag"/>
+			<xsd:enumeration value="Nbr of swells"/>
+			<xsd:enumeration value="Nbr of times programmed"/>
+			<xsd:enumeration value="Nbr of V T.H.D. excess"/>
+			<xsd:enumeration value="Nbr of voltage unbalance"/>
+			<xsd:enumeration value="Nbr of watchdog"/>
+			<xsd:enumeration value="Normal voltage period"/>
+			<xsd:enumeration value="percent"/>
+			<xsd:enumeration value="percent relative humidity"/>
+			<xsd:enumeration value="PH factor"/>
+			<xsd:enumeration value="pounds per square foot"/>
+			<xsd:enumeration value="Power factor"/>
+			<xsd:enumeration value="PPM chlorine"/>
+			<xsd:enumeration value="PPM lead"/>
+			<xsd:enumeration value="PPM odorant"/>
+			<xsd:enumeration value="PPM SO2"/>
+			<xsd:enumeration value="Q"/>
+			<xsd:enumeration value="Qh"/>
+			<xsd:enumeration value="Sense input"/>
+			<xsd:enumeration value="Static pascal"/>
+			<xsd:enumeration value="Static pound per square inch"/>
+			<xsd:enumeration value="T.H.D. Current"/>
+			<xsd:enumeration value="T.H.D. Voltage"/>
+			<xsd:enumeration value="Therm"/>
+			<xsd:enumeration value="Therm per Hr"/>
+			<xsd:enumeration value="Time"/>
+			<xsd:enumeration value="turbidity"/>
+			<xsd:enumeration value="US gl"/>
+			<xsd:enumeration value="US gl per Hr"/>
+			<xsd:enumeration value="V"/>
+			<xsd:enumeration value="V RMS"/>
+			<xsd:enumeration value="VA"/>
+			<xsd:enumeration value="VAh"/>
+			<xsd:enumeration value="VAR"/>
+			<xsd:enumeration value="VARh"/>
+			<xsd:enumeration value="Voltage phase angle"/>
+			<xsd:enumeration value="Vsquared RMS"/>
+			<xsd:enumeration value="W"/>
+			<xsd:enumeration value="Wh"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="extType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="anySimpleType"/>
+			<xsd:enumeration value="anyType"/>
+			<xsd:enumeration value="anyURI"/>
+			<xsd:enumeration value="base64Binary"/>
+			<xsd:enumeration value="boolean"/>
+			<xsd:enumeration value="byte"/>
+			<xsd:enumeration value="date"/>
+			<xsd:enumeration value="dateTime"/>
+			<xsd:enumeration value="decimal"/>
+			<xsd:enumeration value="double"/>
+			<xsd:enumeration value="duration"/>
+			<xsd:enumeration value="ENTITIES"/>
+			<xsd:enumeration value="ENTITY"/>
+			<xsd:enumeration value="float"/>
+			<xsd:enumeration value="gDay"/>
+			<xsd:enumeration value="gMonth"/>
+			<xsd:enumeration value="gMonthDay"/>
+			<xsd:enumeration value="gYear"/>
+			<xsd:enumeration value="gYearMonth"/>
+			<xsd:enumeration value="hexBinary"/>
+			<xsd:enumeration value="ID"/>
+			<xsd:enumeration value="IDREF"/>
+			<xsd:enumeration value="IDREFS"/>
+			<xsd:enumeration value="int"/>
+			<xsd:enumeration value="integer"/>
+			<xsd:enumeration value="language"/>
+			<xsd:enumeration value="long"/>
+			<xsd:enumeration value="Name"/>
+			<xsd:enumeration value="NCName"/>
+			<xsd:enumeration value="negativeInteger"/>
+			<xsd:enumeration value="NMTOKEN"/>
+			<xsd:enumeration value="NMTOKENS"/>
+			<xsd:enumeration value="nonNegativeInteger"/>
+			<xsd:enumeration value="nonPositiveInteger"/>
+			<xsd:enumeration value="normalizedString"/>
+			<xsd:enumeration value="NOTATION"/>
+			<xsd:enumeration value="positiveInteger"/>
+			<xsd:enumeration value="QName"/>
+			<xsd:enumeration value="short"/>
+			<xsd:enumeration value="string"/>
+			<xsd:enumeration value="time"/>
+			<xsd:enumeration value="token"/>
+			<xsd:enumeration value="unsignedByte"/>
+			<xsd:enumeration value="unsignedInt"/>
+			<xsd:enumeration value="unsignedLong"/>
+			<xsd:enumeration value="unsignedShort"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BuildDescriptor">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PR"/>
+			<xsd:enumeration value="RC"/>
+			<xsd:enumeration value="Branch"/>
+			<xsd:enumeration value="Release"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="money">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="currencyCode" type="tns:currencyCode" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="currencyCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="USD"/>
+			<xsd:enumeration value="EUR"/>
+			<xsd:enumeration value="ADF"/>
+			<xsd:enumeration value="ADP"/>
+			<xsd:enumeration value="AED"/>
+			<xsd:enumeration value="AFN"/>
+			<xsd:enumeration value="ALL"/>
+			<xsd:enumeration value="AMD"/>
+			<xsd:enumeration value="ANG"/>
+			<xsd:enumeration value="AOA"/>
+			<xsd:enumeration value="ARS"/>
+			<xsd:enumeration value="ATS"/>
+			<xsd:enumeration value="AUD"/>
+			<xsd:enumeration value="AWG"/>
+			<xsd:enumeration value="AZN"/>
+			<xsd:enumeration value="BAM"/>
+			<xsd:enumeration value="BBD"/>
+			<xsd:enumeration value="BDT"/>
+			<xsd:enumeration value="BEF"/>
+			<xsd:enumeration value="BGN"/>
+			<xsd:enumeration value="BHD"/>
+			<xsd:enumeration value="BIF"/>
+			<xsd:enumeration value="BMD"/>
+			<xsd:enumeration value="BND"/>
+			<xsd:enumeration value="BOB"/>
+			<xsd:enumeration value="BOV"/>
+			<xsd:enumeration value="BRL"/>
+			<xsd:enumeration value="BSD"/>
+			<xsd:enumeration value="BTN"/>
+			<xsd:enumeration value="BWP"/>
+			<xsd:enumeration value="BYR"/>
+			<xsd:enumeration value="BZD"/>
+			<xsd:enumeration value="CAD"/>
+			<xsd:enumeration value="CDF"/>
+			<xsd:enumeration value="CHE"/>
+			<xsd:enumeration value="CHF"/>
+			<xsd:enumeration value="CHW"/>
+			<xsd:enumeration value="CLF"/>
+			<xsd:enumeration value="CLP"/>
+			<xsd:enumeration value="CNY"/>
+			<xsd:enumeration value="COP"/>
+			<xsd:enumeration value="COU"/>
+			<xsd:enumeration value="CRC"/>
+			<xsd:enumeration value="CUP"/>
+			<xsd:enumeration value="CVE"/>
+			<xsd:enumeration value="CYP"/>
+			<xsd:enumeration value="CZK"/>
+			<xsd:enumeration value="DEM"/>
+			<xsd:enumeration value="DJF"/>
+			<xsd:enumeration value="DKK"/>
+			<xsd:enumeration value="DOP"/>
+			<xsd:enumeration value="DZD"/>
+			<xsd:enumeration value="EEK"/>
+			<xsd:enumeration value="EGP"/>
+			<xsd:enumeration value="ERN"/>
+			<xsd:enumeration value="ESP"/>
+			<xsd:enumeration value="ETB"/>
+			<xsd:enumeration value="FIM"/>
+			<xsd:enumeration value="FJD"/>
+			<xsd:enumeration value="FKP"/>
+			<xsd:enumeration value="FRF"/>
+			<xsd:enumeration value="GBP"/>
+			<xsd:enumeration value="GEL"/>
+			<xsd:enumeration value="GHS"/>
+			<xsd:enumeration value="GIP"/>
+			<xsd:enumeration value="GMD"/>
+			<xsd:enumeration value="GNF"/>
+			<xsd:enumeration value="GRD"/>
+			<xsd:enumeration value="GTQ"/>
+			<xsd:enumeration value="GYD"/>
+			<xsd:enumeration value="HKD"/>
+			<xsd:enumeration value="HNL"/>
+			<xsd:enumeration value="HRK"/>
+			<xsd:enumeration value="HTG"/>
+			<xsd:enumeration value="HUF"/>
+			<xsd:enumeration value="IDR"/>
+			<xsd:enumeration value="IEP"/>
+			<xsd:enumeration value="ILS"/>
+			<xsd:enumeration value="INR"/>
+			<xsd:enumeration value="IQD"/>
+			<xsd:enumeration value="IRR"/>
+			<xsd:enumeration value="ISK"/>
+			<xsd:enumeration value="ITL"/>
+			<xsd:enumeration value="JMD"/>
+			<xsd:enumeration value="JOD"/>
+			<xsd:enumeration value="JPY"/>
+			<xsd:enumeration value="KES"/>
+			<xsd:enumeration value="KGS"/>
+			<xsd:enumeration value="KHR"/>
+			<xsd:enumeration value="KMF"/>
+			<xsd:enumeration value="KPW"/>
+			<xsd:enumeration value="KRW"/>
+			<xsd:enumeration value="KWD"/>
+			<xsd:enumeration value="KYD"/>
+			<xsd:enumeration value="KZT"/>
+			<xsd:enumeration value="LAK"/>
+			<xsd:enumeration value="LBP"/>
+			<xsd:enumeration value="LKR"/>
+			<xsd:enumeration value="LRD"/>
+			<xsd:enumeration value="LSL"/>
+			<xsd:enumeration value="LTL"/>
+			<xsd:enumeration value="LUF"/>
+			<xsd:enumeration value="LVL"/>
+			<xsd:enumeration value="LYD"/>
+			<xsd:enumeration value="MAD"/>
+			<xsd:enumeration value="MCF"/>
+			<xsd:enumeration value="MDL"/>
+			<xsd:enumeration value="MGA"/>
+			<xsd:enumeration value="MKD"/>
+			<xsd:enumeration value="MMK"/>
+			<xsd:enumeration value="MNT"/>
+			<xsd:enumeration value="MOP"/>
+			<xsd:enumeration value="MRO"/>
+			<xsd:enumeration value="MTL"/>
+			<xsd:enumeration value="MUR"/>
+			<xsd:enumeration value="MVR"/>
+			<xsd:enumeration value="MWK"/>
+			<xsd:enumeration value="MXN"/>
+			<xsd:enumeration value="MXV"/>
+			<xsd:enumeration value="MYR"/>
+			<xsd:enumeration value="MZN"/>
+			<xsd:enumeration value="NAD"/>
+			<xsd:enumeration value="NGN"/>
+			<xsd:enumeration value="NIO"/>
+			<xsd:enumeration value="NLG"/>
+			<xsd:enumeration value="NOK"/>
+			<xsd:enumeration value="NPR"/>
+			<xsd:enumeration value="NZD"/>
+			<xsd:enumeration value="OMR"/>
+			<xsd:enumeration value="PAB"/>
+			<xsd:enumeration value="PEN"/>
+			<xsd:enumeration value="PGK"/>
+			<xsd:enumeration value="PHP"/>
+			<xsd:enumeration value="PKR"/>
+			<xsd:enumeration value="PLN"/>
+			<xsd:enumeration value="PTE"/>
+			<xsd:enumeration value="PYG"/>
+			<xsd:enumeration value="QAR"/>
+			<xsd:enumeration value="RON"/>
+			<xsd:enumeration value="RSD"/>
+			<xsd:enumeration value="RUB"/>
+			<xsd:enumeration value="RWF"/>
+			<xsd:enumeration value="SAR"/>
+			<xsd:enumeration value="SBD"/>
+			<xsd:enumeration value="SCR"/>
+			<xsd:enumeration value="SDG"/>
+			<xsd:enumeration value="SEK"/>
+			<xsd:enumeration value="SGD"/>
+			<xsd:enumeration value="SHP"/>
+			<xsd:enumeration value="SIT"/>
+			<xsd:enumeration value="SKK"/>
+			<xsd:enumeration value="SLL"/>
+			<xsd:enumeration value="SML"/>
+			<xsd:enumeration value="SOS"/>
+			<xsd:enumeration value="SRD"/>
+			<xsd:enumeration value="STD"/>
+			<xsd:enumeration value="SYP"/>
+			<xsd:enumeration value="SZL"/>
+			<xsd:enumeration value="THB"/>
+			<xsd:enumeration value="TJS"/>
+			<xsd:enumeration value="TMM"/>
+			<xsd:enumeration value="TND"/>
+			<xsd:enumeration value="TOP"/>
+			<xsd:enumeration value="TRY"/>
+			<xsd:enumeration value="TTD"/>
+			<xsd:enumeration value="TWD"/>
+			<xsd:enumeration value="TZS"/>
+			<xsd:enumeration value="UAH"/>
+			<xsd:enumeration value="UGX"/>
+			<xsd:enumeration value="USN"/>
+			<xsd:enumeration value="USS"/>
+			<xsd:enumeration value="UYU"/>
+			<xsd:enumeration value="UZS"/>
+			<xsd:enumeration value="VAL"/>
+			<xsd:enumeration value="VEF"/>
+			<xsd:enumeration value="VND"/>
+			<xsd:enumeration value="VUV"/>
+			<xsd:enumeration value="WST"/>
+			<xsd:enumeration value="XAF"/>
+			<xsd:enumeration value="XAG"/>
+			<xsd:enumeration value="XAU"/>
+			<xsd:enumeration value="XBA"/>
+			<xsd:enumeration value="XBB"/>
+			<xsd:enumeration value="XBC"/>
+			<xsd:enumeration value="XBD"/>
+			<xsd:enumeration value="XCD"/>
+			<xsd:enumeration value="XDR"/>
+			<xsd:enumeration value="XEU"/>
+			<xsd:enumeration value="XFU"/>
+			<xsd:enumeration value="XOF"/>
+			<xsd:enumeration value="XPD"/>
+			<xsd:enumeration value="XPF"/>
+			<xsd:enumeration value="XPT"/>
+			<xsd:enumeration value="XTS"/>
+			<xsd:enumeration value="XXX"/>
+			<xsd:enumeration value="YER"/>
+			<xsd:enumeration value="ZAR"/>
+			<xsd:enumeration value="ZMK"/>
+			<xsd:enumeration value="ZWD"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DefaultCurrencyCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="USD"/>
+			<xsd:enumeration value="EUR"/>
+			<xsd:enumeration value="AED"/>
+			<xsd:enumeration value="AFN"/>
+			<xsd:enumeration value="ALL"/>
+			<xsd:enumeration value="AMD"/>
+			<xsd:enumeration value="ANG"/>
+			<xsd:enumeration value="AOA"/>
+			<xsd:enumeration value="ARS"/>
+			<xsd:enumeration value="AUD"/>
+			<xsd:enumeration value="AWG"/>
+			<xsd:enumeration value="AZN"/>
+			<xsd:enumeration value="BAM"/>
+			<xsd:enumeration value="BBD"/>
+			<xsd:enumeration value="BDT"/>
+			<xsd:enumeration value="BGN"/>
+			<xsd:enumeration value="BHD"/>
+			<xsd:enumeration value="BIF"/>
+			<xsd:enumeration value="BMD"/>
+			<xsd:enumeration value="BND"/>
+			<xsd:enumeration value="BOB"/>
+			<xsd:enumeration value="BOV"/>
+			<xsd:enumeration value="BRL"/>
+			<xsd:enumeration value="BSD"/>
+			<xsd:enumeration value="BTN"/>
+			<xsd:enumeration value="BWP"/>
+			<xsd:enumeration value="BYR"/>
+			<xsd:enumeration value="BZD"/>
+			<xsd:enumeration value="CAD"/>
+			<xsd:enumeration value="CDF"/>
+			<xsd:enumeration value="CHE"/>
+			<xsd:enumeration value="CHF"/>
+			<xsd:enumeration value="CHW"/>
+			<xsd:enumeration value="CLF"/>
+			<xsd:enumeration value="CLP"/>
+			<xsd:enumeration value="CNY"/>
+			<xsd:enumeration value="COP"/>
+			<xsd:enumeration value="COU"/>
+			<xsd:enumeration value="CRC"/>
+			<xsd:enumeration value="CUP"/>
+			<xsd:enumeration value="CVE"/>
+			<xsd:enumeration value="CZK"/>
+			<xsd:enumeration value="DJF"/>
+			<xsd:enumeration value="DKK"/>
+			<xsd:enumeration value="DOP"/>
+			<xsd:enumeration value="DZD"/>
+			<xsd:enumeration value="EEK"/>
+			<xsd:enumeration value="EGP"/>
+			<xsd:enumeration value="ERN"/>
+			<xsd:enumeration value="ETB"/>
+			<xsd:enumeration value="FJD"/>
+			<xsd:enumeration value="FKP"/>
+			<xsd:enumeration value="GBP"/>
+			<xsd:enumeration value="GEL"/>
+			<xsd:enumeration value="GHS"/>
+			<xsd:enumeration value="GIP"/>
+			<xsd:enumeration value="GMD"/>
+			<xsd:enumeration value="GNF"/>
+			<xsd:enumeration value="GTQ"/>
+			<xsd:enumeration value="GYD"/>
+			<xsd:enumeration value="HKD"/>
+			<xsd:enumeration value="HNL"/>
+			<xsd:enumeration value="HRK"/>
+			<xsd:enumeration value="HTG"/>
+			<xsd:enumeration value="HUF"/>
+			<xsd:enumeration value="IDR"/>
+			<xsd:enumeration value="ILS"/>
+			<xsd:enumeration value="INR"/>
+			<xsd:enumeration value="IQD"/>
+			<xsd:enumeration value="IRR"/>
+			<xsd:enumeration value="ISK"/>
+			<xsd:enumeration value="JMD"/>
+			<xsd:enumeration value="JOD"/>
+			<xsd:enumeration value="JPY"/>
+			<xsd:enumeration value="KES"/>
+			<xsd:enumeration value="KGS"/>
+			<xsd:enumeration value="KHR"/>
+			<xsd:enumeration value="KMF"/>
+			<xsd:enumeration value="KPW"/>
+			<xsd:enumeration value="KRW"/>
+			<xsd:enumeration value="KWD"/>
+			<xsd:enumeration value="KYD"/>
+			<xsd:enumeration value="KZT"/>
+			<xsd:enumeration value="LAK"/>
+			<xsd:enumeration value="LBP"/>
+			<xsd:enumeration value="LKR"/>
+			<xsd:enumeration value="LRD"/>
+			<xsd:enumeration value="LSL"/>
+			<xsd:enumeration value="LTL"/>
+			<xsd:enumeration value="LVL"/>
+			<xsd:enumeration value="LYD"/>
+			<xsd:enumeration value="MAD"/>
+			<xsd:enumeration value="MDL"/>
+			<xsd:enumeration value="MGA"/>
+			<xsd:enumeration value="MKD"/>
+			<xsd:enumeration value="MMK"/>
+			<xsd:enumeration value="MNT"/>
+			<xsd:enumeration value="MOP"/>
+			<xsd:enumeration value="MRO"/>
+			<xsd:enumeration value="MUR"/>
+			<xsd:enumeration value="MVR"/>
+			<xsd:enumeration value="MWK"/>
+			<xsd:enumeration value="MXN"/>
+			<xsd:enumeration value="MXV"/>
+			<xsd:enumeration value="MYR"/>
+			<xsd:enumeration value="MZN"/>
+			<xsd:enumeration value="NAD"/>
+			<xsd:enumeration value="NGN"/>
+			<xsd:enumeration value="NIO"/>
+			<xsd:enumeration value="NOK"/>
+			<xsd:enumeration value="NPR"/>
+			<xsd:enumeration value="NZD"/>
+			<xsd:enumeration value="OMR"/>
+			<xsd:enumeration value="PAB"/>
+			<xsd:enumeration value="PEN"/>
+			<xsd:enumeration value="PGK"/>
+			<xsd:enumeration value="PHP"/>
+			<xsd:enumeration value="PKR"/>
+			<xsd:enumeration value="PLN"/>
+			<xsd:enumeration value="PYG"/>
+			<xsd:enumeration value="QAR"/>
+			<xsd:enumeration value="RON"/>
+			<xsd:enumeration value="RSD"/>
+			<xsd:enumeration value="RUB"/>
+			<xsd:enumeration value="RWF"/>
+			<xsd:enumeration value="SAR"/>
+			<xsd:enumeration value="SBD"/>
+			<xsd:enumeration value="SCR"/>
+			<xsd:enumeration value="SDG"/>
+			<xsd:enumeration value="SEK"/>
+			<xsd:enumeration value="SGD"/>
+			<xsd:enumeration value="SHP"/>
+			<xsd:enumeration value="SKK"/>
+			<xsd:enumeration value="SLL"/>
+			<xsd:enumeration value="SOS"/>
+			<xsd:enumeration value="SRD"/>
+			<xsd:enumeration value="STD"/>
+			<xsd:enumeration value="SYP"/>
+			<xsd:enumeration value="SZL"/>
+			<xsd:enumeration value="THB"/>
+			<xsd:enumeration value="TJS"/>
+			<xsd:enumeration value="TMM"/>
+			<xsd:enumeration value="TND"/>
+			<xsd:enumeration value="TOP"/>
+			<xsd:enumeration value="TRY"/>
+			<xsd:enumeration value="TTD"/>
+			<xsd:enumeration value="TWD"/>
+			<xsd:enumeration value="TZS"/>
+			<xsd:enumeration value="UAH"/>
+			<xsd:enumeration value="UGX"/>
+			<xsd:enumeration value="USN"/>
+			<xsd:enumeration value="USS"/>
+			<xsd:enumeration value="UYU"/>
+			<xsd:enumeration value="UZS"/>
+			<xsd:enumeration value="VEF"/>
+			<xsd:enumeration value="VND"/>
+			<xsd:enumeration value="VUV"/>
+			<xsd:enumeration value="WST"/>
+			<xsd:enumeration value="XAF"/>
+			<xsd:enumeration value="XAG"/>
+			<xsd:enumeration value="XAU"/>
+			<xsd:enumeration value="XBA"/>
+			<xsd:enumeration value="XBB"/>
+			<xsd:enumeration value="XBC"/>
+			<xsd:enumeration value="XBD"/>
+			<xsd:enumeration value="XCD"/>
+			<xsd:enumeration value="XDR"/>
+			<xsd:enumeration value="XFU"/>
+			<xsd:enumeration value="XOF"/>
+			<xsd:enumeration value="XPD"/>
+			<xsd:enumeration value="XPF"/>
+			<xsd:enumeration value="XPT"/>
+			<xsd:enumeration value="XTS"/>
+			<xsd:enumeration value="XXX"/>
+			<xsd:enumeration value="YER"/>
+			<xsd:enumeration value="ZAR"/>
+			<xsd:enumeration value="ZMK"/>
+			<xsd:enumeration value="ZWD"/>
+			<xsd:enumeration value="ADF"/>
+			<xsd:enumeration value="ADP"/>
+			<xsd:enumeration value="ATS"/>
+			<xsd:enumeration value="BEF"/>
+			<xsd:enumeration value="CYP"/>
+			<xsd:enumeration value="DEM"/>
+			<xsd:enumeration value="ESP"/>
+			<xsd:enumeration value="FIM"/>
+			<xsd:enumeration value="FRF"/>
+			<xsd:enumeration value="GRD"/>
+			<xsd:enumeration value="IEP"/>
+			<xsd:enumeration value="ITL"/>
+			<xsd:enumeration value="LUF"/>
+			<xsd:enumeration value="MCF"/>
+			<xsd:enumeration value="MTL"/>
+			<xsd:enumeration value="NLG"/>
+			<xsd:enumeration value="PTE"/>
+			<xsd:enumeration value="SIT"/>
+			<xsd:enumeration value="SML"/>
+			<xsd:enumeration value="VAL"/>
+			<xsd:enumeration value="XEU"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="phaseCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="A"/>
+			<xsd:enumeration value="B"/>
+			<xsd:enumeration value="C"/>
+			<xsd:enumeration value="N"/>
+			<xsd:enumeration value="AB"/>
+			<xsd:enumeration value="AC"/>
+			<xsd:enumeration value="BC"/>
+			<xsd:enumeration value="ABC"/>
+			<xsd:enumeration value="AN"/>
+			<xsd:enumeration value="BN"/>
+			<xsd:enumeration value="CN"/>
+			<xsd:enumeration value="ABN"/>
+			<xsd:enumeration value="ACN"/>
+			<xsd:enumeration value="BCN"/>
+			<xsd:enumeration value="ABCN"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MessageHeaderCSUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="feet"/>
+			<xsd:enumeration value="meters"/>
+			<xsd:enumeration value="USSurveyFeet"/>
+			<xsd:enumeration value="other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MessageContext">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Production"/>
+			<xsd:enumeration value="Testing"/>
+			<xsd:enumeration value="Development"/>
+			<xsd:enumeration value="Study"/>
+			<xsd:enumeration value="Training"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="baseType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Base Type 1"/>
+			<xsd:enumeration value="S-base"/>
+			<xsd:enumeration value="A-Base"/>
+			<xsd:enumeration value="B-Base"/>
+			<xsd:enumeration value="K-Base"/>
+			<xsd:enumeration value="P-Base"/>
+			<xsd:enumeration value="IECBottomConnected"/>
+			<xsd:enumeration value="switchboard"/>
+			<xsd:enumeration value="rackmount"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="timeUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Milliseconds"/>
+			<xsd:enumeration value="Seconds"/>
+			<xsd:enumeration value="Minutes"/>
+			<xsd:enumeration value="Hours"/>
+			<xsd:enumeration value="Days"/>
+			<xsd:enumeration value="Weeks"/>
+			<xsd:enumeration value="Months"/>
+			<xsd:enumeration value="Years"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="time">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="units" type="tns:timeUnits" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="extensions">
+		<xsd:sequence>
+			<xsd:any minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfExtensionsItem">
+		<xsd:sequence>
+			<xsd:element name="extensionsItem" type="tns:extensionsItem" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="extensionsItem">
+		<xsd:sequence>
+			<xsd:element name="extName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extValue" type="tns:extValue" minOccurs="0"/>
+			<xsd:element name="extType" type="tns:extType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="extValue">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="units" type="tns:uom" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="mspObject" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>Changed attributes to elements for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="objectID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="verb" type="tns:action" default="Change" minOccurs="0"/>
+			<xsd:element name="errorString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="replaceID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="utility" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extensions" type="tns:extensions" minOccurs="0"/>
+			<xsd:element name="comments" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extensionsList" type="tns:ArrayOfExtensionsItem" minOccurs="0"/>
+			<xsd:element name="objectName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="identifiedObject" type="tns:IdentifiedObject" minOccurs="0"/>
+			<xsd:any/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfErrorObject">
+		<xsd:sequence>
+			<xsd:element name="errorObject" type="tns:errorObject" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="errorObject">
+		<xsd:annotation>
+			<xsd:documentation>Changed attributes to elements for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="objectID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="errorString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="nounType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="eventTime" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="multiSpeakMsgHeader" type="tns:MultiSpeakMsgHeader">
+		<xsd:annotation>
+			<xsd:documentation>Case changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="MultiSpeakMsgHeader">
+		<xsd:annotation>
+			<xsd:documentation>Attributes are now elements for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="majorVersion" type="xsd:integer" default="4" minOccurs="0"/>
+			<xsd:element name="minorVersion" type="xsd:integer" default="1" minOccurs="0"/>
+			<xsd:element name="build" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="branch" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="buildString" type="tns:BuildDescriptor" default="Unknown" minOccurs="0"/>
+			<xsd:element name="userID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="pwd" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="appName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="appVersion" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="company" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="defaultCurrencyCode" type="tns:DefaultCurrencyCode" minOccurs="0"/>
+			<xsd:element name="CSUnits" type="tns:MessageHeaderCSUnits" default="feet" minOccurs="0"/>
+			<xsd:element name="coordinateSystemName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="coordinateSystemAuthority" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="coordinateSystemAuthorityCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="datum" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="sessionID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="previousSessionID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="objectsRemaining" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="lastSent" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="registrationID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="messageID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="timeStamp" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="context" type="tns:MessageContext" minOccurs="0"/>
+			<xsd:element name="auditID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="auditPassword" type="xsd:string" minOccurs="0"/>
+			<xsd:any/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="telephoneNumber">
+		<xsd:sequence>
+			<xsd:element name="areaCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="cityCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="countryCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="localNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extension" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="coord" type="tns:CoordType">
+		<xsd:annotation>
+			<xsd:documentation>This is one of two optional formats for expressing coordinates in GML.  This option is the one that shall be used for expressing points in MultiSpeak data exchanges.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="coordinates" type="tns:CoordinatesType">
+		<xsd:annotation>
+			<xsd:documentation>This is one of two optional formats for expressing coordinates in GML.  This option  shall not be used for expressing points in MultiSpeak data exchanges. </xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="CoordType">
+		<xsd:annotation>
+			<xsd:documentation>
+        Represents a coordinate tuple in one, two, or three dimensions.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="X" type="xsd:decimal"/>
+			<xsd:element name="Y" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="Z" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="Bulge" type="xsd:float" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Bulge is a factor that describes a curved line segment between two points. Bulge=0 is a straight line: Bulge=1 is a curve along the edge of a circle.  A bulge can be associated only with the second point of a line segment.  A negative bulge factor causes the line to bulge to the left as viewed from the first point to the second; a positive bulge causes the line to be curved to the right as viewed from the first point to the left. </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CoordinatesType" mixed="true">
+		<xsd:annotation>
+			<xsd:documentation>
+			Coordinates can be included in a single string, but there is no 
+        facility for validating string content. The value of the 'cs' attribute 
+        is the separator for coordinate values, and the value of the 'ts' 
+        attribute gives the tuple separator (a single space by default); the 
+        default values may be changed to reflect local usage.
+      Attributes changed to elements for OUAF compatibility.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="decimal" type="xsd:string" default="." minOccurs="0"/>
+			<xsd:element name="cs" type="xsd:string" default="," minOccurs="0"/>
+			<xsd:element name="ts" type="xsd:string" default="&#x20;" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PointType">
+		<xsd:annotation>
+			<xsd:documentation>
+        A Point is defined by a single coordinate tuple.
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="tns:AbstractGeometryType">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element ref="tns:coord"/>
+						<xsd:element ref="tns:coordinates"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="AbstractGeometryType" abstract="true"/>
+	<xsd:complexType name="LineStringType" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:AbstractGeometryType">
+				<xsd:sequence>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="coord" type="tns:CoordType" minOccurs="0"/>
+						<xsd:element name="coordinates" type="tns:CoordinatesType" minOccurs="0"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GMLLocation" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:PointType"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GPSLocation">
+		<xsd:sequence>
+			<xsd:element name="latitude" type="xsd:double"/>
+			<xsd:element name="longitude" type="xsd:double"/>
+			<xsd:element name="altitude" type="xsd:double" minOccurs="0"/>
+			<xsd:element name="GPSMetadata" type="tns:GPSMetadata" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="GPSValidity" type="xsd:boolean"/>
+	</xsd:complexType>
+	<xsd:complexType name="GPSMetadata">
+		<xsd:sequence>
+			<xsd:element name="easting" type="xsd:double" minOccurs="0"/>
+			<xsd:element name="northing" type="xsd:double" minOccurs="0"/>
+			<xsd:element name="source" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="number" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="isRealTimeDiffCorrection" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="hdop" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="vdop" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="diffID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="collected" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="numSat" type="xsd:long" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="gpsPoint">
+		<xsd:sequence>
+			<xsd:element name="latitude" type="xsd:double"/>
+			<xsd:element name="longitude" type="xsd:double"/>
+			<xsd:element name="altitude" type="xsd:double" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="expirationTime">
+		<xsd:complexContent>
+			<xsd:extension base="tns:time"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="expTime" type="tns:expirationTime"/>
+	<xsd:complexType name="assetFields">
+		<xsd:sequence>
+			<xsd:element name="manufacturer" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serialNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="manufacturedDate" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="price" type="tns:money" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eaLoc">
+		<xsd:complexContent>
+			<xsd:extension base="tns:objectRef"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="objectRef">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="noun" type="xsd:QName" minOccurs="0"/>
+			<xsd:element name="objectID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="utility" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="mspDevice" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="deviceClass" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="inServiceDate" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="outServiceDate" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="facilityID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="manufacturer" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="serialNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="assetFields" type="tns:assetFields" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="module" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspDevice">
+				<xsd:sequence>
+					<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="moduleType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="firmwareVersion" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfModule">
+		<xsd:sequence>
+			<xsd:element name="module" type="tns:module" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="mspMeter" abstract="true" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="meterNo" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="installedDate" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="removedDate" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="manufacturer" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="catalogNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="serialNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="metrologyFirmwareVersion" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="metrologyFirmwareRevision" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="meterType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="AMRDeviceType" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="AMRVendor" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="billingCycle" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="meterStatusList" type="tns:ArrayOfStringMeterStatus" minOccurs="0"/>
+					<xsd:element name="moduleList" type="tns:ArrayOfModule" minOccurs="0"/>
+					<xsd:element name="utilityInfo" type="tns:utilityInfo" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfStringMeterStatus">
+		<xsd:sequence>
+			<xsd:element name="meterStatus" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="serviceID">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="serviceType" type="tns:serviceType" minOccurs="0"/>
+			<xsd:element name="objectID" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="utilityInfo">
+		<xsd:sequence>
+			<xsd:element name="owner" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="district" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serviceLocationID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serviceID" type="tns:serviceID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="accountNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="customerID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="GMLLocation" type="tns:GMLLocation" minOccurs="0"/>
+			<xsd:element name="gpsPoint" type="tns:gpsPoint" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="electricMeter" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspMeter">
+				<xsd:sequence>
+					<xsd:element name="meterBaseID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="electricNameplate" type="tns:electricNameplate" minOccurs="0"/>
+					<xsd:element name="electricLocationFields" type="tns:electricLocationFields" minOccurs="0"/>
+					<xsd:element name="sealNumberList" type="tns:ArrayOfStringSealNumberList" minOccurs="0"/>
+					<xsd:element name="parentMeterList" type="tns:ArrayOfMeterID" minOccurs="0"/>
+					<xsd:element name="subMeterList" type="tns:ArrayOfMeterID" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfStringSealNumberList">
+		<xsd:sequence>
+			<xsd:element name="sealNumber" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterID">
+		<xsd:sequence>
+			<xsd:element name="meterID" type="tns:meterID" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="electricLocationFields">
+		<xsd:sequence>
+			<xsd:element name="substationCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="substationName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="feederCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="bus" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="phaseCode" type="tns:phaseCode" minOccurs="0"/>
+			<xsd:element name="eaLoc" type="tns:eaLoc" minOccurs="0"/>
+			<xsd:element name="transformerBankID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="linemenServiceArea" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="poleNo" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="electricNameplate">
+		<xsd:sequence>
+			<xsd:element name="kh" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="kr" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="frequency" type="tns:frequency" minOccurs="0"/>
+			<xsd:element name="numberOfElements" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="baseType" type="tns:baseType" minOccurs="0"/>
+			<xsd:element name="accuracyClass" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="elementsVoltage" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="supplyVoltage" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="maxAmperage" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="testAmperage" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="regRatio" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="phases" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="wires" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="dials" type="xsd:long" minOccurs="0"/>
+			<xsd:element name="form" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="multiplier" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="demandMult" type="xsd:float" minOccurs="0"/>
+			<xsd:element name="supportedReadingTypes" type="tns:ArrayOfStringReadingType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfStringReadingType">
+		<xsd:sequence>
+			<xsd:element name="readingType" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="frequency">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="units" type="tns:frequencyUnits" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="frequencyUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Hz"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Cycles per second"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="meters" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="electricMeters" type="tns:ArrayOfElectricMeter" minOccurs="0"/>
+					<xsd:element name="waterMeters" type="tns:ArrayOfWaterMeter" minOccurs="0"/>
+					<xsd:element name="gasMeters" type="tns:ArrayOfGasMeter" minOccurs="0"/>
+					<xsd:element name="propaneMeters" type="tns:ArrayOfPropaneMeter" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfElectricMeter">
+		<xsd:sequence>
+			<xsd:element name="electricMeter" type="tns:electricMeter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfWaterMeter">
+		<xsd:sequence>
+			<xsd:element name="waterMeter" type="tns:waterMeter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfGasMeter">
+		<xsd:sequence>
+			<xsd:element name="gasMeter" type="tns:gasMeter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfPropaneMeter">
+		<xsd:sequence>
+			<xsd:element name="propaneMeter" type="tns:propaneMeter" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="meterID">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="meterNo" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serviceType" type="tns:serviceType" minOccurs="0"/>
+			<xsd:element name="objectID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="utility" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMeterReadings">
+		<xsd:sequence>
+			<xsd:element name="meterReading" type="tns:meterReading" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="meterReading" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="meterID" type="tns:meterID" minOccurs="0"/>
+					<xsd:element name="deviceID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="readingValues" type="tns:ArrayOfReadingValue" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfReadingValue">
+		<xsd:sequence>
+			<xsd:element name="readingValue" type="tns:readingValue" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="readingValue">
+		<xsd:sequence>
+			<xsd:element name="extensions" type="tns:extensions" minOccurs="0"/>
+			<xsd:element name="extensionsList" type="tns:ArrayOfExtensionsItem" minOccurs="0"/>
+			<xsd:element name="units" type="tns:uom" minOccurs="0"/>
+			<xsd:element name="value" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ratePeriod" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="readingType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="fieldName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="measurementPeriod" type="tns:measurementPeriod" minOccurs="0"/>
+			<xsd:element name="timeStamp" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="readingStatusCode" type="tns:readingStatusCode" minOccurs="0"/>
+			<xsd:element name="readingTypeCode" type="tns:readingTypeCode" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="measurementPeriod">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Current"/>
+			<xsd:enumeration value="Previous"/>
+			<xsd:enumeration value="Previous Season"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="readingStatusCode">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="originatingSystemID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="codeCategory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="codeIndex" type="xsd:string" minOccurs="0"/>
+			<xsd:any/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="readingTypeCode">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="timeAttribute" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="dataQualifier" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="accumulationBehavior" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="flowDirection" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="UOMCategory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="measurementCategory" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="phaseIndex" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="unitsMultiplier" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="displayableUOM" type="xsd:string" minOccurs="0"/>
+			<xsd:any/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Name" type="tns:Name"/>
+	<xsd:complexType name="Name">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The name is a free text human readable name of the object. It may be non unique and may not correlate to a naming hierarchy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="NameType" type="tns:NameType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Names" type="tns:Names"/>
+	<xsd:complexType name="Names">
+		<xsd:sequence>
+			<xsd:element name="Name" type="tns:Name" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="NameType" type="tns:NameType"/>
+	<xsd:complexType name="NameType">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="NameTypeAuthority" type="tns:NameTypeAuthority" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="NameTypeAuthority" type="tns:NameTypeAuthority"/>
+	<xsd:complexType name="NameTypeAuthority">
+		<xsd:sequence>
+			<xsd:element name="nameString" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="description" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IdentifiedObject" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>This is a root class to provide common naming attributes for all classes needing naming attributes</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="mRID" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>A Model Authority issues mRIDs. Given that each Model Authority has a unique id and this id is part of the mRID, then the mRID is globally unique.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="description" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The description is a free human readable text describing or naming the object. It may be non unique and may not correlate to a naming hierarchy.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Names" type="tns:Names" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:anyAttribute/>
+	</xsd:complexType>
+	<xsd:element name="PingURL">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="PingURLResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="PingURLResult" type="tns:ArrayOfErrorObject" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="GetMethods">
+		<xsd:complexType/>
+	</xsd:element>
+	<xsd:element name="GetMethodsResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="GetMethodsResult" type="tns:ArrayOfStringMethodResults" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ArrayOfStringMethodResults">
+		<xsd:sequence>
+			<xsd:element name="string" type="xsd:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="waterMeter" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspMeter">
+				<xsd:sequence>
+					<xsd:element name="waterNameplate" type="tns:waterNameplate" minOccurs="0"/>
+					<xsd:element name="waterLocationFields" type="tns:waterLocationFields" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="waterLocationFields">
+		<xsd:sequence>
+			<xsd:element name="serviceLocationID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="waterServiceID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="extensionsList" type="tns:ArrayOfExtensionsItem" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="waterNameplate">
+		<xsd:sequence>
+			<xsd:element name="installType" type="tns:installType" minOccurs="0"/>
+			<xsd:element name="fluidType" type="tns:fluidType" minOccurs="0"/>
+			<xsd:element name="driveType" type="tns:driveType" minOccurs="0"/>
+			<xsd:element name="pipeSize" type="tns:pipeSize" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="installType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="fluidType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="driveType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+			<xsd:enumeration value="8"/>
+			<xsd:enumeration value="9"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="11"/>
+			<xsd:enumeration value="12"/>
+			<xsd:enumeration value="13"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="pipeSize">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+			<xsd:enumeration value="8"/>
+			<xsd:enumeration value="9"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="11"/>
+			<xsd:enumeration value="12"/>
+			<xsd:enumeration value="13"/>
+			<xsd:enumeration value="14"/>
+			<xsd:enumeration value="15"/>
+			<xsd:enumeration value="16"/>
+			<xsd:enumeration value="17"/>
+			<xsd:enumeration value="18"/>
+			<xsd:enumeration value="19"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="21"/>
+			<xsd:enumeration value="22"/>
+			<xsd:enumeration value="23"/>
+			<xsd:enumeration value="24"/>
+			<xsd:enumeration value="25"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="gasMeter" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspMeter">
+				<xsd:sequence>
+					<xsd:element name="gasNameplate" type="tns:gasNameplate" minOccurs="0"/>
+					<xsd:element name="gasLocationFields" type="tns:gasLocationFields" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="gasLocationFields">
+		<xsd:sequence>
+			<xsd:element name="extensionsList" type="tns:ArrayOfExtensionsItem" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="gasNameplate">
+		<xsd:sequence>
+			<xsd:element name="mechanicalForm" type="tns:mechanicalForm" minOccurs="0"/>
+			<xsd:element name="measurementSystem" type="tns:measurementSystem" minOccurs="0"/>
+			<xsd:element name="gasPressure" type="tns:gasPressure" minOccurs="0"/>
+			<xsd:element name="gasFlow" type="tns:gasFlow" minOccurs="0"/>
+			<xsd:element name="gearDriveSize" type="tns:gearDriveSize" minOccurs="0"/>
+			<xsd:element name="internalPipeDiameter" type="tns:internalPipeDiameter" minOccurs="0"/>
+			<xsd:element name="temperatureCompensationType" type="tns:temperatureCompensationType" minOccurs="0"/>
+			<xsd:element name="pressureCompensationType" type="tns:pressureCompensationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="mechanicalForm">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="measurementSystem">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="gasPressure">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="maxPressureUOM" type="tns:pressureUnits" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="pressureUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Pascal"/>
+			<xsd:enumeration value="Newton per square meter"/>
+			<xsd:enumeration value="PSI"/>
+			<xsd:enumeration value="Bar"/>
+			<xsd:enumeration value="Barye"/>
+			<xsd:enumeration value="Atmosphere"/>
+			<xsd:enumeration value="Millibar"/>
+			<xsd:enumeration value="Inch of Hg"/>
+			<xsd:enumeration value="Millimeter of Hg"/>
+			<xsd:enumeration value="Inch of water"/>
+			<xsd:enumeration value="Millimeter of water"/>
+			<xsd:enumeration value="Kip"/>
+			<xsd:enumeration value="Pound-force"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="gasFlow">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="maxFlowRateUOM" type="tns:uom"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="gearDriveSize">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="internalPipeDiameter">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+			<xsd:enumeration value="8"/>
+			<xsd:enumeration value="9"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="11"/>
+			<xsd:enumeration value="12"/>
+			<xsd:enumeration value="13"/>
+			<xsd:enumeration value="14"/>
+			<xsd:enumeration value="15"/>
+			<xsd:enumeration value="16"/>
+			<xsd:enumeration value="17"/>
+			<xsd:enumeration value="18"/>
+			<xsd:enumeration value="19"/>
+			<xsd:enumeration value="20"/>
+			<xsd:enumeration value="21"/>
+			<xsd:enumeration value="22"/>
+			<xsd:enumeration value="23"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="temperatureCompensationType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="pressureCompensationType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="propaneMeter" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspMeter">
+				<xsd:sequence>
+					<xsd:element name="propaneNameplate" type="tns:propaneNameplate" minOccurs="0"/>
+					<xsd:element name="propaneLocationFields" type="tns:propaneLocationFields" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="propaneNameplate" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:gasNameplate"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="propaneLocationFields">
+		<xsd:sequence>
+			<xsd:element name="extensionsList" type="tns:ArrayOfExtensionsItem" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfMessage">
+		<xsd:sequence>
+			<xsd:element name="message" type="tns:message" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="message" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="recordID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="eventTime" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="listenedOn" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="listenedBy" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="transcription" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="attachments" type="tns:ArrayOfAttachment" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ArrayOfAttachment">
+		<xsd:sequence>
+			<xsd:element name="attachment" type="tns:attachment" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="attachment" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:choice>
+						<xsd:element name="contentReference" type="tns:contentReference" minOccurs="0"/>
+						<xsd:element name="content" type="tns:content" minOccurs="0"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="contentReference">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="URI" type="xsd:anyURI" minOccurs="0"/>
+			<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="category" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="content" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="contentBinary" type="xsd:base64Binary" minOccurs="0"/>
+					<xsd:element name="contentEncoding" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="contentType" type="tns:contentType" minOccurs="0"/>
+					<xsd:element name="fileName" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="sourceFilePath" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="attachDateTime" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="caption" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="contentType">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:string"/>
+			<xsd:element name="type" type="tns:binaryType" minOccurs="0"/>
+			<xsd:element name="subType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="charset" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="binaryType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="text"/>
+			<xsd:enumeration value="image"/>
+			<xsd:enumeration value="audio"/>
+			<xsd:enumeration value="video"/>
+			<xsd:enumeration value="application"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ouaf="http://xmlns.oracle.com/ouaf" xmlns:mspk="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://xmlns.oracle.com/ouaf" schemaLocation="ouaf.xsd"/>
+	<xsd:simpleType name="CDReasonCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="PPMBalanceNegative"/>
+			<xsd:enumeration value="PPMBalancePositive"/>
+			<xsd:enumeration value="NonPayment"/>
+			<xsd:enumeration value="ServiceInactive"/>
+			<xsd:enumeration value="PaymentAgreement"/>
+			<xsd:enumeration value="PaymentReceived"/>
+			<xsd:enumeration value="NewCustomer"/>
+			<xsd:enumeration value="ServiceRestored"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="loadActionCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Connect"/>
+			<xsd:enumeration value="Disconnect"/>
+			<xsd:enumeration value="InitiatePowerLimitation"/>
+			<xsd:enumeration value="Opened"/>
+			<xsd:enumeration value="Closed"/>
+			<xsd:enumeration value="Open"/>
+			<xsd:enumeration value="Close"/>
+			<xsd:enumeration value="Armed"/>
+			<xsd:enumeration value="Enabled"/>
+			<xsd:enumeration value="Disabled"/>
+			<xsd:enumeration value="Arm"/>
+			<xsd:enumeration value="Enable"/>
+			<xsd:enumeration value="Disable"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="powerLimitationUnits">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="kWh"/>
+			<xsd:enumeration value="kW"/>
+			<xsd:enumeration value="A"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="powerLimitationValue">
+		<xsd:annotation>
+			<xsd:documentation>Structure changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="xsd:float"/>
+			<xsd:element name="units" type="tns:powerLimitationUnits" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="connectDisconnectEvent" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="serviceLocationID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="customerID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="gridLocation" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="accountNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="meterID" type="tns:meterID" minOccurs="0"/>
+					<xsd:element name="loadActionCode" type="tns:loadActionCode" minOccurs="0"/>
+					<xsd:element name="powerLimitationValue" type="tns:powerLimitationValue" minOccurs="0"/>
+					<xsd:element name="CDReasonCode" type="tns:CDReasonCode" minOccurs="0"/>
+					<xsd:element name="amountDue" type="tns:money" minOccurs="0"/>
+					<xsd:element name="serviceType" type="tns:serviceType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="initiateConnectDisconnectEnvelope">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ouaf:OUAFRequestEnvelope">
+					<xsd:sequence>
+						<xsd:element ref="tns:initiateConnectDisconnect"/>
+						<xsd:element name="externalSenderID" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiateConnectDisconnect">
+		<xsd:annotation>
+			<xsd:documentation>Case changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="CDEvents" type="tns:ArrayOfConnectDisconnectEvent" minOccurs="0"/>
+				<xsd:element name="responseURL" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+				<xsd:element ref="tns:expTime" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ArrayOfConnectDisconnectEvent">
+		<xsd:sequence>
+			<xsd:element name="connectDisconnectEvent" type="tns:connectDisconnectEvent" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="initiateConnectDisconnectResponseEnvelope">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:element ref="ouaf:fault"/>
+					<xsd:sequence>
+						<xsd:element ref="ouaf:instanceId"/>
+						<xsd:element ref="ouaf:externalSenderID"/>
+						<xsd:element ref="mspk:multiSpeakMsgHeader"/>
+						<xsd:element ref="tns:initiateConnectDisconnectResult" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiateConnectDisconnectResult" type="tns:ArrayOfErrorObject">
+		<xsd:annotation>
+			<xsd:documentation>Case changed for OUAF compatibility.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

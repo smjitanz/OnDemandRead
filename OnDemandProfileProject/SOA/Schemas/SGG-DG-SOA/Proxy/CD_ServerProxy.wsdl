@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:s3="http://www.w3.org/1999/xlink"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s1="cpsm_V4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:s2="gml_V4.1_Release"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+  
+  <wsdl:import location="oramds:/apps/SGG-DG-SOA/MultiSpeak/CD_Messages.wsdl" namespace="http://www.multispeak.org/Version_4.1_Release"/>
+  
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.multispeak.org/Version_4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/CD_Server.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="cpsm_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/cpsm.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="gml_V4.1_Release">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/gml.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.w3.org/1999/xlink">
+      <s:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/xlink.xsd"/>
+    </s:schema>
+  </wsdl:types>
+  
+  <wsdl:portType name="CD_ServerProxy">
+    <wsdl:operation name="InitiateConnectDisconnect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">CB
+                                                                        initiates
+                                                                        a
+                                                                        connect
+                                                                        or
+                                                                        disconnect
+                                                                        action
+                                                                        by
+                                                                        issuing
+                                                                        one or
+                                                                        more
+                                                                        connectDisconnectEvent
+                                                                        objects
+                                                                        to the
+                                                                        CD. CD
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        failed
+                                                                        transactions
+                                                                        by
+                                                                        returning
+                                                                        an array
+                                                                        of
+                                                                        errorObjects.
+                                                                        The
+                                                                        connect/disconnect
+                                                                        function
+                                                                        returns
+                                                                        infromation
+                                                                        about
+                                                                        this
+                                                                        action
+                                                                        using
+                                                                        the
+                                                                        CDStateChangedNotification
+                                                                        to the
+                                                                        URL
+                                                                        specified
+                                                                        in the
+                                                                        responseURL
+                                                                        calling
+                                                                        parameter
+                                                                        and
+                                                                        references
+                                                                        the
+                                                                        transactionID
+                                                                        specified
+                                                                        to link
+                                                                        the
+                                                                        transaction
+                                                                        to this
+                                                                        Initiate
+                                                                        request.The
+                                                                        expiration
+                                                                        time
+                                                                        parameter
+                                                                        indicates
+                                                                        the
+                                                                        amount
+                                                                        of time
+                                                                        for
+                                                                        which
+                                                                        the
+                                                                        publisher
+                                                                        should
+                                                                        try to
+                                                                        obtain
+                                                                        and
+                                                                        publish
+                                                                        the
+                                                                        data; if
+                                                                        the
+                                                                        publisher
+                                                                        has been
+                                                                        unsuccessful
+                                                                        in
+                                                                        publishing
+                                                                        the data
+                                                                        after
+                                                                        the
+                                                                        expiration
+                                                                        time,
+                                                                        then the
+                                                                        publisher
+                                                                        will
+                                                                        discard
+                                                                        the
+                                                                        request
+                                                                        and the
+                                                                        requestor
+                                                                        should
+                                                                        not
+                                                                        expect a
+                                                                        response.</wsdl:documentation>
+      <wsdl:input message="tns:InitiateConnectDisconnectSoapIn"/>
+      <wsdl:output message="tns:InitiateConnectDisconnectSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="CD_ServerPL">
+    <plnk:role name="CD_ServerProvider">
+     <plnk:portType name="tns:CD_ServerProxy"/>
+    </plnk:role>
+   </plnk:partnerLinkType>
+   
+  <wsdl:binding name="CD_ServerProxy" type="tns:CD_ServerProxy">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="InitiateConnectDisconnect">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/InitiateConnectDisconnect"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateConnectDisconnectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:InitiateConnectDisconnectMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

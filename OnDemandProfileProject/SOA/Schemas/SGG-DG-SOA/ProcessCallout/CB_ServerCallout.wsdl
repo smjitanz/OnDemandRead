@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+             
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.multispeak.org/Version_4.1_Release" elementFormDefault="qualified">
+      <xsd:include schemaLocation="oramds:/apps/SGG-DG-SOA/xsd/MultiSpeak/CB_Server.xsd"/>
+      <xsd:element name="ReadingChangedNotificationEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:ReadingChangedNotification"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CDStatesChangedNotificationEnvelope">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="tns:MultiSpeakMsgHeader"/>
+            <xsd:element ref="tns:CDStatesChangedNotification"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+ <wsdl:message name="ReadingChangedNotificationArrived">
+    <wsdl:part name="payload"
+          element="tns:ReadingChangedNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="ReadingChangedNotificationArrivedResponse">
+    <wsdl:part name="payload"
+          element="tns:ReadingChangedNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="CDStatesChangedNotificationArrived">
+    <wsdl:part name="payload"
+          element="tns:CDStatesChangedNotificationEnvelope"/>
+  </wsdl:message>
+  <wsdl:message name="CDStatesChangedNotificationArrivedResponse">
+    <wsdl:part name="payload"
+          element="tns:CDStatesChangedNotificationEnvelope"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="CB_ServerCallout">
+    <wsdl:operation name="ReadingChangedNotificationArrived">
+      <wsdl:input message="tns:ReadingChangedNotificationArrived"/>
+      <wsdl:output message="tns:ReadingChangedNotificationArrivedResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CDStatesChangedNotificationArrived">
+      <wsdl:input message="tns:CDStatesChangedNotificationArrived"/>
+      <wsdl:output message="tns:CDStatesChangedNotificationArrivedResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <plnk:partnerLinkType name="CB_ServerCalloutPL">
+      <plnk:role name="CB_ServerCalloutProvider">
+          <plnk:portType name="tns:CB_ServerCallout"/>
+      </plnk:role>
+  </plnk:partnerLinkType>
+  
+  <wsdl:binding name="CB_ServerCallout" type="tns:CB_ServerCallout">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+                  style="document"/>
+    <wsdl:operation name="CDStatesChangedNotificationArrived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/CDStatesChangedNotificationArrived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadingChangedNotificationArrived">
+      <soap:operation style="document"
+                      soapAction="http://www.multispeak.org/Version_4.1_Release/ReadingChangedNotificationArrived"/>
+      <wsdl:input>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="payload"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  
+</wsdl:definitions>

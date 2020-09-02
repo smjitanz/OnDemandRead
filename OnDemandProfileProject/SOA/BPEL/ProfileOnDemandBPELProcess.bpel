@@ -1,0 +1,177 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jun 22 10:19:23 PKT 2020
+  Author:  Pc
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ProfileOnDemandBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/OnDemandProfileRestReference"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns2="http://www.multispeak.org/Version_4.1_Release"
+         xmlns:ns3="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_request"
+         xmlns:ns4="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_response"
+         xmlns:ns5="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
+         xmlns:ns6="http://oracle.com/CYANOnDemanReadRespInterval.xsd">
+  <import namespace="http://schemas.oracle.com/bpel/extension" location="../WSDLs/RuntimeFault.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess" location="../WSDLs/ProfileOnDemandBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="profileondemandbpelprocess_client" partnerLinkType="client:ProfileOnDemandBPELProcess" myRole="ProfileOnDemandBPELProcessProvider"/>
+    <partnerLink name="OnDemandProfileRestReference" partnerLinkType="ns1:OnDemandProfileRestReference"
+                 partnerRole="OnDemandProfileRestReferenceProvider"/>
+    <partnerLink name="OUAFResponseSOAPReference" partnerLinkType="ns5:OUAFResponseSOAPReference"
+                 partnerRole="CYANOnDemanReadRespIntervalPortType"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ProfileOnDemandBPELProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ProfileOnDemandBPELProcessResponseMessage"/>
+    <variable name="Invoke1_InputVariable" messageType="ns1:onDemandProfile_inputMessage"/>
+    <variable name="Invoke1_OutputVariable" messageType="ns1:onDemandProfile_outputMessage"/>
+    <variable name="meterId" type="xsd:string"/>
+    <variable name="onDemandProfileUrl" type="xsd:string"/>
+    <variable name="catchsummary" type="xsd:string"/>
+    <variable name="CatchReply_OutputVariable" messageType="client:ProfileOnDemandBPELProcessResponseMessage"/>
+    <variable name="InvokeOUAFResponse__InputVariable" messageType="ns5:CYANOnDemanReadRespIntervalRequest"/>
+    <variable name="InvokeOUAFResponse_OutputVariable" messageType="ns5:CYANOnDemanReadRespIntervalResponse"/>
+    <variable name="InvokeOUAFFaultResponseFault_InputVariable" messageType="ns5:CYANOnDemanReadRespIntervalRequest"/>
+    <variable name="InvokeOUAFFaultResponseFault_OutputVariable" messageType="ns5:CYANOnDemanReadRespIntervalResponse"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence>
+        <assign name="AssignErrorDetails">
+          <copy>
+            <from>ora:getFaultAsString()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CatchReply_OutputVariable.payload/client:result</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CatchReply_OutputVariable.payload/client:flowId</to>
+          </copy>
+          <copy>
+            <from>ora:getFaultAsString()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponseFault_OutputVariable.body/ns6:responseDetail/ns6:responseEnvelope/ns6:fault/ns6:faultString</to>
+          </copy>
+          <copy>
+            <from>"e"</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponseFault_OutputVariable.body/ns6:responseDetail/ns6:responseEnvelope/ns6:fault/ns6:faultCode</to>
+          </copy>
+        </assign>
+        <reply name="CatchReply" partnerLink="profileondemandbpelprocess_client" variable="CatchReply_OutputVariable"
+               portType="client:ProfileOnDemandBPELProcess" operation="process"/>
+        <invoke name="InvokeOUAFFaultResponse" bpelx:invokeAsDetail="no" partnerLink="OUAFResponseSOAPReference"
+                portType="ns5:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
+                inputVariable="InvokeOUAFFaultResponseFault_InputVariable"
+                outputVariable="InvokeOUAFFaultResponseFault_OutputVariable"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ProfileOnDemandBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="profileondemandbpelprocess_client" portType="client:ProfileOnDemandBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignInputs">
+      <copy>
+        <from>concat(ora:getPreference("onDemandProfileUrl"),$meterId)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$onDemandProfileUrl</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:MeterId</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$meterId</to>
+      </copy>
+      <copy>
+        <from>ora:formatDate(ora:getCurrentDateTime(),"yyyy-MM-dd'T'HH:mm:ss'Z'")</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_InputVariable.request/ns3:sampleStopTime</to>
+      </copy>
+      <copy>
+        <from>concat(string(xp20:current-date()),"T00:00:00Z")</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_InputVariable.request/ns3:sampleStartTime</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:ObisCode</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_InputVariable.request/ns3:formattedProfileObisCode</to>
+      </copy>
+      <copy>
+        <from>"Successful"</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:flowId</to>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="profileondemandbpelprocess_client"
+           portType="client:ProfileOnDemandBPELProcess" operation="process" variable="outputVariable"/>
+    <invoke name="InvokeInDemandProfile" partnerLink="OnDemandProfileRestReference"
+            portType="ns1:OnDemandProfileRestReference_ptt" operation="onDemandProfile"
+            inputVariable="Invoke1_InputVariable" outputVariable="Invoke1_OutputVariable" bpelx:invokeAsDetail="no">
+      <bpelx:toProperties>
+        <bpelx:toProperty name="rest.binding.requestURI" variable="onDemandProfileUrl"/>
+      </bpelx:toProperties>
+    </invoke>
+    <assign name="Transformation1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation1_2.xsl", $inputVariable.payload, "Invoke1_OutputVariable.reply", $Invoke1_OutputVariable.reply)</from>
+        <to variable="InvokeOUAFResponse_OutputVariable" part="body"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <invoke name="InvokeOUAFResponse" bpelx:invokeAsDetail="no" partnerLink="OUAFResponseSOAPReference"
+            portType="ns5:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
+            inputVariable="InvokeOUAFResponse__InputVariable" outputVariable="InvokeOUAFResponse_OutputVariable"/>
+  </sequence>
+</process>

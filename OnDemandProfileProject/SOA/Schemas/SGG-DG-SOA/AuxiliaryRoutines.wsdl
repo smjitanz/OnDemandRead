@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AuxiliaryRoutines"
+                  targetNamespace="http://xmlns.oracle.com/ouaf/common"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:client="http://xmlns.oracle.com/ouaf/common"
+                  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+                  xmlns:tns="http://xmlns.oracle.com/ouaf/common"
+                  xmlns:sgg="http://xmlns.oracle.com/ouaf"
+                  xmlns:d6="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+ <wsdl:types>
+   <xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1"
+              elementFormDefault="qualified">
+   <xsd:include schemaLocation="xsd/ouaf/mspcommon.xsd"/>
+   <xsd:element name="findExpirationTime">
+    <xsd:complexType>
+     <xsd:sequence>
+      <xsd:element name="years" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="months" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="days" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="hours" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="minutes" minOccurs="0" type="xsd:string"/>
+      <xsd:element name="seconds" minOccurs="0" type="xsd:string"/>
+     </xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+  </xsd:schema>
+ </wsdl:types>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+ <wsdl:message name="FindExpTimeInput">
+  <wsdl:part name="input" element="d6:findExpirationTime"/>
+ </wsdl:message>
+ <wsdl:message name="FindExpTimeOutput">
+  <wsdl:part name="return" element="d6:expTime"/>
+ </wsdl:message>
+ <wsdl:message name="FindTimeoutInput">
+  <wsdl:part name="input" element="d6:expTime"/>
+ </wsdl:message>
+ <wsdl:message name="FindTimeoutOutput">
+  <wsdl:part name="return" type="xsd:string"/>
+ </wsdl:message>
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+ <!-- portType implemented by the AuxiliaryRoutines BPEL process -->
+ <wsdl:portType name="AuxiliaryRoutines">
+  <wsdl:operation name="FindExpTime">
+   <wsdl:input message="tns:FindExpTimeInput"/>
+   <wsdl:output message="tns:FindExpTimeOutput"/>
+  </wsdl:operation>
+  <wsdl:operation name="FindTimeout">
+   <wsdl:input message="tns:FindTimeoutInput"/>
+   <wsdl:output message="tns:FindTimeoutOutput"/>
+  </wsdl:operation>
+ </wsdl:portType>
+ 
+ <plnk:partnerLinkType name="AuxiliaryRoutinesPL">
+    <plnk:role name="AuxiliaryRoutinesProvider">
+      <plnk:portType name="tns:AuxiliaryRoutines"/>
+    </plnk:role>
+  </plnk:partnerLinkType>
+    
+ <wsdl:binding name="AuxiliaryRoutinesBinding" type="client:AuxiliaryRoutines">
+  <soap:binding style="document"
+                transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:operation name="FindExpTime">
+   <soap:operation style="document"
+                   soapAction="http://xmlns.oracle.com/ouaf/common/FindExpTime"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="input"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="return"/>
+   </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="FindTimeout">
+   <soap:operation style="document"
+                   soapAction="http://xmlns.oracle.com/ouaf/common/FindTimeout"/>
+   <wsdl:input>
+    <soap:body use="literal" parts="input"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal" parts="return"/>
+   </wsdl:output>
+  </wsdl:operation>
+ </wsdl:binding>
+ 
+ 
+</wsdl:definitions>

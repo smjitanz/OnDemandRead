@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xmlns.oracle.com/ouaf/multispeak_4.1" xmlns:ouaf="http://xmlns.oracle.com/ouaf" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://xmlns.oracle.com/ouaf" schemaLocation="ouaf.xsd"/>
+	<xsd:simpleType name="outageEventType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Instantaneous"/>
+			<xsd:enumeration value="Outage"/>
+			<xsd:enumeration value="Restoration"/>
+			<xsd:enumeration value="NoResponse"/>
+			<xsd:enumeration value="Inferred"/>
+			<xsd:enumeration value="PowerOn"/>
+			<xsd:enumeration value="PowerOff"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="outageDetectDeviceType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Call"/>
+			<xsd:enumeration value="CustomerServiceRep"/>
+			<xsd:enumeration value="InboundTelephoneDevice"/>
+			<xsd:enumeration value="Meter"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="DG-OutageDetectionEventNotification">
+		<xsd:annotation>
+			<xsd:documentation>Once the XAI WSDL is available, delete this element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="ouaf:abstractOUAFResponse">
+					<xsd:sequence>
+						<xsd:element name="communicationId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="communicationType" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="bo" type="xsd:string"/>
+						<xsd:element name="boStatus" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusReason" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="externalSystem" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+						<xsd:element name="initiatingOutCommunication" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="amiDeviceIdentifierNumber" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="deviceId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="retryDetails" type="ouaf:retryDetails" minOccurs="0"/>
+						<xsd:element name="responseDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MultiSpeak" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element ref="ouaf:instanceId"/>
+												<xsd:element ref="tns:multiSpeakMsgHeader"/>
+												<xsd:element ref="tns:ODEventNotification"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="DG-UnsolicitedEventNotification">
+		<xsd:annotation>
+			<xsd:documentation>Once the XAI WSDL is available, delete this element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="ouaf:abstractOUAFResponse">
+					<xsd:sequence>
+						<xsd:element name="communicationId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="communicationType" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="bo" type="xsd:string"/>
+						<xsd:element name="boStatus" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusReason" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="externalSystem" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="statusDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="creationDateTime" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="version" type="xsd:decimal" minOccurs="0"/>
+						<xsd:element name="initiatingOutCommunication" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="amiDeviceIdentifierNumber" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="deviceId" type="xsd:string" minOccurs="0"/>
+						<xsd:element name="retryDetails" type="ouaf:retryDetails" minOccurs="0"/>
+						<xsd:element name="responseDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MultiSpeak" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element ref="ouaf:instanceId"/>
+												<xsd:element ref="tns:multiSpeakMsgHeader"/>
+												<xsd:element ref="tns:ODEventNotification"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:restriction>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ODEventNotification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="ODEvents" type="tns:ArrayOfOutageDetectionEvent" minOccurs="0"/>
+				<xsd:element name="transactionID" type="xsd:string" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ArrayOfOutageDetectionEvent">
+		<xsd:sequence>
+			<xsd:element name="outageDetectionEvent" type="tns:outageDetectionEvent" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="outageDetectionEvent" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="phaseCode" type="tns:phaseCode" minOccurs="0"/>
+					<xsd:element name="eventTime" type="xsd:dateTime" minOccurs="0"/>
+					<xsd:element name="outageEventType" type="tns:outageEventType" minOccurs="0"/>
+					<xsd:element name="outageDetectionDeviceID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="outageDetectionDeviceType" type="tns:outageDetectDeviceType" minOccurs="0"/>
+					<xsd:element name="outageLocation" type="tns:outageLocation" minOccurs="0"/>
+					<xsd:element name="messageList" type="tns:ArrayOfMessage" minOccurs="0"/>
+					<xsd:element name="outageCustomer" type="tns:outageCustomer" minOccurs="0"/>
+					<xsd:element name="priority" type="tns:priorityType" minOccurs="0"/>
+					<xsd:element name="percentConfident" type="xsd:integer" minOccurs="0"/>
+					<xsd:element name="problemCode" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="resolvedLevel" type="tns:resolvedLevel" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="outageLocation" mixed="false">
+		<xsd:complexContent mixed="false">
+			<xsd:extension base="tns:mspObject">
+				<xsd:sequence>
+					<xsd:element name="serviceLocationID" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="meterID" type="tns:meterID" minOccurs="0"/>
+					<xsd:element name="accountNumber" type="xsd:string" minOccurs="0"/>
+					<xsd:element name="telephoneNumber" type="tns:telephoneNumber" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="outageCustomer">
+		<xsd:sequence>
+			<xsd:element name="customerID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="callBackPhone" type="tns:telephoneNumber" minOccurs="0"/>
+			<xsd:element name="timeToCall" type="tns:timeToCall" minOccurs="0"/>
+			<xsd:element name="callBackFlag" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="callBackContactFirstName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="callBackContactLastName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="callBackContactMName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="callBackStatus" type="tns:callBackStatus" minOccurs="0"/>
+			<xsd:element name="callBackCompletedTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="callBackType" type="tns:callBackType" minOccurs="0"/>
+			<xsd:element name="callRecordID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="outageEventID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="callerID" type="tns:telephoneNumber" minOccurs="0"/>
+			<xsd:element name="serviceLocationID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serviceID" type="tns:serviceID" minOccurs="0"/>
+			<xsd:element name="meterID" type="tns:meterID" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="timeToCall">
+		<xsd:sequence>
+			<xsd:element name="startTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="endTime" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="callBackStatus">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="On"/>
+			<xsd:enumeration value="Off"/>
+			<xsd:enumeration value="StillOff"/>
+			<xsd:enumeration value="Undialable"/>
+			<xsd:enumeration value="MaxDial"/>
+			<xsd:enumeration value="NoResponse"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="callBackType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="IVR"/>
+			<xsd:enumeration value="Manual"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="priorityType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Normal"/>
+			<xsd:enumeration value="NeedsAttention"/>
+			<xsd:enumeration value="Urgent"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="resolvedLevel">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Meter"/>
+			<xsd:enumeration value="Address"/>
+			<xsd:enumeration value="Unresolved"/>
+			<xsd:enumeration value="Other"/>
+			<xsd:enumeration value="Unknown"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

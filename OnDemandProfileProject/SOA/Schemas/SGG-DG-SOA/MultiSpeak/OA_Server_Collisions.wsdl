@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:s3="http://www.w3.org/1999/xlink"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:tns="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:s1="cpsm_V4.1_Release"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns:s2="gml_V4.1_Release"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  targetNamespace="http://www.multispeak.org/Version_4.1_Release"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+                  
+  <!--
+  
+  This WSDL is a holding tank created to house elements that collide with other 
+  parts of the MultiSpeak standard.  For example, CDStateChangedNotification
+  exists in both OA_Server and CB_Server and the definitions are different.  We
+  need the OA_Server definition much less, so it was removed from the base
+  OA_Server and so long as this WSDL goes unincorporated into a composite that
+  also uses CB_Server there should be no collisions.
+  
+  -->
+                
+  <wsdl:import location="OA_Server.wsdl" namespace="http://www.multispeak.org/Version_4.1_Release"/>
+  
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.multispeak.org/Version_4.1_Release">
+      <s:include schemaLocation="../xsd/MultiSpeak/OA_Server.xsd"/>
+      <s:element name="CDStateChangedNotification">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="meterID" type="tns:meterID" minOccurs="0"/>
+            <s:element name="stateChange" type="tns:loadActionCode"/>
+            <s:element name="transactionID" type="s:string" minOccurs="0"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="cpsm_V4.1_Release">
+      <s:include schemaLocation="../xsd/MultiSpeak/cpsm.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="gml_V4.1_Release">
+      <s:include schemaLocation="../xsd/MultiSpeak/gml.xsd"/>
+    </s:schema>
+    <s:schema elementFormDefault="qualified"
+              targetNamespace="http://www.w3.org/1999/xlink">
+      <s:include schemaLocation="../xsd/MultiSpeak/xlink.xsd"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CDStateChangedNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:CDStateChangedNotification"/>
+  </wsdl:message>
+  <wsdl:message name="CDStateChangedNotificationSoapOut">
+    <wsdl:part name="parameters"
+               element="tns:CDStateChangedNotificationResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CDStateChangedNotificationMultiSpeakMsgHeader">
+    <wsdl:part name="MultiSpeakMsgHeader" element="tns:MultiSpeakMsgHeader"/>
+  </wsdl:message>
+  <wsdl:portType name="OA_ServerSoapCollisions">
+    <wsdl:operation name="CDStateChangedNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Publisher
+                                                                        notifies
+                                                                        OA of
+                                                                        state
+                                                                        change
+                                                                        for a
+                                                                        connect/disconnect
+                                                                        device
+                                                                        By
+                                                                        meterID
+                                                                        and
+                                                                        loadActionCode.
+                                                                        The
+                                                                        transactionID
+                                                                        calling
+                                                                        parameter
+                                                                        can be
+                                                                        used to
+                                                                        link
+                                                                        this
+                                                                        action
+                                                                        with an
+                                                                        InitiateConectDisconnect
+                                                                        call. If
+                                                                        this
+                                                                        transaction
+                                                                        fails,
+                                                                        CB
+                                                                        returns
+                                                                        information
+                                                                        about
+                                                                        the
+                                                                        failure
+                                                                        in a
+                                                                        SOAPFault.
+                                                                        The
+                                                                        message
+                                                                        header
+                                                                        attribute
+                                                                        'registrationID'
+                                                                        should
+                                                                        be added
+                                                                        to all
+                                                                        publish
+                                                                        messages
+                                                                        to
+                                                                        indicate
+                                                                        to the
+                                                                        subscriber
+                                                                        under
+                                                                        which
+                                                                        registrationID
+                                                                        they
+                                                                        received
+                                                                        this
+                                                                        notification
+                                                                        data.</wsdl:documentation>
+      <wsdl:input message="tns:CDStateChangedNotificationSoapIn"/>
+      <wsdl:output message="tns:CDStateChangedNotificationSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OA_ServerSoapCollisions"
+                type="tns:OA_ServerSoapCollisions">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="CDStateChangedNotification">
+      <soap:operation soapAction="http://www.multispeak.org/Version_4.1_Release/CDStateChangedNotification"
+                      style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CDStateChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+        <soap:header message="tns:CDStateChangedNotificationMultiSpeakMsgHeader"
+                     part="MultiSpeakMsgHeader" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

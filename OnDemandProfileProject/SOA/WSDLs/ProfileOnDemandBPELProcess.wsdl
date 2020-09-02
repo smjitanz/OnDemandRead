@@ -1,0 +1,36 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="ProfileOnDemandBPELProcess"
+     targetNamespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
+     xmlns:ns1="http://www.multispeak.org/Version_4.1_Release"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+    >
+    <plnk:partnerLinkType name="ProfileOnDemandBPELProcess">
+        <plnk:role name="ProfileOnDemandBPELProcessProvider" portType="client:ProfileOnDemandBPELProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="RuntimeFault.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
+                 schemaLocation="../Schemas/ProfileOnDemandBPELProcess.xsd"/>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://www.multispeak.org/Version_4.1_Release" schemaLocation="../Schemas/SGG-DG-SOA/xsd/MultiSpeak/MR_Server.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ProfileOnDemandBPELProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="ProfileOnDemandBPELProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ProfileOnDemandBPELProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ProfileOnDemandBPELProcessRequestMessage"/>
+            <wsdl:output message="client:ProfileOnDemandBPELProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
