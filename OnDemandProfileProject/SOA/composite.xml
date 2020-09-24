@@ -15,10 +15,10 @@
           location="WSDLs/OnDemandProfileRestReference.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess"
           location="WSDLs/ProfileOnDemandBPELProcess.wsdl" importType="wsdl"/>
-  <import namespace="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
-          location="WSDLs/CYANOnDemanReadRespInterval_1.wsdl" importType="wsdl"/>
-  <import namespace="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
-          location="WSDLs/CYANOnDemanReadRespInterval_1Wrapper.wsdl" importType="wsdl"/>
+  <import namespace="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval"
+          location="WSDLs/CYANOnDemanReadRespInterval_1_20Wrapper.wsdl" importType="wsdl"/>
+  <import namespace="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval"
+          location="WSDLs/CYANOnDemanReadRespInterval_1_1_.wsdl" importType="wsdl"/>
   <service name="profileondemandbpelprocess_client_ep" ui:wsdlLocation="WSDLs/ProfileOnDemandBPELProcess.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess#wsdl.interface(ProfileOnDemandBPELProcess)"/>
     <binding.ws port="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess#wsdl.endpoint(profileondemandbpelprocess_client_ep/ProfileOnDemandBPELProcess_pt)"/>
@@ -35,8 +35,9 @@
       <reference name="OnDemandProfileRestReference" ui:wsdlLocation="WSDLs/OnDemandProfileRestReference.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/OnDemandProfileRestReference#wsdl.interface(OnDemandProfileRestReference_ptt)"/>
       </reference>
-      <reference name="OUAFResponseSOAPReference" ui:wsdlLocation="WSDLs/CYANOnDemanReadRespInterval_1Wrapper.wsdl">
-        <interface.wsdl interface="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval#wsdl.interface(CYANOnDemanReadRespIntervalPortType)"/>
+      <reference name="OUAFResponseSOAPReference"
+                 ui:wsdlLocation="WSDLs/CYANOnDemanReadRespInterval_1_20Wrapper.wsdl">
+        <interface.wsdl interface="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval#wsdl.interface(CYANOnDemanReadRespIntervalPortType)"/>
       </reference>
     </componentType>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
@@ -47,11 +48,16 @@
     <binding.rest config="WADLs/OnDemandProfileRestReference.wadl"
                   location="https://mea-itanz-itg.dev.cyanconnode.com"/>
   </reference>
-  <reference name="OUAFResponseSOAPReference" ui:wsdlLocation="WSDLs/CYANOnDemanReadRespInterval_1.wsdl">
-    <interface.wsdl interface="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval#wsdl.interface(CYANOnDemanReadRespIntervalPortType)"/>
-    <binding.ws port="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval#wsdl.endpoint(CYANOnDemanReadRespIntervalService/CYANOnDemanReadRespIntervalPort)"
-                location="WSDLs/CYANOnDemanReadRespInterval_1.wsdl" soapVersion="1.1">
+  <reference name="OUAFResponseSOAPReference"
+             ui:wsdlLocation="WSDLs/CYANOnDemanReadRespInterval_1_1_.wsdl">
+    <interface.wsdl interface="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval#wsdl.interface(CYANOnDemanReadRespIntervalPortType)"/>
+    <binding.ws port="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval#wsdl.endpoint(CYANOnDemanReadRespIntervalService/CYANOnDemanReadRespIntervalPort)"
+                location="WSDLs/CYANOnDemanReadRespInterval_1_1_.wsdl" soapVersion="1.1">
       <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      <property name="endpointURI">http://192.168.203.36:6501/ouaf/webservices/CYANOnDemanReadRespInterval</property>
+      <property name="oracle.webservices.preemptiveBasicAuth" type="xs:string" many="false">true</property>
+
+
     </binding.ws>
   </reference>
   <wire>

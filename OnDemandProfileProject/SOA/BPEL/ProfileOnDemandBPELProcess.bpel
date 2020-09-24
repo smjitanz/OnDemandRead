@@ -34,7 +34,8 @@
          xmlns:ns3="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_request"
          xmlns:ns4="http://TargetNamespace.com/OnDemandProfileRestReference_onDemandProfile_response"
          xmlns:ns5="http://ouaf.oracle.com/spl/XAIXapp/xaiserver/CYANOnDemanReadRespInterval"
-         xmlns:ns6="http://oracle.com/CYANOnDemanReadRespInterval.xsd">
+         xmlns:ns6="http://oracle.com/CYANOnDemanReadRespInterval.xsd"
+         xmlns:ns7="http://ouaf.oracle.com/webservices/cm/CYANOnDemanReadRespInterval">
   <import namespace="http://schemas.oracle.com/bpel/extension" location="../WSDLs/RuntimeFault.wsdl"
           importType="http://schemas.xmlsoap.org/wsdl/"/>
   <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/OnDemandProfileApplication/OnDemandProfileProject/ProfileOnDemandBPELProcess" location="../WSDLs/ProfileOnDemandBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -53,7 +54,7 @@
     <partnerLink name="profileondemandbpelprocess_client" partnerLinkType="client:ProfileOnDemandBPELProcess" myRole="ProfileOnDemandBPELProcessProvider"/>
     <partnerLink name="OnDemandProfileRestReference" partnerLinkType="ns1:OnDemandProfileRestReference"
                  partnerRole="OnDemandProfileRestReferenceProvider"/>
-    <partnerLink name="OUAFResponseSOAPReference" partnerLinkType="ns5:OUAFResponseSOAPReference"
+    <partnerLink name="OUAFResponseSOAPReference" partnerLinkType="ns7:OUAFResponseSOAPReference"
                  partnerRole="CYANOnDemanReadRespIntervalPortType"/>
   </partnerLinks>
 
@@ -75,10 +76,10 @@
     <variable name="onDemandProfileUrl" type="xsd:string"/>
     <variable name="catchsummary" type="xsd:string"/>
     <variable name="CatchReply_OutputVariable" messageType="client:ProfileOnDemandBPELProcessResponseMessage"/>
-    <variable name="InvokeOUAFResponse__InputVariable" messageType="ns5:CYANOnDemanReadRespIntervalRequest"/>
-    <variable name="InvokeOUAFResponse_OutputVariable" messageType="ns5:CYANOnDemanReadRespIntervalResponse"/>
-    <variable name="InvokeOUAFFaultResponseFault_InputVariable" messageType="ns5:CYANOnDemanReadRespIntervalRequest"/>
-    <variable name="InvokeOUAFFaultResponseFault_OutputVariable" messageType="ns5:CYANOnDemanReadRespIntervalResponse"/>
+    <variable name="InvokeOUAFResponse__InputVariable" messageType="ns7:CYANOnDemanReadRespIntervalRequest"/>
+    <variable name="InvokeOUAFResponse_OutputVariable" messageType="ns7:CYANOnDemanReadRespIntervalResponse"/>
+    <variable name="InvokeOUAFFaultResponse_InputVariable" messageType="ns7:CYANOnDemanReadRespIntervalRequest"/>
+    <variable name="InvokeOUAFFaultResponse_OutputVariable" messageType="ns7:CYANOnDemanReadRespIntervalResponse"/>
   </variables>
   <faultHandlers>
     <catchAll>
@@ -94,19 +95,19 @@
           </copy>
           <copy>
             <from>ora:getFaultAsString()</from>
-            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponseFault_OutputVariable.body/ns6:responseDetail/ns6:responseEnvelope/ns6:fault/ns6:faultString</to>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponse_OutputVariable.body/ns7:responseDetail/ns7:responseEnvelope/ns7:fault/ns7:faultString</to>
           </copy>
           <copy>
             <from>"e"</from>
-            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponseFault_OutputVariable.body/ns6:responseDetail/ns6:responseEnvelope/ns6:fault/ns6:faultCode</to>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeOUAFFaultResponse_OutputVariable.body/ns7:responseDetail/ns7:responseEnvelope/ns7:fault/ns7:faultCode</to>
           </copy>
         </assign>
+        <invoke name="InvokeOUAFFaultResponse" bpelx:invokeAsDetail="no" partnerLink="OUAFResponseSOAPReference"
+                portType="ns7:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
+                inputVariable="InvokeOUAFFaultResponse_InputVariable"
+                outputVariable="InvokeOUAFFaultResponse_OutputVariable"/>
         <reply name="CatchReply" partnerLink="profileondemandbpelprocess_client" variable="CatchReply_OutputVariable"
                portType="client:ProfileOnDemandBPELProcess" operation="process"/>
-        <invoke name="InvokeOUAFFaultResponse" bpelx:invokeAsDetail="no" partnerLink="OUAFResponseSOAPReference"
-                portType="ns5:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
-                inputVariable="InvokeOUAFFaultResponseFault_InputVariable"
-                outputVariable="InvokeOUAFFaultResponseFault_OutputVariable"/>
       </sequence>
     </catchAll>
   </faultHandlers>
@@ -123,10 +124,6 @@
     <receive name="receiveInput" partnerLink="profileondemandbpelprocess_client" portType="client:ProfileOnDemandBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
     <assign name="AssignInputs">
       <copy>
-        <from>concat(ora:getPreference("onDemandProfileUrl"),$meterId)</from>
-        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$onDemandProfileUrl</to>
-      </copy>
-      <copy>
         <from>$inputVariable.payload/client:MeterId</from>
         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$meterId</to>
       </copy>
@@ -135,7 +132,7 @@
         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_InputVariable.request/ns3:sampleStopTime</to>
       </copy>
       <copy>
-        <from>concat(string(xp20:current-date()),"T00:00:00Z")</from>
+        <from>ora:formatDate(xp20:subtract-dayTimeDuration-from-dateTime(xp20:current-date(), 'P1D'),"yyyy-MM-dd'T'HH:mm:ss'Z'")</from>
         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_InputVariable.request/ns3:sampleStartTime</to>
       </copy>
       <copy>
@@ -150,6 +147,10 @@
         <from>ora:getFlowId()</from>
         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:flowId</to>
       </copy>
+      <copy>
+        <from>concat(ora:getPreference("onDemandProfileUrl"),$meterId)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$onDemandProfileUrl</to>
+      </copy>
     </assign>
     <reply name="replyOutput" partnerLink="profileondemandbpelprocess_client"
            portType="client:ProfileOnDemandBPELProcess" operation="process" variable="outputVariable"/>
@@ -160,18 +161,18 @@
         <bpelx:toProperty name="rest.binding.requestURI" variable="onDemandProfileUrl"/>
       </bpelx:toProperties>
     </invoke>
-    <assign name="Transformation1">
+    <assign name="Transformation2">
       <bpelx:annotation>
         <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
       </bpelx:annotation>
       <copy>
-        <from>ora:doXSLTransformForDoc("../Transformations/Transformation1_2.xsl", $inputVariable.payload, "Invoke1_OutputVariable.reply", $Invoke1_OutputVariable.reply)</from>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation2_1.xsl", $inputVariable.payload, "Invoke1_OutputVariable.reply", $Invoke1_OutputVariable.reply)</from>
         <to variable="InvokeOUAFResponse_OutputVariable" part="body"/>
       </copy>
     </assign>
     <!-- Generate reply to synchronous request -->
     <invoke name="InvokeOUAFResponse" bpelx:invokeAsDetail="no" partnerLink="OUAFResponseSOAPReference"
-            portType="ns5:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
+            portType="ns7:CYANOnDemanReadRespIntervalPortType" operation="CYANOnDemanReadRespInterval"
             inputVariable="InvokeOUAFResponse__InputVariable" outputVariable="InvokeOUAFResponse_OutputVariable"/>
   </sequence>
 </process>

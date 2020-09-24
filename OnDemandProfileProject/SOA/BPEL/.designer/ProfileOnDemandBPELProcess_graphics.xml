@@ -4,11 +4,11 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="profileondemandbpelprocess_client" x="0" y="210" side="left"/>
-      <partnerlink name="OUAFResponseSOAPReference" x="0" y="463" side="left"/>
+      <partnerlink name="profileondemandbpelprocess_client" x="0" y="242" side="left"/>
+      <partnerlink name="OUAFResponseSOAPReference" x="0" y="415" side="left"/>
       <partnerlink name="OnDemandProfileRestReference" x="780" y="380" side="right"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,188,972,512" show_swimlanes="true">
+   <graph_layout viewport="0,209,972,512" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catchAll" type="catchall"/>
       <layout_item collapsed="false" xpath="/process/faultHandlers/catchAll/sequence" type="sequence"/>
